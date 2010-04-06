@@ -1,0 +1,15 @@
+pacstats.glade
+
+PacStats/about_dlg.py
+PacStats/db.py
+PacStats/main_win.py
+PacStats/transactions.py
+PacStats/app.py
+PacStats/__init__.py
+PacStats/packages.py
+PacStats/basechart.py
+PacStats/libparser.py
+PacStats/settings.py
+PacStats/charts.py
+PacStats/logparser.py
+PacStats/subject.py

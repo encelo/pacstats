@@ -1,0 +1,129 @@
+# PacStats Italian catalog file.
+# Copyright (C) 2007
+# This file is distributed under the same license as the PacStats package.
+# Angelo "Encelo" Theodorou <encelo@users.sourceforge.net>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-06 20:58+0200\n"
+"PO-Revision-Date: 2007-10-06 20:31+0100\n"
+"Last-Translator: Angelo \"Encelo\" Theodorou <encelo@users.sourceforge.net>\n"
+"Language-Team: Italian <it@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../pacstats.glade.h:1
+msgid "About the application"
+msgstr "Infomazioni sull'applicazione"
+
+#: ../pacstats.glade.h:2
+msgid "Clear the database"
+msgstr "Cancella il database"
+
+#: ../pacstats.glade.h:3
+msgid "Dump the database in a text file"
+msgstr "Salva il contenuto del database in un file di testo"
+
+#: ../pacstats.glade.h:4
+msgid "Quit the application"
+msgstr "Chiude l'applicazione"
+
+#: ../pacstats.glade.h:5
+msgid "Update the database"
+msgstr "Aggiorna il database"
+
+#: ../pacstats.glade.h:6
+msgid "_Clear"
+msgstr "Cancella"
+
+#: ../pacstats.glade.h:7
+msgid "_Database"
+msgstr "_Database"
+
+#: ../pacstats.glade.h:8
+msgid "_Dump"
+msgstr "_Salva"
+
+#: ../pacstats.glade.h:9
+msgid "_File"
+msgstr "_Archivio"
+
+#: ../pacstats.glade.h:10
+msgid "_Help"
+msgstr "A_iuto"
+
+#: ../pacstats.glade.h:11
+msgid "_Update"
+msgstr "_Aggiorna"
+
+#: ../pacstats.glade.h:12
+msgid "gtk-about"
+msgstr ""
+
+#: ../pacstats.glade.h:13
+msgid "gtk-quit"
+msgstr ""
+
+#: ../pacstats.glade.h:14
+msgid "translator-credits"
+msgstr "Angelo \"Encelo\" Theodorou <encelo@users.sourceforge.net> (Italian)"
+
+#: ../PacStats/main_win.py:79 ../PacStats/main_win.py:213
+msgid "Parsing the log file..."
+msgstr "Analisi del file di log..."
+
+#: ../PacStats/main_win.py:82 ../PacStats/main_win.py:216
+msgid "Parsing the library..."
+msgstr "Analisi della libreria..."
+
+#: ../PacStats/main_win.py:107
+#, python-format
+msgid "Packages: %d   | Transactions: %d   first: %s %s   last: %s %s"
+msgstr "Pacchetti: %d   | Transazioni: %d   prima: %s %s   ultima: %s %s"
+
+#. Columns
+#: ../PacStats/main_win.py:117
+msgid "Name"
+msgstr "Nome"
+
+#: ../PacStats/main_win.py:124
+msgid "Description"
+msgstr "Descrizione"
+
+#: ../PacStats/main_win.py:131
+msgid "Version"
+msgstr "Versione"
+
+#: ../PacStats/main_win.py:192
+msgid "Do you really want to clear the database?"
+msgstr "Vuoi davvero cancellare il database?"
+
+#: ../PacStats/main_win.py:200
+msgid "Clearing the database..."
+msgstr "Cancellazione del database..."
+
+#: ../PacStats/main_win.py:228
+msgid "DB Dump"
+msgstr "Salvataggio del DB"
+
+#: ../PacStats/main_win.py:240
+msgid "Saving the transactions table as "
+msgstr "Salvataggio della tabella delle transazioni come "
+
+#: ../PacStats/main_win.py:243
+msgid "Saving the packages table as "
+msgstr "Salvataggio della tabella dei pacchetti come "
+
+#: ../PacStats/transactions.py:34 ../PacStats/packages.py:34
+#: ../PacStats/settings.py:34
+#, python-format
+msgid "%s table exists already"
+msgstr "La tabella %s esiste già"
+
+#: ../PacStats/libparser.py:39
+#, python-format
+msgid "Cannot list %s!"
+msgstr "Impossibile listare il contenuto di %s!"

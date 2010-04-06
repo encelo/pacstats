@@ -1,0 +1,21 @@
+pacstats: ArchLinux' Pacman graphical statistics
+Copyright (C) 2007 Angelo "Encelo" Theodorou
+
+http://???
+
+Info
+----
+PacStats parses pacman.log and pacman library and make these informations available to statistical chart plugins.
+
+Dependencies
+------------
+Python (Program)
+GTK2, PyGTK, Libglade (GUI)
+SQLite, PySQLite if Python <= 2.4 (DB)
+MatPlotLib, NumPy (Statistical charts)
+Epydoc (Docs generation)
+
+Generating Docs
+---------------
+Go in the src directory then type:
+	$ epydoc -o epydoc --name=pacstats --url=http://? --graph=all PacStats/*.py

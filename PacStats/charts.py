@@ -1,7 +1,7 @@
 ## charts.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -24,16 +24,17 @@ import sys
 
 class Charts():
 	"""Charts manager class"""
-	def __init__(self, charts_dir, transactions, packages):
+	def __init__(self, transactions, packages):
 
 		self.__charts = {}
+		charts_dir = os.path.join(os.path.dirname(__file__), 'charts')
 		sys.path.insert(0, charts_dir)
 
 		charts_dir_list = os.listdir(charts_dir)
 		for file in charts_dir_list:
 			if file[0] == '.' or file.find('.pyc') >= 0: # exclude hidden and compiled files
 				continue
-		
+
 			modname = file.replace('.py', '')
 			module = __import__(modname)
 			if 'Chart' in dir(module):

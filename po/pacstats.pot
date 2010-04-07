@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-06 20:58+0200\n"
+"POT-Creation-Date: 2010-04-07 00:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,105 +16,64 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../pacstats.glade.h:1
-msgid "About the application"
+#: ../ui/main_win.ui.h:1
+msgid "Description"
 msgstr ""
 
-#: ../pacstats.glade.h:2
-msgid "Clear the database"
+#: ../ui/main_win.ui.h:2
+msgid "Name"
 msgstr ""
 
-#: ../pacstats.glade.h:3
-msgid "Dump the database in a text file"
+#: ../ui/main_win.ui.h:3
+msgid "Version"
 msgstr ""
 
-#: ../pacstats.glade.h:4
-msgid "Quit the application"
-msgstr ""
-
-#: ../pacstats.glade.h:5
-msgid "Update the database"
-msgstr ""
-
-#: ../pacstats.glade.h:6
-msgid "_Clear"
-msgstr ""
-
-#: ../pacstats.glade.h:7
+#: ../ui/main_win.ui.h:4
 msgid "_Database"
 msgstr ""
 
-#: ../pacstats.glade.h:8
-msgid "_Dump"
-msgstr ""
-
-#: ../pacstats.glade.h:9
+#: ../ui/main_win.ui.h:5
 msgid "_File"
 msgstr ""
 
-#: ../pacstats.glade.h:10
+#: ../ui/main_win.ui.h:6
 msgid "_Help"
 msgstr ""
 
-#: ../pacstats.glade.h:11
-msgid "_Update"
-msgstr ""
-
-#: ../pacstats.glade.h:12
-msgid "gtk-about"
-msgstr ""
-
-#: ../pacstats.glade.h:13
-msgid "gtk-quit"
-msgstr ""
-
-#: ../pacstats.glade.h:14
+#: ../ui/about_dlg.ui.h:1
 msgid "translator-credits"
 msgstr ""
 
-#: ../PacStats/main_win.py:79 ../PacStats/main_win.py:213
+#: ../PacStats/main_win.py:78 ../PacStats/main_win.py:181
 msgid "Parsing the log file..."
 msgstr ""
 
-#: ../PacStats/main_win.py:82 ../PacStats/main_win.py:216
+#: ../PacStats/main_win.py:81 ../PacStats/main_win.py:184
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:107
+#: ../PacStats/main_win.py:106
 #, python-format
 msgid "Packages: %d   | Transactions: %d   first: %s %s   last: %s %s"
 msgstr ""
 
-#. Columns
-#: ../PacStats/main_win.py:117
-msgid "Name"
-msgstr ""
-
-#: ../PacStats/main_win.py:124
-msgid "Description"
-msgstr ""
-
-#: ../PacStats/main_win.py:131
-msgid "Version"
-msgstr ""
-
-#: ../PacStats/main_win.py:192
+#: ../PacStats/main_win.py:160
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:200
+#: ../PacStats/main_win.py:168
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:228
+#: ../PacStats/main_win.py:196
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:240
+#: ../PacStats/main_win.py:208
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:243
+#: ../PacStats/main_win.py:211
 msgid "Saving the packages table as "
 msgstr ""
 

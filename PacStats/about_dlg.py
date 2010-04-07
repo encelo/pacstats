@@ -1,7 +1,7 @@
 ## about_dlg.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -23,19 +23,26 @@ import pygtk
 pygtk.require('2.0')
 import sys
 import webbrowser
-import gtk.glade
+import gtk
+
 import PacStats
 
 class About_Dialog:
 	"""Open the about dialog"""
-	def __init__(self, glade_file):
+
+	def __init__(self, ui_file):
 		gtk.about_dialog_set_url_hook(self.__url_hook)
-		self.about = gtk.glade.XML(glade_file, root='about_dlg')
-		self.dialog = self.about.get_widget("about_dlg")
+
+		self.ui = gtk.Builder()
+		self.ui.add_from_file(ui_file)
+		self.dialog = self.ui.get_object("about_dlg")
+
 		self.dialog.set_version(PacStats.VERSION)
 		self.dialog.run()
 		self.dialog.destroy()
 		return
+
+
 	def __url_hook(dialog, link, user_data):
 		"""Hook function called when a link in the about dialog is clicked"""
 		if sys.version_info[:2] >= (2, 5):

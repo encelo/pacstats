@@ -1,7 +1,7 @@
 ## db.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ class Database:
 		"""Connect to the specified database"""
 		self.error = sqlite.Error 
 		if os.path.exists(fname) == False:
-			print 'Creating' + ' ' + fname
+			print('Creating' + ' ' + fname)
 		self.con = sqlite.connect(fname)
 		self.cur = self.con.cursor()
 
@@ -84,7 +84,7 @@ class Database:
 			for i in range(len(row)-2):
 				line = line + str(row[i]) + '|'
 			line = line + str(row[len(row)-1])
-			print line
+			print(line)
 
 
 	def save_as(self, fname):

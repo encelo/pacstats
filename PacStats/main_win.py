@@ -1,7 +1,7 @@
 ## main_win.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -19,9 +19,10 @@
 ##
 
 
+import os
 import pygtk
 pygtk.require('2.0')
-import gtk.glade
+import gtk
 
 import about_dlg
 
@@ -38,8 +39,11 @@ class Main_Window:
 		self.libparser = app_cls.libparser
 		self.charts = app_cls.charts
 
-		self.glade_file = 'pacstats.glade'
-		self.xml = gtk.glade.XML(self.glade_file, root="main_win")
+		self.share_dir = app_cls.share_dir
+		self.ui_dir = app_cls.ui_dir
+
+		self.ui = gtk.Builder()
+		self.ui.add_from_file(os.path.join(self.ui_dir, 'main_win.ui'))
 
 		app_signals = {
 			"on_main_win_destroy": self.on_main_win_destroy,
@@ -51,21 +55,16 @@ class Main_Window:
 			"on_charts_list_button_press_event": self.on_charts_list_button_press_event,
 			"on_charts_list_row_activated": self.on_charts_list_row_activated
 		}
-		self.xml.signal_autoconnect(app_signals)
+		self.ui.connect_signals(app_signals)
 
 		# Getting widgets
-		self.window = self.xml.get_widget("main_win")
-		self.charts_list = self.xml.get_widget("charts_list")
-		self.chart_vbox = self.xml.get_widget("chart_vbox")
-		self.statusbar = self.xml.get_widget("statusbar")
-
-		# Setting initial attributes
-		#pix = gtk.gdk.pixbuf_new_from_file(os.path.join(self.share_dir, 'pixmaps/globs.png'))
-		#gtk.window_set_default_icon(pix)
-		#self.window.set_icon(pix)
+		self.window = self.ui.get_object("main_win")
+		self.charts_list = self.ui.get_object("charts_list")
+		self.liststore = self.ui.get_object("liststore")
+		self.chart_vbox = self.ui.get_object("chart_vbox")
+		self.statusbar = self.ui.get_object("statusbar")
 
 		# Init methods
-		self.setup_charts_list()
 		self.populate_charts_list()
 
 		# parsing
@@ -77,16 +76,16 @@ class Main_Window:
 		self.pb.show()
 		self.window.set_sensitive(False)
 		self.statusbar.push(1, _('Parsing the log file...'))
-		self.logparser.parse()
+#		self.logparser.parse()
 		self.statusbar.pop(1)
 		self.statusbar.push(1, _('Parsing the library...'))
-		self.libparser.parse()
+#		self.libparser.parse()
  		self.statusbar.pop(1)
 		self.pb.hide()
 
 		self.setup_dbstatus()
 		self.window.set_sensitive(True)
-
+		self.window.show()
 
 		self.active_chart = None
 
@@ -107,37 +106,6 @@ class Main_Window:
 		string = _('Packages: %d   | Transactions: %d   first: %s %s   last: %s %s') % (packages[0], transactions[0], first[0], first[1], last[0], last[1])
 
 		self.statusbar.push(1, string)
-
-
-	def setup_charts_list(self):
-		"""Setup the treeview for charts list"""
-		cell = gtk.CellRendererText()
-
-		# Columns
-		column = gtk.TreeViewColumn(_('Name'))
-		column.pack_start(cell, True)
-		column.add_attribute(cell, 'text', 0)
-		column.set_resizable(True)
-		column.set_sort_column_id(0)
-		self.charts_list.append_column(column)
-
-		column = gtk.TreeViewColumn(_('Description'))
-		column.pack_start(cell, True)
-		column.add_attribute(cell, 'text', 1)
-		column.set_resizable(True)
-		column.set_sort_column_id(1)
-		self.charts_list.append_column(column)
-
-		column = gtk.TreeViewColumn(_('Version'))
-		column.pack_start(cell, True)
-		column.add_attribute(cell, 'text', 2)
-		column.set_resizable(True)
-		column.set_sort_column_id(2)
-		self.charts_list.append_column(column)
-
-		# Model
-		self.liststore = gtk.ListStore(str, str, str)
-		self.charts_list.set_model(self.liststore)
 
 
 	def populate_charts_list(self):
@@ -248,8 +216,8 @@ class Main_Window:
 	def on_about_activate(self, event):
 		"""Open the about dialog"""
 
-		about_dlg.About_Dialog(self.glade_file)
-		return
+		ui_file = os.path.join(self.ui_dir, 'about_dlg.ui')
+		about_dlg.About_Dialog(ui_file)
 
 
 	def on_charts_list_button_press_event(self, widget, event, data=None):

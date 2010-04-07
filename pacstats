@@ -2,17 +2,17 @@
 
 share_dir = '.'
 locale_dir = './po'
-charts_dir = '.'
 
 import locale
 import gettext
+from gtk import glade
 from PacStats import app
-import gtk
 
 locale.setlocale(locale.LC_ALL, '')
-gtk.glade.bindtextdomain('pacstats', locale_dir)
-gtk.glade.textdomain('pacstats')
+for module in gettext, glade:
+	module.bindtextdomain('pacstats', locale_dir)
+	module.textdomain('pacstats')
 gettext.install('pacstats', locale_dir, unicode=1)
 
-app = app.Application(share_dir, charts_dir)
+app = app.Application(share_dir)
 app.run()

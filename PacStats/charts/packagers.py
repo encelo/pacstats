@@ -1,7 +1,7 @@
-## histo_letter.py
+## packagers.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -21,22 +21,22 @@
 from PacStats.basechart import BaseChart
 
 try:
+	import numpy as n
 	import matplotlib.figure as f
 	import matplotlib.pylab as p
-	import matplotlib.numerix as n
-	import matplotlib.backends.backend_gtkcairo as cairo
+	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 except ImportError:
-	print 'MatPlotLib is missing!'
+	print('MatPlotLib is missing!')
 	exit(-1)
 
 
 class Chart(BaseChart):
-	"""Histo letter chart"""
+	"""Packagers chart"""
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self.name = 'Histo Letter'
-		self.description = 'Initial package letter histogram'
+		self.name = 'Packagers'
+		self.description = 'Number of packages for each packager'
 		self.version = '0.1'
 
 		self.letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
@@ -47,22 +47,24 @@ class Chart(BaseChart):
 		"""Setup the Drawing Area class for the test chart"""
 		self.parent = parent_box
 		
-		data = []
-		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
-		for l in self.letters:
-			data.append(self.packages.query(QUERY % (self.packages.table, l))[0])
+		QUERY = """SELECT packager, COUNT(*) FROM %s GROUP BY packager ORDER BY packager DESC;"""
+		data = self.packages.query(QUERY % (self.packages.table))
+		widths = []
+		labels = []
+		for tuple in data:
+			labels.append(tuple[0])
+			widths.append(tuple[1])
 	
  		self.fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
 		self.fig.hold(False)
 		self.axes = self.fig.add_subplot(111)
-		self.axes.set_xlim(0, len(self.letters))
-		self.axes.set_ylim(0, max(data)[0])
-		self.axes.set_xticks(n.arange(0.5, len(self.letters)))
-		self.axes.set_xticklabels(self.letters)
+		self.axes.barh(range(len(widths)), widths)
+		self.axes.set_ylim(0, len(widths))
+		self.axes.set_xlim(0, max(widths))
+		self.axes.set_yticks(n.arange(0.5, len(widths)))
+		self.axes.set_yticklabels(labels, fontsize=5)
 
-		self.axes.bar(range(len(self.letters)), data)
-
-		self.canvas = cairo.FigureCanvasGTKCairo(self.fig)  # a gtk.DrawingArea
+		self.canvas = FigureCanvas(self.fig)  # a gtk.DrawingArea
 		self.parent.pack_start(self.canvas, True, True)
 		self.canvas.show()
 
@@ -70,10 +72,7 @@ class Chart(BaseChart):
 	def update(self):
 		"""Update the test chart"""
 
-		self.canvas.destroy()
-		self.canvas = cairo.FigureCanvasGTKCairo(self.fig)  # a gtk.DrawingArea
-		self.parent.pack_start(self.canvas, True, True)
-		self.canvas.show()
+		self.canvas.draw()
 
 
 	def detach(self):

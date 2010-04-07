@@ -1,7 +1,7 @@
 ## logparser.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ class LogParser(Subject):
 		try:
 			f = open(logfile)
 		except IOError:
-			print 'Cannot open %s!' % logfile
+			print('Cannot open %s!' % logfile)
 			return
 
 		size = stat(logfile).st_size

@@ -1,7 +1,7 @@
 ## libparser.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ class LibParser(Subject):
 		try:
 			lib_listdir = os.listdir(libdir)
 		except OSError:
-			print _('Cannot list %s!') % libdir
+			print(_('Cannot list %s!') % libdir)
 			return
 
 		pkg_count = 0

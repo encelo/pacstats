@@ -1,11 +1,11 @@
-pacstats: ArchLinux' Pacman graphical statistics
-Copyright (C) 2007 Angelo "Encelo" Theodorou
+PacStats: ArchLinux' Pacman statistical charts application
+Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 
 http://???
 
 Info
 ----
-PacStats parses pacman.log and pacman library and make these informations available to statistical chart plugins.
+PacStats parses pacman.log and the pacman library to make these informations available to statistical chart plugins.
 
 Dependencies
 ------------

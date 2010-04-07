@@ -1,7 +1,7 @@
 ## pie_letter.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -21,12 +21,12 @@
 from PacStats.basechart import BaseChart
 
 try:
+	import numpy as n
 	import matplotlib.figure as f
 	import matplotlib.pylab as p
-	import matplotlib.numerix as n
-	import matplotlib.backends.backend_gtkcairo as cairo
+	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 except ImportError:
-	print 'MatPlotLib is missing!'
+	print('MatPlotLib is missing!')
 	exit(-1)
 
 
@@ -52,14 +52,14 @@ class Chart(BaseChart):
 		data = []
 		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
 		for l in self.letters:
-			data.append(self.packages.query(QUERY % (self.packages.table, l))[0])
-	
+			data.append(self.packages.query(QUERY % (self.packages.table, l))[0][0])
+
  		self.fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
 		self.fig.hold(False)
 		self.axes = self.fig.add_subplot(111)
 		self.pie = self.axes.pie(data, labels=self.letters, shadow=True)
 
-		self.canvas = cairo.FigureCanvasGTKCairo(self.fig)  # a gtk.DrawingArea
+		self.canvas = FigureCanvas(self.fig)  # a gtk.DrawingArea
 		self.parent.pack_start(self.canvas, True, True)
 		self.canvas.show()
 
@@ -67,10 +67,7 @@ class Chart(BaseChart):
 	def update(self):
 		"""Update the test chart"""
 
-		self.canvas.destroy()
-		self.canvas = cairo.FigureCanvasGTKCairo(self.fig)  # a gtk.DrawingArea
-		self.parent.pack_start(self.canvas, True, True)
-		self.canvas.show()
+		self.canvas.draw()
 
 
 	def detach(self):

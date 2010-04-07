@@ -1,7 +1,7 @@
 ## subject.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ class Subject():
 	def detach(self, cls):
 
 		if cls in self.__observers:
-			self.__observers.remoe(cls)
+			self.__observers.remove(cls)
 
 
 	def notify(self, arg):

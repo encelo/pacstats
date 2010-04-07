@@ -1,7 +1,7 @@
 ## app.py
 ##
-## PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -32,11 +32,11 @@ class Application:
 	This is the main application class.
 	Its role is to instantiate the singleton classes which compose the program.
 	"""
-	def __init__(self, share_dir='', charts_dir=''):
+	def __init__(self, share_dir=''):
 		#db_file = os.path.expanduser('~/.pacstats.db')
 		db_file = 'pacstats.db'
 		self.share_dir = share_dir
-		self.glade_file = os.path.join(share_dir, 'pacstats.glade')
+		self.ui_dir = (os.path.join(share_dir, 'ui'))
 		
 		# Singletons
 		self.settings = settings.Settings(db_file)
@@ -44,7 +44,7 @@ class Application:
 		self.logparser = logparser.LogParser(self.settings, self.transactions)
 		self.packages = packages.Packages(db_file)
 		self.libparser = libparser.LibParser(self.packages)
-		self.charts = charts.Charts((os.path.join(charts_dir, 'charts')), self.transactions, self.packages)
+		self.charts = charts.Charts(self.transactions, self.packages)
 		
 		self.main_win = main_win.Main_Window(self)
 

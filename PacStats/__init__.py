@@ -1,1 +1,1 @@
-VERSION = '0.1-svn'
+VERSION = '0.1-hg'

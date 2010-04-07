@@ -1,7 +1,7 @@
 ## transactions.py
 ##
-## PacStats: PacStats: ArchLinux' Pacman statistics
-## Copyright (C) 2007 Angelo Theodorou <encelo@users.sourceforge.net>
+## PacStats: ArchLinux' Pacman statistical charts application
+## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ class Transactions(Database):
 		try:
 			self.create_table()
 		except self.error:
-			print _('%s table exists already') % self.table
+			print(_('%s table exists already') % self.table)
 
 
 	def create_table(self):

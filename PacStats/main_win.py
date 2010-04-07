@@ -64,10 +64,16 @@ class Main_Window:
 		self.chart_vbox = self.ui.get_object("chart_vbox")
 		self.statusbar = self.ui.get_object("statusbar")
 
+		# Setting initial attributes
+		self.logo = gtk.gdk.pixbuf_new_from_file(os.path.join(self.share_dir, 'pixmaps/logo.png'))
+		pix = gtk.gdk.pixbuf_new_from_file(os.path.join(self.share_dir, 'pixmaps/icon.png'))
+		gtk.window_set_default_icon(pix)
+		self.window.set_icon(pix)
+
 		# Init methods
 		self.populate_charts_list()
 
-		# parsing
+		# Parsing
 		self.pb = gtk.ProgressBar()
 		self.statusbar.pack_start(self.pb)
 		self.logparser.attach(self)
@@ -217,7 +223,7 @@ class Main_Window:
 		"""Open the about dialog"""
 
 		ui_file = os.path.join(self.ui_dir, 'about_dlg.ui')
-		about_dlg.About_Dialog(ui_file)
+		about_dlg.About_Dialog(ui_file, self.logo)
 
 
 	def on_charts_list_button_press_event(self, widget, event, data=None):

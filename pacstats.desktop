@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=PacStats
+Comment=Pacman statistical charts application
+Icon=pacstats.png
+Exec=pacstats %F
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=GTK;Application;Utility;

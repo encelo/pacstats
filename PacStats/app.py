@@ -33,8 +33,8 @@ class Application:
 	Its role is to instantiate the singleton classes which compose the program.
 	"""
 	def __init__(self, share_dir=''):
-		#db_file = os.path.expanduser('~/.pacstats.db')
-		db_file = 'pacstats.db'
+		db_file = os.path.expanduser('~/.pacstats.db')
+		#db_file = 'pacstats.db'
 		self.share_dir = share_dir
 		self.ui_dir = (os.path.join(share_dir, 'ui'))
 		

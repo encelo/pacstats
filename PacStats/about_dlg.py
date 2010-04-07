@@ -30,7 +30,7 @@ import PacStats
 class About_Dialog:
 	"""Open the about dialog"""
 
-	def __init__(self, ui_file):
+	def __init__(self, ui_file, logo):
 		gtk.about_dialog_set_url_hook(self.__url_hook)
 
 		self.ui = gtk.Builder()
@@ -38,6 +38,7 @@ class About_Dialog:
 		self.dialog = self.ui.get_object("about_dlg")
 
 		self.dialog.set_version(PacStats.VERSION)
+		self.dialog.set_logo(logo)
 		self.dialog.run()
 		self.dialog.destroy()
 		return

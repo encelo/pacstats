@@ -32,7 +32,7 @@ class Charts():
 
 		charts_dir_list = os.listdir(charts_dir)
 		for file in charts_dir_list:
-			if file[0] == '.' or file.find('.pyc') >= 0: # exclude hidden and compiled files
+			if file[0] == '.' or file.endswith('.py') == False: #exlude hidden and not .py files
 				continue
 
 			modname = file.replace('.py', '')

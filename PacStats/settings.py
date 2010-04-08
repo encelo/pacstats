@@ -24,16 +24,10 @@ import cPickle
 
 
 class PersistentInt():
-	"""A class to store the seek value of the log in a binary file"""
+	"""A class to persistently store an integer in a binary file"""
 	def __init__(self, fname, default = 0):
-		cfg_home = os.environ.get('XDG_CONFIG_HOME')
-		if cfg_home == None or cfg_home == '':
-			cfg_home = os.path.expanduser('~/.config')
-
-		cfg_home = os.path.join(cfg_home, 'pacstats')
-		if os.path.isdir(cfg_home) == False:
-			os.makedirs(cfg_home)
-		fname = os.path.join(cfg_home, fname)
+		if os.path.isdir(os.path.dirname(fname)) == False:
+			os.makedirs(os.path.dirname(fname))
 
 		self._pfile = fname
 
@@ -63,6 +57,7 @@ class PersistentInt():
 class Settings():
 	"""A class to parse the configuration file"""
 	def __init__(self, fname = ''):
+		# Determining config file path
 		if fname == '':
 			cfg_home = os.environ.get('XDG_CONFIG_HOME')
 			if cfg_home == None or cfg_home == '':
@@ -75,9 +70,19 @@ class Settings():
 
 		self._cfg_file = fname
 
+		# Determining default database path
+		data_home = os.environ.get('XDG_DATA_HOME')
+		if data_home == None or data_home == '':
+			data_home = os.path.expanduser('~/.local/share')
+
+		data_home = os.path.join(data_home, 'pacstats')
+		if os.path.isdir(data_home) == False:
+			os.makedirs(data_home)
+		dbname = os.path.join(data_home, 'pacstats.db')
+
 		# Setting defaults
 		defaults = {}
-		defaults['db'] = os.path.expanduser('~/.pacstats.db')
+		defaults['db'] = dbname
 		defaults['log'] = '/var/log/pacman.log'
 		defaults['lib'] = '/var/lib/pacman/local'
 		defaults['abs'] = '/var/abs'

@@ -39,7 +39,8 @@ class Application:
 		# Singletons
 		self.settings = settings.Settings()
 		self.transactions = transactions.Transactions(self.settings.db)
-		self.logparser = logparser.LogParser(self.transactions, self.settings.log, settings.PersistentInt('seek.p'))
+		seek_p = settings.PersistentInt(os.path.join(os.path.dirname(self.settings.db), 'seek.p'))
+		self.logparser = logparser.LogParser(self.transactions, self.settings.log, seek_p)
 		self.packages = packages.Packages(self.settings.db)
 		self.libparser = libparser.LibParser(self.packages, self.settings.lib)
 		self.charts = charts.Charts(self.transactions, self.packages)

@@ -26,7 +26,7 @@ class Charts():
 	"""Charts manager class"""
 	def __init__(self, transactions, packages):
 
-		self.__charts = {}
+		self._charts = {}
 		charts_dir = os.path.join(os.path.dirname(__file__), 'charts')
 		sys.path.insert(0, charts_dir)
 
@@ -38,23 +38,23 @@ class Charts():
 			modname = file.replace('.py', '')
 			module = __import__(modname)
 			if 'Chart' in dir(module):
-				self.__charts[modname] = module.Chart(transactions, packages)
+				self._charts[modname] = module.Chart(transactions, packages)
 
 
 	def __len__(self):
 		"""Return the number of available charts"""
-		return len(self.__charts)
+		return len(self._charts)
 
 
 	def get_names(self):
 		"""Return chart names"""
-		return self.__charts.keys()
+		return self._charts.keys()
 
 
 	def get_chart(self, name):
 		"""Return the given chart"""
 		try:
-			return self.__charts[name]
+			return self._charts[name]
 		except KeyError:
 			return None
 

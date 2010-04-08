@@ -23,21 +23,21 @@ class Subject():
 	"""A subject in the observer pattern"""
 	def __init__(self):
 
-		self.__observers = []
+		self._observers = []
 
 	def attach(self, cls):
 
-		if isinstance(cls, object) and cls not in self.__observers:
-			self.__observers.append(cls)
+		if isinstance(cls, object) and cls not in self._observers:
+			self._observers.append(cls)
 
 
 	def detach(self, cls):
 
-		if cls in self.__observers:
-			self.__observers.remove(cls)
+		if cls in self._observers:
+			self._observers.remove(cls)
 
 
 	def notify(self, arg):
 
-		for cls in self.__observers:
+		for cls in self._observers:
 			cls.notify(arg)

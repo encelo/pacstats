@@ -29,30 +29,35 @@ UPGRADE = 4
 
 class LogParser(Subject):
 	"""A parser for pacman.log"""
-	def __init__(self, settings, transactions):
+	def __init__(self, transactions, logfile, seek):
 
 		Subject.__init__(self)
+		self._transactions = transactions
+		self._logfile = logfile
+		self._seek = seek
 
-		self.settings = settings
-		self.transactions = transactions
+
+	def reset_seek(self):
+		"""Reset the seek value to zero"""
+
+		self._seek.set(0)
+		self._seek.write()
 
 
-	def parse(self, logfile='/var/log/pacman.log'):
+	def parse(self):
 		"""Parse a logfile from the saved seek position"""
 
 		try:
-			f = open(logfile)
+			f = open(self._logfile)
 		except IOError:
-			print('Cannot open %s!' % logfile)
+			print('Cannot open \"%s\"!' % self._logfile)
 			return
 
-		size = stat(logfile).st_size
-		seek_value = self.settings.get('log_seek')
-		if seek_value:
-			seek_value = int(seek_value)
-			f.seek(seek_value)
-		else:
-			seek_value = 0
+		print('Parsing the log \"%s\"' % self._logfile)
+
+		size = stat(self._logfile).st_size
+		seek_value = self._seek.get()
+		f.seek(seek_value)
 
 		for line in f:
 			rawstamp = line[:line.find(']')+1]
@@ -93,12 +98,13 @@ class LogParser(Subject):
 					version.append(rawaction[2].strip('(').strip(')\n'))
 
 			if action in (0, 1):
-				self.transactions.insert(date, time, action)
+				self._transactions.insert(date, time, action)
 			else:
-				self.transactions.insert(date, time, action, package, version[0], version[1])
+				self._transactions.insert(date, time, action, package, version[0], version[1])
 
 			seek_value = f.tell()
-			self.settings.set('log_seek', seek_value)
 			self.notify(float(seek_value)/float(size))
 
+		self._seek.set(size)
+		self._seek.write()
 		f.close()

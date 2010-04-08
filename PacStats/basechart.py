@@ -22,27 +22,27 @@
 class BaseChart:
 	"""A skeleton class for a chart to inherit from"""
 	def __init__(self, transactions, packages):
-		self.transactions = transactions
-		self.packages = packages
+		self._transactions = transactions
+		self._packages = packages
 
-		self.name = ''
-		self.description = ''
-		self.version = ''
+		self._name = ''
+		self._description = ''
+		self._version = ''
 
 
 	def get_name(self):
-		return self.name
+		return self._name
 
 	def get_description(self):
-		return self.description
+		return self._description
 
 	def get_version(self):
-		return self.version
+		return self._version
 
 
 	def attach(self, parent_box):
 		"""Setup the Drawing Area class for the chart"""
-		self.parent = parent_box
+		self._parent = parent_box
 		
 
 	def update(self):
@@ -52,4 +52,4 @@ class BaseChart:
 
 	def detach(self):
 		"""Erase the Drawing Area class of the chart"""
-		self.parent = None
+		self._parent = None

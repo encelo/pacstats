@@ -23,32 +23,33 @@ from subject import Subject
 
 class LibParser(Subject):
 	"""A parser for the pacman lib"""
-	def __init__(self, packages):
+	def __init__(self, packages, libdir):
 
 		Subject.__init__(self)
+		self._packages = packages
+		self._libdir = libdir
 
-		self.packages = packages
 
-
-	def parse(self, libdir='/var/lib/pacman/local'):
+	def parse(self):
 		"""Parse the lib directory"""
 
 		try:
-			lib_listdir = os.listdir(libdir)
+			lib_listdir = os.listdir(self._libdir)
 		except OSError:
-			print(_('Cannot list %s!') % libdir)
+			print('Cannot list \"%s\"!' % self._libdir)
 			return
+		print('Parsing the lib \"%s\"' % self._libdir)
 
 		pkg_count = 0
 		for pkg in lib_listdir:
-			pkgdesc = os.path.join(libdir, pkg, 'desc')
+			pkgdesc = os.path.join(self._libdir, pkg, 'desc')
 
 			list = pkg.split('-')
 			pkgname = '-'.join(list[:len(list)-2])
 			pkgver = '-'.join(list[len(list)-2:])
 			try:
-				stored_pkg = self.packages.query("SELECT name, version FROM %s WHERE name='%s'" % \
-					(self.packages.table, pkgname))[0]
+				stored_pkg = self._packages.query("SELECT name, version FROM %s WHERE name='%s'" % \
+					(self._packages.table, pkgname))[0]
 			except IndexError:
 				pass
 			else:
@@ -57,7 +58,7 @@ class LibParser(Subject):
 					self.notify(float(pkg_count)/float(len(lib_listdir)))
 					continue
 				else:
-					self.packages.query("DELETE FROM %s WHERE name='%s'" % (self.packages.table, pkgname))
+					self._packages.query("DELETE FROM %s WHERE name='%s'" % (self._packages.table, pkgname))
 
 			reas = 0 # Default value for packages missing this field
 
@@ -90,5 +91,5 @@ class LibParser(Subject):
 			f.close()
 			pkg_count += 1
 
-			self.packages.insert(name, ver, desc, url, lic, arch, bdate, idate, pack, size, reas)
+			self._packages.insert(name, ver, desc, url, lic, arch, bdate, idate, pack, size, reas)
 			self.notify(float(pkg_count)/float(len(lib_listdir)))

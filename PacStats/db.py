@@ -30,56 +30,56 @@ class Database:
 	"""General database managing class"""
 	def __init__(self, fname):
 		"""Connect to the specified database"""
-		self.error = sqlite.Error 
+		self._error = sqlite.Error 
 		if os.path.exists(fname) == False:
-			print('Creating' + ' ' + fname)
-		self.con = sqlite.connect(fname)
-		self.cur = self.con.cursor()
+			print('Creating \"%s\"' % fname)
+		self._con = sqlite.connect(fname)
+		self._cur = self._con.cursor()
 
 		self.table = None
 
 
 	def __del__(self):
 		"""Close the connection"""
-		self.con.commit()
-		self.con.close()
+		self._con.commit()
+		self._con.close()
 
 
 	def clear(self):
 		"""Clear the whole specified table"""
 		DELETE = """DELETE FROM %s;""" % self.table
 
-		self.cur.execute(DELETE)
-		self.con.commit()
+		self._cur.execute(DELETE)
+		self._con.commit()
 
 
 	def drop_table(self):
 		"""Drop the specified table"""
 		DROP = """DROP TABLE %s;""" % self.table
 
-		self.cur.execute(DROP)
-		self.con.commit()
+		self._cur.execute(DROP)
+		self._con.commit()
 
 
 	def query(self, string):
 		"""Execute an arbitrary query"""
-		self.cur.execute(string)
-		return self.cur.fetchall()
+		self._cur.execute(string)
+		return self._cur.fetchall()
 
 
 	def select(self, where=''):
 		"""Return the rows selected by a WHERE clause"""
 		SELECT = """SELECT * FROM  %s %s;""" % (self.table, where)
-		self.cur.execute(SELECT)
-		return self.cur.fetchall()
+		self._cur.execute(SELECT)
+		return self._cur.fetchall()
 
 
 	def show(self, where=''):
 		"""Print the rows selected by a WHERE clause"""
 		SELECT = """SELECT * FROM %s %s;""" % (self.table, where)
 
-		self.cur.execute(SELECT)
-		for row in self.cur:
+		self._cur.execute(SELECT)
+		for row in self._cur:
 			line = ''
 			for i in range(len(row)-2):
 				line = line + str(row[i]) + '|'
@@ -91,11 +91,11 @@ class Database:
 		"""Save the database as a text file"""
 		SELECT = """SELECT * FROM %s;""" % self.table
 		
-		self.cur.execute(SELECT)
+		self._cur.execute(SELECT)
 
 		f = open(fname, 'w')
 
-		for row in self.cur:
+		for row in self._cur:
 			line = ''
 			for i in range(len(row)-2):
 				line = line + str(row[i]) + '|'

@@ -30,8 +30,9 @@ class Transactions(Database):
 
 		try:
 			self.create_table()
-		except self.error:
-			print(_('%s table exists already') % self.table)
+		except self._error:
+#			print('\"%s\" table exists already' % self.table)
+			pass
 
 
 	def create_table(self):
@@ -46,8 +47,8 @@ class Transactions(Database):
 			new_ver VARCHAR(32)
 			);""" % self.table
 	
-		self.cur.execute(CREATE)
-		self.con.commit()
+		self._cur.execute(CREATE)
+		self._con.commit()
 
 
 	def insert(self, date, time, action, package=None, old_ver=None, new_ver=None):
@@ -58,13 +59,13 @@ class Transactions(Database):
 			INSERT = """INSERT INTO %s VALUES (NULL, '%s', '%s', %d, '%s', '%s', '%s')""" % \
 				(self.table, date, time, action, package, old_ver, new_ver)
 	
-		self.cur.execute(INSERT)
-		self.con.commit()
+		self._cur.execute(INSERT)
+		self._con.commit()
 
 
 	def remove(self, id):
 		"""Remove the transaction with the given id from the database"""
 		DELETE = """DELETE FROM %s WHERE rowid=%d""" % (self.table, id)
 
-		self.cur.execute(DELETE)
-		self.con.commit()
+		self._cur.execute(DELETE)
+		self._con.commit()

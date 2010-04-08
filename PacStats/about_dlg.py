@@ -31,20 +31,20 @@ class About_Dialog:
 	"""Open the about dialog"""
 
 	def __init__(self, ui_file, logo):
-		gtk.about_dialog_set_url_hook(self.__url_hook)
+		gtk.about_dialog_set_url_hook(self._url_hook)
 
-		self.ui = gtk.Builder()
-		self.ui.add_from_file(ui_file)
-		self.dialog = self.ui.get_object("about_dlg")
+		ui = gtk.Builder()
+		ui.add_from_file(ui_file)
+		self._dialog = ui.get_object("about_dlg")
 
-		self.dialog.set_version(PacStats.VERSION)
-		self.dialog.set_logo(logo)
-		self.dialog.run()
-		self.dialog.destroy()
+		self._dialog.set_version(PacStats.VERSION)
+		self._dialog.set_logo(logo)
+		self._dialog.run()
+		self._dialog.destroy()
 		return
 
 
-	def __url_hook(dialog, link, user_data):
+	def _url_hook(dialog, link, user_data):
 		"""Hook function called when a link in the about dialog is clicked"""
 		if sys.version_info[:2] >= (2, 5):
 			webbrowser.open_new_tab(user_data)

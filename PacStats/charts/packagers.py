@@ -35,52 +35,51 @@ class Chart(BaseChart):
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self.name = 'Packagers'
-		self.description = 'Number of packages for each packager'
-		self.version = '0.1'
+		self._name = 'Packagers'
+		self._description = 'Number of packages for each packager'
+		self._version = '0.1'
 
-		self.letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
-		self.data = []
+		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
 
 
 	def attach(self, parent_box):
 		"""Setup the Drawing Area class for the test chart"""
-		self.parent = parent_box
+		self._parent = parent_box
 		
 		QUERY = """SELECT packager, COUNT(*) FROM %s GROUP BY packager ORDER BY packager DESC;"""
-		data = self.packages.query(QUERY % (self.packages.table))
+		data = self._packages.query(QUERY % (self._packages.table))
 		widths = []
 		labels = []
 		for tuple in data:
 			labels.append(tuple[0])
 			widths.append(tuple[1])
 	
- 		self.fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
-		self.fig.hold(False)
-		self.axes = self.fig.add_subplot(111)
-		self.axes.barh(range(len(widths)), widths)
-		self.axes.set_ylim(0, len(widths))
-		self.axes.set_xlim(0, max(widths))
-		self.axes.set_yticks(n.arange(0.5, len(widths)))
-		self.axes.set_yticklabels(labels, fontsize=5)
+ 		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
+		self._fig.hold(False)
+		self._axes = self._fig.add_subplot(111)
+		self._axes.barh(range(len(widths)), widths)
+		self._axes.set_ylim(0, len(widths))
+		self._axes.set_xlim(0, max(widths))
+		self._axes.set_yticks(n.arange(0.5, len(widths)))
+		self._axes.set_yticklabels(labels, fontsize=5)
 
-		self.canvas = FigureCanvas(self.fig)  # a gtk.DrawingArea
-		self.parent.pack_start(self.canvas, True, True)
-		self.canvas.show()
+		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
+		self._parent.pack_start(self._canvas, True, True)
+		self._canvas.show()
 
 
 	def update(self):
 		"""Update the test chart"""
 
-		self.canvas.draw()
+		self._canvas.draw()
 
 
 	def detach(self):
 		"""Delete the Drawing class for the test chart"""
 	
 		try:
-			self.parent.remove(self.canvas)
-			self.canvas.destroy()
+			self._parent.remove(self._canvas)
+			self._canvas.destroy()
 		except AttributeError:
 			pass
 

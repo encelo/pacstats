@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-07 00:20+0300\n"
+"POT-Creation-Date: 2010-04-08 05:39+0300\n"
 "PO-Revision-Date: 2010-04-07 00:18+0200\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -43,46 +43,35 @@ msgstr "A_iuto"
 msgid "translator-credits"
 msgstr "Angelo \"Encelo\" Theodorou <encelo@gmail.com> (Italian)"
 
-#: ../PacStats/main_win.py:78 ../PacStats/main_win.py:181
-msgid "Parsing the log file..."
-msgstr "Analisi del file di log..."
-
-#: ../PacStats/main_win.py:81 ../PacStats/main_win.py:184
-msgid "Parsing the library..."
-msgstr "Analisi della libreria..."
-
-#: ../PacStats/main_win.py:106
+#: ../PacStats/main_win.py:100
 #, python-format
 msgid "Packages: %d   | Transactions: %d   first: %s %s   last: %s %s"
 msgstr "Pacchetti: %d   | Transazioni: %d   prima: %s %s   ultima: %s %s"
 
-#: ../PacStats/main_win.py:160
+#: ../PacStats/main_win.py:154
 msgid "Do you really want to clear the database?"
 msgstr "Si intende davver davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:168
+#: ../PacStats/main_win.py:162
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:196
+#: ../PacStats/main_win.py:175
+msgid "Parsing the log file..."
+msgstr "Analisi del file di log..."
+
+#: ../PacStats/main_win.py:178
+msgid "Parsing the library..."
+msgstr "Analisi della libreria..."
+
+#: ../PacStats/main_win.py:190
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:208
+#: ../PacStats/main_win.py:202
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:211
+#: ../PacStats/main_win.py:205
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
-
-#: ../PacStats/transactions.py:34 ../PacStats/packages.py:34
-#: ../PacStats/settings.py:34
-#, python-format
-msgid "%s table exists already"
-msgstr "La tabella %s esiste già"
-
-#: ../PacStats/libparser.py:39
-#, python-format
-msgid "Cannot list %s!"
-msgstr "Impossibile listare il contenuto di %s!"

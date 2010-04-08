@@ -33,17 +33,15 @@ class Application:
 	Its role is to instantiate the singleton classes which compose the program.
 	"""
 	def __init__(self, share_dir=''):
-		db_file = os.path.expanduser('~/.pacstats.db')
-		#db_file = 'pacstats.db'
 		self.share_dir = share_dir
 		self.ui_dir = (os.path.join(share_dir, 'ui'))
 		
 		# Singletons
-		self.settings = settings.Settings(db_file)
-		self.transactions = transactions.Transactions(db_file)
-		self.logparser = logparser.LogParser(self.settings, self.transactions)
-		self.packages = packages.Packages(db_file)
-		self.libparser = libparser.LibParser(self.packages)
+		self.settings = settings.Settings()
+		self.transactions = transactions.Transactions(self.settings.db)
+		self.logparser = logparser.LogParser(self.transactions, self.settings.log, settings.PersistentInt('seek.p'))
+		self.packages = packages.Packages(self.settings.db)
+		self.libparser = libparser.LibParser(self.packages, self.settings.lib)
 		self.charts = charts.Charts(self.transactions, self.packages)
 		
 		self.main_win = main_win.Main_Window(self)
@@ -51,3 +49,4 @@ class Application:
 	def run(self):
 		"""Make the gtk main loop start."""
 		gtk.main()
+		self.settings.write()

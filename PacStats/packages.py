@@ -30,8 +30,9 @@ class  Packages(Database):
 
 		try:
 			self.create_table()
-		except self.error:
-			print(_('%s table exists already') % self.table)
+		except self._error:
+#			print('\"%s\" table exists already' % self.table)
+			pass
 
 
 	def create_table(self):
@@ -50,8 +51,8 @@ class  Packages(Database):
 			reason INTEGER
 			);""" % self.table
 	
-		self.cur.execute(CREATE)
-		self.con.commit()
+		self._cur.execute(CREATE)
+		self._con.commit()
 
 
 	def insert(self, name, version, description, url, license, arch, builddate, installdate, packager, size, reason):
@@ -60,15 +61,15 @@ class  Packages(Database):
 				(self.table, name, version, description, url, license, arch, builddate, installdate, packager, size, reason)
 		
 		try:
-			self.cur.execute(INSERT)
-		except self.error:
+			self._cur.execute(INSERT)
+		except self._error:
 			return
-		self.con.commit()
+		self._con.commit()
 
 
 	def remove(self, name):
 		"""Remove the package with the given n ame from the database"""
 		DELETE = """DELETE FROM %s WHERE name='%s'""" % (self.table, name)
 
-		self.cur.execute(DELETE)
-		self.con.commit()
+		self._cur.execute(DELETE)
+		self._con.commit()

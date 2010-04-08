@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=PacStats
-Comment=Pacman statistical charts application
+Comment=Statistical charts about pacman activity
 Icon=pacstats.png
 Exec=pacstats %F
 Terminal=false

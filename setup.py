@@ -1,6 +1,6 @@
 ## setup.py
 ##
-## PacStats: ArchLinux' Pacman statistical charts application
+## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -91,8 +91,8 @@ setup(name='pacstats',
 	description='ArchLinux\' Pacman statistical charts application',
 	author='Angelo "Encelo" Theodorou',
 	author_email='encelo@gmail.com',
-#	url='http://***',
-#	download_url='http://code.google.com/p/formalchemy/downloads/list',
+	url='http://pacstats.googlecode.com',
+	download_url='http://code.google.com/p/pacstats/downloads/list',
 	license = 'GNU GENERAL PUBLIC LICENSE',
 	classifiers=[
           'Development Status :: 3 - Alpha',

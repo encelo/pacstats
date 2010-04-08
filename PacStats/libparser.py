@@ -1,6 +1,6 @@
 ## libparser.py
 ##
-## PacStats: ArchLinux' Pacman statistical charts application
+## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify

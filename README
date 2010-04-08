@@ -1,11 +1,12 @@
-PacStats: ArchLinux' Pacman statistical charts application
+PacStats: Statistical charts about Archlinux pacman activity
 Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
 
-http://???
+http://pacstats.googlecode.com
 
 Info
 ----
-PacStats parses pacman.log and the pacman library to make these informations available to statistical chart plugins.
+PacStats parses pacman.log and the pacman lib directory to make this information 
+available to statistical chart plugins.
 
 Dependencies
 ------------
@@ -13,9 +14,19 @@ Python (Program)
 GTK2, PyGTK, Libglade (GUI)
 SQLite, PySQLite if Python <= 2.4 (DB)
 MatPlotLib, NumPy (Statistical charts)
-Epydoc (Docs generation)
+Epydoc and Graphviz (Docs generation)
+
+Please note that, even if using GtkBuilder, at the moment libglade is still 
+needed for correct localization of the GUI.
+
+Installation
+------------
+To install the program, type:
+	$ python setup.py install [ --root=path --prefix=path ]
+
+You can specify a prefix (e.g. /usr) and an alternative root (e.g. /mnt/hdb1).
 
 Generating Docs
 ---------------
-Go in the src directory then type:
-	$ epydoc -o epydoc --name=pacstats --url=http://? --graph=all PacStats/*.py
+To generate automatic documentation type:
+	$ epydoc -o epydoc --name=pacstats --url=http://pacstats.googlecode.com --graph=all PacStats/*.py PacStats/charts/*.py

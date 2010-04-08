@@ -36,32 +36,33 @@ class Chart(BaseChart):
 		BaseChart.__init__(self, transactions, packages)
 
 		self._name = 'Packagers'
-		self._description = 'Number of packages for each packager'
+		self._description = 'Top ten for number of packages delivered'
 		self._version = '0.1'
-
-		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
 
 
 	def attach(self, parent_box):
 		"""Setup the Drawing Area class for the test chart"""
 		self._parent = parent_box
 		
-		QUERY = """SELECT packager, COUNT(*) FROM %s GROUP BY packager ORDER BY packager DESC;"""
+		QUERY = """SELECT packager, COUNT(*) AS total FROM %s GROUP BY packager ORDER BY total DESC LIMIT 10;"""
 		data = self._packages.query(QUERY % (self._packages.table))
+		data.reverse()
 		widths = []
 		labels = []
 		for tuple in data:
-			labels.append(tuple[0])
+			name = tuple[0][:tuple[0].find('<')].rstrip() # stripping email
+			labels.append(name)
 			widths.append(tuple[1])
 	
  		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
 		self._fig.hold(False)
 		self._axes = self._fig.add_subplot(111)
-		self._axes.barh(range(len(widths)), widths)
 		self._axes.set_ylim(0, len(widths))
-		self._axes.set_xlim(0, max(widths))
+		if len(widths) > 0:
+			self._axes.set_xlim(0, max(widths)+max(widths)*0.05)
 		self._axes.set_yticks(n.arange(0.5, len(widths)))
 		self._axes.set_yticklabels(labels, fontsize=5)
+		self._axes.barh(range(len(widths)), widths)
 
 		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
 		self._parent.pack_start(self._canvas, True, True)

@@ -1,4 +1,4 @@
-## histo_letter.py
+## packagers.py
 ##
 ## PacStats: ArchLinux' Pacman statistical charts application
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -31,36 +31,37 @@ except ImportError:
 
 
 class Chart(BaseChart):
-	"""Histo letter chart"""
+	"""Package size chart"""
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = 'Histo Letter'
-		self._description = 'Initial package letter histogram'
+		self._name = 'Package size'
+		self._description = 'Top ten for package size in MB'
 		self._version = '0.1'
-
-		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
 
 
 	def attach(self, parent_box):
 		"""Setup the Drawing Area class for the test chart"""
 		self._parent = parent_box
 		
-		data = []
-		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
-		for l in self._letters:
-			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
+		QUERY = """SELECT name, size/(1024*1024) FROM %s ORDER BY size DESC LIMIT 10;"""
+		data = self._packages.query(QUERY % (self._packages.table))
+		data.reverse()
+		widths = []
+		labels = []
+		for tuple in data:
+			labels.append(tuple[0])
+			widths.append(tuple[1])
 	
  		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
 		self._fig.hold(False)
 		self._axes = self._fig.add_subplot(111)
-
-		self._axes.set_xlim(0, len(self._letters))
-		self._axes.set_ylim(0, max(data)+max(data)*0.1)
-		self._axes.set_xticks(n.arange(0.5, len(self._letters)))
-		self._axes.set_xticklabels(self._letters)
-
-		self._axes.bar(range(len(self._letters)), data)
+		self._axes.set_ylim(0, len(widths))
+		if len(widths) > 0:
+			self._axes.set_xlim(0, max(widths)+max(widths)*0.05)
+		self._axes.set_yticks(n.arange(0.5, len(widths)))
+		self._axes.set_yticklabels(labels, fontsize=5)
+		self._axes.barh(range(len(widths)), widths)
 
 		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
 		self._parent.pack_start(self._canvas, True, True)

@@ -59,15 +59,24 @@ class LogParser(Subject):
 		seek_value = self._seek.get()
 		f.seek(seek_value)
 
+		line_no = 0
 		for line in f:
-			rawstamp = line[:line.find(']')+1]
-			rawaction = line[line.find(']')+2:]
+			line_no += 1
+
+			open_box = line.find('[')
+			close_box = line.find(']')
+			if open_box == -1 or close_box == -1:
+#				print('No matching brackets at line %s: \"%s\"' % (line_no, line.rstrip('\n')))
+				continue
+
+			rawstamp = line[open_box:close_box+1]
+			rawaction = line[close_box+1:].lstrip()
 
 			# Timestamp
 			rawstamp = rawstamp.strip('[')
 			rawstamp = rawstamp.strip(']')
 			rawstamp = rawstamp.split(' ')
-			
+		
 			date = rawstamp[0]
 			time = rawstamp[1]
 
@@ -85,6 +94,7 @@ class LogParser(Subject):
 				elif rawaction[0] == 'upgraded':
 					action = UPGRADE
 				else:
+#					print('Unknown action at line  %s: \"%s\"' % (line_no, line.rstrip('\n')))
 					continue
 
 				package = rawaction[1]

@@ -38,7 +38,8 @@ class Charts():
 			modname = file.replace('.py', '')
 			module = __import__(modname)
 			if 'Chart' in dir(module):
-				self._charts[modname] = module.Chart(transactions, packages)
+				cls =  module.Chart(transactions, packages)
+				self._charts[cls.get_name()] = cls
 
 
 	def __len__(self):

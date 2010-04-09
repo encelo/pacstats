@@ -233,8 +233,7 @@ class Main_Window:
 		iter = self._liststore.get_iter(path)
 		(selname, ) = self._liststore.get(iter, 0)
 
-		for modname in self._charts.get_names():
-			chart = self._charts.get_chart(modname)
-			if chart.get_name() == selname:
-				self.detach_chart()
-				self.attach_chart(chart)
+		chart = self._charts.get_chart(selname)
+		if chart != None:
+			self.detach_chart()
+			self.attach_chart(chart)

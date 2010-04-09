@@ -13,7 +13,7 @@ Dependencies
 Python (Program)
 GTK2, PyGTK, Libglade (GUI)
 SQLite, PySQLite if Python <= 2.4 (DB)
-MatPlotLib, NumPy (Statistical charts)
+Matplotlib, NumPy (Statistical charts)
 Epydoc and Graphviz (Docs generation)
 
 Please note that, even if using GtkBuilder, at the moment libglade is still 

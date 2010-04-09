@@ -22,11 +22,8 @@ from PacStats.basechart import BaseChart
 
 try:
 	import numpy as n
-	import matplotlib.figure as f
-	import matplotlib.pylab as p
-	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 except ImportError:
-	print('MatPlotLib is missing!')
+	print('NumPy is missing!')
 	exit(-1)
 
 
@@ -39,42 +36,17 @@ class Chart(BaseChart):
 		self._description = 'Initial package letter pie chart'
 		self._version = '0.1'
 
-		self._transactions = transactions
 		self._letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z']
 		self._letters.reverse() # Clockwise pie chart
 
 
-	def attach(self, parent_box):
-		"""Setup the Drawing Area class for the test chart"""
-		self._parent = parent_box
+	def generate(self):
+		"""Genrate the chart"""
 		
 		data = []
 		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
 		for l in self._letters:
 			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
 
- 		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
-		self._fig.hold(False)
 		self._axes = self._fig.add_subplot(111)
 		self._pie = self._axes.pie(data, labels=self._letters, shadow=True)
-
-		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
-		self._parent.pack_start(self._canvas, True, True)
-		self._canvas.show()
-
-
-	def update(self):
-		"""Update the test chart"""
-
-		self._canvas.draw()
-
-
-	def detach(self):
-		"""Delete the Drawing class for the test chart"""
-
-		try:
-			self._parent.remove(self._canvas)
-			self._canvas.destroy()
-		except AttributeError:
-			pass
-

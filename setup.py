@@ -20,8 +20,8 @@
 
 import sys
 import os
-from setuptools import setup
-from setuptools.command import install 
+from distutils.core import setup
+from distutils.command import install 
 
 
 def compile_po(path):
@@ -105,7 +105,7 @@ setup(name='pacstats',
 		  'Topic :: System',
           'Topic :: Utilities',
           ],
-	install_requires=['pygtk', 'matplotlib'],
+	requires=['pygtk', 'matplotlib', 'numpy'],
 	packages=['PacStats', 'PacStats/charts'],
 	scripts=['pacstats'],
 	data_files=[('share/pacstats/ui', ['ui/about_dlg.ui', 'ui/main_win.ui']),

@@ -22,11 +22,8 @@ from PacStats.basechart import BaseChart
 
 try:
 	import numpy as n
-	import matplotlib.figure as f
-	import matplotlib.pylab as p
-	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 except ImportError:
-	print('MatPlotLib is missing!')
+	print('NumPy is missing!')
 	exit(-1)
 
 
@@ -40,9 +37,8 @@ class Chart(BaseChart):
 		self._version = '0.1'
 
 
-	def attach(self, parent_box):
-		"""Setup the Drawing Area class for the test chart"""
-		self._parent = parent_box
+	def generate(self):
+		"""Generate the chart"""
 		
 		QUERY = """SELECT packager, COUNT(*) AS total FROM %s GROUP BY packager ORDER BY total DESC LIMIT 10;"""
 		data = self._packages.query(QUERY % (self._packages.table))
@@ -54,8 +50,6 @@ class Chart(BaseChart):
 			labels.append(name)
 			widths.append(tuple[1])
 	
- 		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
-		self._fig.hold(False)
 		self._axes = self._fig.add_subplot(111)
 		self._axes.set_ylim(0, len(widths))
 		if len(widths) > 0:
@@ -63,24 +57,4 @@ class Chart(BaseChart):
 		self._axes.set_yticks(n.arange(0.5, len(widths)))
 		self._axes.set_yticklabels(labels, fontsize=5)
 		self._axes.barh(range(len(widths)), widths)
-
-		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
-		self._parent.pack_start(self._canvas, True, True)
-		self._canvas.show()
-
-
-	def update(self):
-		"""Update the test chart"""
-
-		self._canvas.draw()
-
-
-	def detach(self):
-		"""Delete the Drawing class for the test chart"""
-	
-		try:
-			self._parent.remove(self._canvas)
-			self._canvas.destroy()
-		except AttributeError:
-			pass
 

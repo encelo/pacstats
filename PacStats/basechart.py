@@ -19,6 +19,15 @@
 ##
 
 
+try:
+	import matplotlib.figure as f
+	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
+	from matplotlib.backends.backend_gtk import NavigationToolbar2GTK as NavigationToolbar
+except ImportError:
+	print('Matplotlib is missing!')
+	exit(-1)
+
+
 class BaseChart:
 	"""A skeleton class for a chart to inherit from"""
 	def __init__(self, transactions, packages):
@@ -42,14 +51,37 @@ class BaseChart:
 
 	def attach(self, parent_box):
 		"""Setup the Drawing Area class for the chart"""
+
 		self._parent = parent_box
+
+		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
+		self._fig.hold(False)
+		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
+		self._toolbar = NavigationToolbar(self._canvas, self._canvas.window)
+		self._parent.pack_start(self._canvas, True, True)
+		self._parent.pack_start(self._toolbar, False, False)
+		self._canvas.show()
+
+		self.generate()
+
+	def generate(self):
+		"""Generate the chart"""
+		pass
 		
 
 	def update(self):
 		"""Update the chart"""
-		pass
+		self._canvas.draw()
 
 
 	def detach(self):
 		"""Erase the Drawing Area class of the chart"""
-		self._parent = None
+
+#		try:
+		self._parent.remove(self._toolbar)
+		self._parent.remove(self._canvas)
+		self._canvas.destroy()
+#		except AttributeError:
+#			pass
+
+		self._parent = None		

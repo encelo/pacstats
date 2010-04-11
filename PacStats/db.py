@@ -69,14 +69,14 @@ class Database:
 
 	def select(self, where=''):
 		"""Return the rows selected by a WHERE clause"""
-		SELECT = """SELECT * FROM  %s %s;""" % (self.table, where)
+		SELECT = """SELECT * FROM %s WHERE %s;""" % (self.table, where)
 		self._cur.execute(SELECT)
 		return self._cur.fetchall()
 
 
 	def show(self, where=''):
 		"""Print the rows selected by a WHERE clause"""
-		SELECT = """SELECT * FROM %s %s;""" % (self.table, where)
+		SELECT = """SELECT * FROM %s WHERE %s;""" % (self.table, where)
 
 		self._cur.execute(SELECT)
 		for row in self._cur:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-08 05:39+0300\n"
-"PO-Revision-Date: 2010-04-07 00:18+0200\n"
+"POT-Creation-Date: 2010-04-11 05:35+0300\n"
+"PO-Revision-Date: 2010-04-11 05:36+0200\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,39 +39,83 @@ msgstr "_Archivio"
 msgid "_Help"
 msgstr "A_iuto"
 
+#: ../ui/dbinfo_win.ui.h:1
+msgid "Database Information"
+msgstr "Informazioni Database"
+
+#: ../ui/dbinfo_win.ui.h:2
+msgid "First:"
+msgstr "Prima:"
+
+#: ../ui/dbinfo_win.ui.h:3
+msgid "Installations:"
+msgstr "Installazioni:"
+
+#: ../ui/dbinfo_win.ui.h:4
+msgid "Last:"
+msgstr "Ultima:"
+
+#: ../ui/dbinfo_win.ui.h:5
+msgid "N/A"
+msgstr "N/D"
+
+#: ../ui/dbinfo_win.ui.h:6
+msgid "Packages:"
+msgstr "Pacchetti:"
+
+#: ../ui/dbinfo_win.ui.h:7
+msgid "Removals:"
+msgstr "Rimozioni:"
+
+#: ../ui/dbinfo_win.ui.h:8
+msgid "Synchronizations:"
+msgstr "Sincronizzazioni:"
+
+#: ../ui/dbinfo_win.ui.h:9
+msgid "System Upgrades:"
+msgstr "Aggiornamenti di sistema:"
+
+#: ../ui/dbinfo_win.ui.h:10
+msgid "Transactions:"
+msgstr "Transazioni:"
+
+#: ../ui/dbinfo_win.ui.h:11
+msgid "Upgrades:"
+msgstr "Aggiornamenti:"
+
 #: ../ui/about_dlg.ui.h:1
 msgid "translator-credits"
 msgstr "Angelo \"Encelo\" Theodorou <encelo@gmail.com> (Italian)"
 
-#: ../PacStats/main_win.py:100
+#: ../PacStats/main_win.py:96
 #, python-format
-msgid "Packages: %d   | Transactions: %d   first: %s %s   last: %s %s"
-msgstr "Pacchetti: %d   | Transazioni: %d   prima: %s %s   ultima: %s %s"
+msgid "Packages: %d Transactions: %d"
+msgstr "Pacchetti: %d Transazioni: %d"
 
-#: ../PacStats/main_win.py:154
+#: ../PacStats/main_win.py:166
 msgid "Do you really want to clear the database?"
 msgstr "Si intende davver davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:162
+#: ../PacStats/main_win.py:174
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:175
+#: ../PacStats/main_win.py:187
 msgid "Parsing the log file..."
 msgstr "Analisi del file di log..."
 
-#: ../PacStats/main_win.py:178
+#: ../PacStats/main_win.py:190
 msgid "Parsing the library..."
 msgstr "Analisi della libreria..."
 
-#: ../PacStats/main_win.py:190
+#: ../PacStats/main_win.py:202
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:202
+#: ../PacStats/main_win.py:214
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:205
+#: ../PacStats/main_win.py:217
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "

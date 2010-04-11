@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-08 05:39+0300\n"
+"POT-Creation-Date: 2010-04-11 05:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,39 +40,83 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
+#: ../ui/dbinfo_win.ui.h:1
+msgid "Database Information"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:2
+msgid "First:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:3
+msgid "Installations:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:4
+msgid "Last:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:5
+msgid "N/A"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:6
+msgid "Packages:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:7
+msgid "Removals:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:8
+msgid "Synchronizations:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:9
+msgid "System Upgrades:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:10
+msgid "Transactions:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:11
+msgid "Upgrades:"
+msgstr ""
+
 #: ../ui/about_dlg.ui.h:1
 msgid "translator-credits"
 msgstr ""
 
-#: ../PacStats/main_win.py:100
+#: ../PacStats/main_win.py:96
 #, python-format
-msgid "Packages: %d   | Transactions: %d   first: %s %s   last: %s %s"
+msgid "Packages: %d Transactions: %d"
 msgstr ""
 
-#: ../PacStats/main_win.py:154
+#: ../PacStats/main_win.py:166
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:162
+#: ../PacStats/main_win.py:174
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:175
+#: ../PacStats/main_win.py:187
 msgid "Parsing the log file..."
 msgstr ""
 
-#: ../PacStats/main_win.py:178
+#: ../PacStats/main_win.py:190
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:190
+#: ../PacStats/main_win.py:202
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:202
+#: ../PacStats/main_win.py:214
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:205
+#: ../PacStats/main_win.py:217
 msgid "Saving the packages table as "
 msgstr ""

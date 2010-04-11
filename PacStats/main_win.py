@@ -24,7 +24,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 
-import about_dlg
+import about_dlg, dbinfo_win
 
 
 class Main_Window:
@@ -48,6 +48,7 @@ class Main_Window:
 		app_signals = {
 			"on_main_win_destroy": self.on_main_win_destroy,
 			"on_quit_activate": self.on_quit_activate,
+			"on_info_db_activate": self.on_info_db_activate,
 			"on_clear_db_activate": self.on_clear_db_activate,
 			"on_update_db_activate": self.on_update_db_activate,
 			"on_dump_db_activate": self.on_dump_db_activate,
@@ -64,6 +65,9 @@ class Main_Window:
 		self._liststore = ui.get_object("liststore")
 		self._chart_vbox = ui.get_object("chart_vbox")
 		self._statusbar = ui.get_object("statusbar")
+		
+		# Open/close window flags
+		self.dbinfo_win = None
 
 		# Init
 		self._logo = gtk.gdk.pixbuf_new_from_file(os.path.join(self._share_dir, 'pixmaps/logo.png'))
@@ -87,17 +91,9 @@ class Main_Window:
 	def setup_dbstatus(self):
 		"""Setup DB info in the statusbar"""
 
-		packages = self._packages.query("SELECT COUNT(*) FROM packages;")[0]
-
-		transactions = self._transactions.query("SELECT COUNT(*) FROM transactions;")[0]
-		if transactions[0] == 0:
-			first = ['', '']
-			last = ['', '']
-		else:
-			first = self._transactions.query("SELECT date, time FROM transactions ORDER BY date ASC LIMIT 1;")[0]
-			last = self._transactions.query("SELECT date, time FROM transactions ORDER BY date DESC LIMIT 1;")[0]
-
-		string = _('Packages: %d   | Transactions: %d   first: %s %s   last: %s %s') % (packages[0], transactions[0], first[0], first[1], last[0], last[1])
+		packages = self._packages.query("SELECT COUNT(*) FROM packages;")[0][0]
+		transactions = self._transactions.query("SELECT COUNT(*) FROM transactions;")[0][0]
+		string = _('Packages: %d Transactions: %d') % (packages, transactions)
 
 		self._statusbar.push(1, string)
 
@@ -145,6 +141,22 @@ class Main_Window:
 	def on_quit_activate(self, event):
 		"""Quit the application"""
 		return gtk.main_quit()
+
+
+	def on_info_db_activate(self, event):
+		"""Open the database Information window"""
+
+		if self.dbinfo_win:
+			self.dbinfo_win.window.present()
+		else:
+			ui_file = os.path.join(self._ui_dir, 'dbinfo_win.ui')
+			self.dbinfo_win = dbinfo_win.DBInfo_Window(ui_file, self._packages, self._transactions)
+			self.dbinfo_win.window.connect('destroy', self.on_info_db_destroy)
+
+
+	def on_info_db_destroy(self, event):
+		"""Close the database information window"""
+		self.dbinfo_win = None
 
 
 	def on_clear_db_activate(self, event):

@@ -1,4 +1,5 @@
 [type: gettext/glade]ui/main_win.ui
+[type: gettext/glade]ui/dbinfo_win.ui
 [type: gettext/glade]ui/about_dlg.ui
 
 PacStats/about_dlg.py

@@ -54,6 +54,20 @@
                   <object class="GtkMenu" id="menu2">
                     <property name="visible">True</property>
                     <child>
+                      <object class="GtkImageMenuItem" id="info_db">
+                        <property name="label">gtk-dialog-info</property>
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_info_db_activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="menuitem3">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkImageMenuItem" id="clear_db">
                         <property name="label">gtk-clear</property>
                         <property name="visible">True</property>
@@ -129,11 +143,15 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">liststore</property>
+                    <property name="rules_hint">True</property>
                     <signal name="button_press_event" handler="on_charts_list_button_press_event"/>
                     <signal name="row_activated" handler="on_charts_list_row_activated"/>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Name</property>
+                        <property name="sort_indicator">True</property>
+                        <property name="sort_column_id">1</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
@@ -144,6 +162,7 @@
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Description</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
@@ -155,6 +174,7 @@
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                        <property name="resizable">True</property>
                         <property name="title" translatable="yes">Version</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext3"/>

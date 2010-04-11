@@ -28,12 +28,12 @@ except ImportError:
 
 
 class Chart(BaseChart):
-	"""Package size chart"""
+	"""A derived chart"""
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = 'Package size'
-		self._description = 'Top ten for package size in MB'
+		self._name = ('Package size')
+		self._description = _('Top ten for size in megabytes')
 		self._version = '0.1'
 
 

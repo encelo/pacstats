@@ -28,12 +28,12 @@ except ImportError:
 
 
 class Chart(BaseChart):
-	"""Packagers chart"""
+	"""A derived chart"""
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = 'Packagers'
-		self._description = 'Top ten for number of packages delivered'
+		self._name = _('Packagers')
+		self._description = _('Top ten for number of packages created')
 		self._version = '0.1'
 
 

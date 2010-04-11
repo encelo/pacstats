@@ -38,14 +38,17 @@ class  Packages(Database):
 	def create_table(self):
 		"""Create the packagess table"""
 		CREATE = """CREATE TABLE %s (
-			name VARCHAR(128) PRIMARY KEY,
+			id INTEGER PRIMARY KEY,
+			name VARCHAR(128) UNIQUE NOT NULL,
 			version VARCHAR(32) NOT NULL,
 			description VARCHAR(256),
 			url VARCHAR(256),
 			license VARCHAR(128),
 			arch VARCHAR(16) NOT NULL,
-			builddate TIMESTAMP,
-			installdate TIMESTAMP,
+			builddate DATE NOT NULL,
+			buildtime TIME NOT NULL,
+			installdate DATE NOT NULL,
+			installtime TIME NOT NULL,
 			packager VARCHAR(128),
 			size INTEGER,
 			reason INTEGER
@@ -55,10 +58,13 @@ class  Packages(Database):
 		self._con.commit()
 
 
-	def insert(self, name, version, description, url, license, arch, builddate, installdate, packager, size, reason):
+	def insert(self, name, version, description, url, license, arch, buildepoch, installepoch, packager, size, reason):
 		"""Insert a new transaction into the database"""
-		INSERT = """INSERT INTO %s VALUES ('%s', '%s', "%s", '%s', '%s', '%s', '%s', '%s', "%s", %d, %d)""" % \
-				(self.table, name, version, description, url, license, arch, builddate, installdate, packager, size, reason)
+		INSERT = """INSERT INTO %s VALUES (NULL, '%s', '%s', "%s", '%s', '%s', '%s',
+			date('%s', 'unixepoch', 'localtime'), time('%s', 'unixepoch', 'localtime'), 
+			date('%s', 'unixepoch', 'localtime'), time('%s', 'unixepoch', 'localtime'), "%s", %d, %d)""" % \
+			(self.table, name, version, description, url, license, arch, \
+			buildepoch, buildepoch, installepoch, installepoch, packager, size, reason)
 		
 		try:
 			self._cur.execute(INSERT)

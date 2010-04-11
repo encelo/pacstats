@@ -20,6 +20,7 @@
 
 
 import os
+from os import stat
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -49,8 +50,9 @@ class Main_Window:
 			"on_main_win_destroy": self.on_main_win_destroy,
 			"on_quit_activate": self.on_quit_activate,
 			"on_info_db_activate": self.on_info_db_activate,
-			"on_clear_db_activate": self.on_clear_db_activate,
+			"on_optimize_db_activate": self.on_optimize_db_activate,
 			"on_update_db_activate": self.on_update_db_activate,
+			"on_clear_db_activate": self.on_clear_db_activate,
 			"on_dump_db_activate": self.on_dump_db_activate,
 			"on_about_activate": self.on_about_activate,
 			"on_charts_list_button_press_event": self.on_charts_list_button_press_event,
@@ -159,6 +161,36 @@ class Main_Window:
 		self.dbinfo_win = None
 
 
+	def on_update_db_activate(self, event):
+		"""Update the database"""
+
+		self._pb.show()
+		self._vpaned.set_sensitive(False)
+		self._statusbar.push(1, _('Parsing the log file...'))
+		self._logparser.parse()
+		self._statusbar.pop(1)
+		self._statusbar.push(1, _('Parsing the library...'))
+		self._libparser.parse()
+		self._statusbar.pop(1)
+		self._pb.hide()
+
+		self.setup_dbstatus()
+		self._vpaned.set_sensitive(True)
+
+
+	def on_optimize_db_activate(self, event):
+		"""Optimize the database and open an informative dialog"""
+
+		old_size = stat(self._settings.db).st_size
+		self._packages.vacuum() # this call is enough for the whole DB
+		new_size = stat(self._settings.db).st_size
+
+		dlg = gtk.MessageDialog(type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK,
+			message_format=_('Database optimized. The new file size is %s bytes (%s bytes less).' % (new_size, old_size-new_size)))
+		dlg.run()
+		dlg.destroy()
+
+
 	def on_clear_db_activate(self, event):
 		"""Clear the whole database"""
 
@@ -177,23 +209,6 @@ class Main_Window:
 			self._packages.clear()
 			self._statusbar.pop(1)
 			self.setup_dbstatus()
-
-
-	def on_update_db_activate(self, event):
-		"""Update the database"""
-
-		self._pb.show()
-		self._vpaned.set_sensitive(False)
-		self._statusbar.push(1, _('Parsing the log file...'))
-		self._logparser.parse()
-		self._statusbar.pop(1)
-		self._statusbar.push(1, _('Parsing the library...'))
-		self._libparser.parse()
-		self._statusbar.pop(1)
-		self._pb.hide()
-
-		self.setup_dbstatus()
-		self._vpaned.set_sensitive(True)
 
 
 	def on_dump_db_activate(self, event):

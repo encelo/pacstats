@@ -103,3 +103,10 @@ class Database:
 			f.write(line + '\n')
 		
 		f.close()
+
+
+	def vacuum(self):
+		"""Optimize the whole database defragmenting it"""
+
+		self._cur.execute('VACUUM;')
+		self._con.commit()

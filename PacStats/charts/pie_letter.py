@@ -28,12 +28,12 @@ except ImportError:
 
 
 class Chart(BaseChart):
-	"""Pie letter chart"""
+	"""A derived chart"""
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = 'Pie Letter'
-		self._description = 'Initial package letter pie chart'
+		self._name = _('Pie Letter')
+		self._description = _('Initial package letter pie chart')
 		self._version = '0.1'
 
 		self._letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z']

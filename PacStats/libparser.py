@@ -78,9 +78,9 @@ class LibParser(Subject):
 				elif line.find('%ARCH%') == 0:
 					arch = f.readline().replace('\n', '')
 				elif line.find('%BUILDDATE%') == 0:
-					bdate = f.readline().replace('\n', '')
+					bepoch = f.readline().replace('\n', '')
 				elif line.find('%INSTALLDATE%') == 0:
-					idate = f.readline().replace('\n', '')
+					iepoch = f.readline().replace('\n', '')
 				elif line.find('%PACKAGER%') == 0:
 					pack = f.readline().replace('\n', '')
 				elif line.find('%SIZE%') == 0:
@@ -91,5 +91,5 @@ class LibParser(Subject):
 			f.close()
 			pkg_count += 1
 
-			self._packages.insert(name, ver, desc, url, lic, arch, bdate, idate, pack, size, reas)
+			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas)
 			self.notify(float(pkg_count)/float(len(lib_listdir)))

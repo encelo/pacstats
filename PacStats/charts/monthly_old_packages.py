@@ -1,4 +1,4 @@
-## histo_letter.py
+## daily_transactions.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+import time
 from PacStats.basechart import BaseChart
 
 try:
@@ -32,24 +33,27 @@ class Chart(BaseChart):
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = _('Histo Letter')
-		self._description = _('Initial package letter histogram')
+		self._name = _('Monthly Old Packages')
+		self._description = _('Number of packages no more updated since a certain month this year')
 		self._version = '0.1'
-
-		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
 
 
 	def generate(self):
 		"""Generate the chart"""
+		
+		QUERY = """SELECT COUNT(*) FROM %s WHERE installdate BETWEEN date('now', '-%s month') AND date('now', '-%s month') ;"""
+
+		month = int(time.strftime('%m'))
 
 		data = []
-		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
-		for l in self._letters:
-			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
-	
+		for m in range(month):
+			data.append(self._packages.query(QUERY % (self._packages.table, m+1, m))[0][0])
+		data.reverse()
+
 		self._axes = self._fig.add_subplot(111)
-		self._axes.set_xlim(0, len(self._letters))
-		self._axes.set_ylim(0, max(data)+max(data)*0.1)
-		self._axes.set_xticks(n.arange(0.5, len(self._letters)))
-		self._axes.set_xticklabels(self._letters)
-		self._axes.bar(range(len(self._letters)), data)
+		if len(data) > 0:
+			self._axes.set_ylim(0, max(data)+max(data)*0.05)
+		self._axes.set_xlim(0, month)
+		self._axes.set_xticks(n.arange(0.5, month))
+		self._axes.set_xticklabels(range(1, month+1), fontsize=5)
+		self._axes.bar(range(month), data)

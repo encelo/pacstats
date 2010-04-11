@@ -2,16 +2,24 @@
 [type: gettext/glade]ui/dbinfo_win.ui
 [type: gettext/glade]ui/about_dlg.ui
 
-PacStats/about_dlg.py
-PacStats/db.py
-PacStats/main_win.py
-PacStats/transactions.py
-PacStats/app.py
 PacStats/__init__.py
-PacStats/packages.py
+PacStats/about_dlg.py
+PacStats/app.py
 PacStats/basechart.py
-PacStats/libparser.py
-PacStats/settings.py
 PacStats/charts.py
+PacStats/dbinfo_win.py
+PacStats/db.py
+PacStats/libparser.py
 PacStats/logparser.py
+PacStats/main_win.py
+PacStats/packages.py
+PacStats/settings.py
 PacStats/subject.py
+PacStats/transactions.py
+
+PacStats/charts/daily_transactions.py
+PacStats/charts/histo_letter.py
+PacStats/charts/monthly_old_packages.py
+PacStats/charts/packagers.py
+PacStats/charts/package_size.py
+PacStats/charts/pie_letter.py

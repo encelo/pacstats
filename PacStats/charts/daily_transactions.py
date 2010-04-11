@@ -1,4 +1,4 @@
-## histo_letter.py
+## daily_transactions.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+import time
 from PacStats.basechart import BaseChart
 
 try:
@@ -32,24 +33,27 @@ class Chart(BaseChart):
 	def __init__(self, transactions, packages):
 		BaseChart.__init__(self, transactions, packages)
 
-		self._name = _('Histo Letter')
-		self._description = _('Initial package letter histogram')
+		self._name = _('Daily Transactions')
+		self._description = _('Current month transactions per day')
 		self._version = '0.1'
-
-		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
 
 
 	def generate(self):
 		"""Generate the chart"""
+		
+		QUERY = """SELECT COUNT(*) FROM %s WHERE date = date('now', '-%s day');"""
+
+		today = int(time.strftime('%d'))
 
 		data = []
-		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
-		for l in self._letters:
-			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
-	
+		for d in range(today):
+			data.append(self._transactions.query(QUERY % (self._transactions.table, d))[0][0])
+		data.reverse()
+
 		self._axes = self._fig.add_subplot(111)
-		self._axes.set_xlim(0, len(self._letters))
-		self._axes.set_ylim(0, max(data)+max(data)*0.1)
-		self._axes.set_xticks(n.arange(0.5, len(self._letters)))
-		self._axes.set_xticklabels(self._letters)
-		self._axes.bar(range(len(self._letters)), data)
+		if len(data) > 0:
+			self._axes.set_ylim(0, max(data)+max(data)*0.05)
+		self._axes.set_xlim(0, today)
+		self._axes.set_xticks(n.arange(0.5, today))
+		self._axes.set_xticklabels(range(1, today+1), fontsize=5)
+		self._axes.bar(range(today), data)

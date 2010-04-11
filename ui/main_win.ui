@@ -55,7 +55,7 @@
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkImageMenuItem" id="info_db">
-                        <property name="label">gtk-dialog-info</property>
+                        <property name="label">gtk-properties</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -68,21 +68,30 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="clear_db">
-                        <property name="label">gtk-clear</property>
-                        <property name="visible">True</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="on_clear_db_activate"/>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkImageMenuItem" id="update_db">
                         <property name="label">gtk-refresh</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <signal name="activate" handler="on_update_db_activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="optimize_db">
+                        <property name="label" translatable="yes">Optimize</property>
+                        <property name="visible">True</property>
+                        <property name="image">image1</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="on_optimize_db_activate"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="clear_db">
+                        <property name="label">gtk-delete</property>
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_clear_db_activate"/>
                       </object>
                     </child>
                     <child>
@@ -222,5 +231,9 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="stock">gtk-clear</property>
   </object>
 </interface>

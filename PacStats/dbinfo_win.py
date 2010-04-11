@@ -48,12 +48,12 @@ class DBInfo_Window:
 		self._upgrades_label = ui.get_object("upgrades_label")
 
 		# Init methods
-		self.setup_entries()
+		self.setup_labels()
 
 		self.window.show()
 
 
-	def setup_entries(self):
+	def setup_labels(self):
 		"""Setup information labels"""
 
 		packages = self._packages.query("SELECT COUNT(*) FROM packages;")[0][0]

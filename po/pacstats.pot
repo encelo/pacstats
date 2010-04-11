@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 11:07+0300\n"
+"POT-Creation-Date: 2010-04-11 16:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,32 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui/main_win.ui.h:1
-msgid "Description"
-msgstr ""
-
-#: ../ui/main_win.ui.h:2
-msgid "Name"
-msgstr ""
-
-#: ../ui/main_win.ui.h:3
-msgid "Optimize"
-msgstr ""
-
-#: ../ui/main_win.ui.h:4
-msgid "Version"
-msgstr ""
-
-#: ../ui/main_win.ui.h:5
-msgid "_Database"
-msgstr ""
-
-#: ../ui/main_win.ui.h:6
-msgid "_File"
-msgstr ""
-
-#: ../ui/main_win.ui.h:7
-msgid "_Help"
+#: ../ui/about_dlg.ui.h:1
+msgid "translator-credits"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:1
@@ -88,45 +64,85 @@ msgstr ""
 msgid "Upgrades:"
 msgstr ""
 
-#: ../ui/about_dlg.ui.h:1
-msgid "translator-credits"
+#: ../ui/main_win.ui.h:1
+msgid "Description"
 msgstr ""
 
-#: ../PacStats/main_win.py:98
+#: ../ui/main_win.ui.h:2
+msgid "Name"
+msgstr ""
+
+#: ../ui/main_win.ui.h:3
+msgid "Optimize"
+msgstr ""
+
+#: ../ui/main_win.ui.h:4
+msgid "Version"
+msgstr ""
+
+#: ../ui/main_win.ui.h:5
+msgid "_Database"
+msgstr ""
+
+#: ../ui/main_win.ui.h:6
+msgid "_File"
+msgstr ""
+
+#: ../ui/main_win.ui.h:7
+msgid "_Help"
+msgstr ""
+
+#: ../ui/prefs_win.ui.h:1
+msgid "Database:"
+msgstr ""
+
+#: ../ui/prefs_win.ui.h:2
+msgid "Pacman lib:"
+msgstr ""
+
+#: ../ui/prefs_win.ui.h:3
+msgid "Pacman log:"
+msgstr ""
+
+#: ../ui/prefs_win.ui.h:4
+msgid "Preferences"
+msgstr ""
+
+#: ../PacStats/main_win.py:100
 #, python-format
 msgid "Packages: %d Transactions: %d"
 msgstr ""
 
-#: ../PacStats/main_win.py:169
+#: ../PacStats/main_win.py:187
 msgid "Parsing the log file..."
 msgstr ""
 
-#: ../PacStats/main_win.py:172
+#: ../PacStats/main_win.py:190
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:189
+#: ../PacStats/main_win.py:207
 #, python-format
 msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
 msgstr ""
 
-#: ../PacStats/main_win.py:198
+#: ../PacStats/main_win.py:216
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:206
+#: ../PacStats/main_win.py:224
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:217
+#: ../PacStats/main_win.py:235
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:229
+#: ../PacStats/main_win.py:247
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:232
+#: ../PacStats/main_win.py:250
 msgid "Saving the packages table as "
 msgstr ""
 

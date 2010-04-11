@@ -25,7 +25,7 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 
-import about_dlg, dbinfo_win
+import about_dlg, dbinfo_win, prefs_win
 
 
 class Main_Window:
@@ -48,6 +48,7 @@ class Main_Window:
 
 		app_signals = {
 			"on_main_win_destroy": self.on_main_win_destroy,
+			"on_prefs_activate": self.on_prefs_activate,
 			"on_quit_activate": self.on_quit_activate,
 			"on_info_db_activate": self.on_info_db_activate,
 			"on_optimize_db_activate": self.on_optimize_db_activate,
@@ -69,7 +70,8 @@ class Main_Window:
 		self._statusbar = ui.get_object("statusbar")
 		
 		# Open/close window flags
-		self.dbinfo_win = None
+		self._prefs_win = None
+		self._dbinfo_win = None
 
 		# Init
 		self._logo = gtk.gdk.pixbuf_new_from_file(os.path.join(self._share_dir, 'pixmaps/logo.png'))
@@ -140,6 +142,22 @@ class Main_Window:
 		return gtk.main_quit()
 
 
+	def on_prefs_activate(self, event):
+		"""Open the preferences window"""
+
+		if self._prefs_win:
+			self._prefs_win.window.present()
+		else:
+			ui_file = os.path.join(self._ui_dir, 'prefs_win.ui')
+			self._prefs_win = prefs_win.Preferences_Window(ui_file, self._settings)
+			self._prefs_win.window.connect('destroy', self.on_prefs_destroy)
+
+
+	def on_prefs_destroy(self, event):
+		"""Close the preferences window"""
+		self._prefs_win = None
+
+
 	def on_quit_activate(self, event):
 		"""Quit the application"""
 		return gtk.main_quit()
@@ -148,17 +166,17 @@ class Main_Window:
 	def on_info_db_activate(self, event):
 		"""Open the database Information window"""
 
-		if self.dbinfo_win:
-			self.dbinfo_win.window.present()
+		if self._dbinfo_win:
+			self._dbinfo_win.window.present()
 		else:
 			ui_file = os.path.join(self._ui_dir, 'dbinfo_win.ui')
-			self.dbinfo_win = dbinfo_win.DBInfo_Window(ui_file, self._packages, self._transactions)
-			self.dbinfo_win.window.connect('destroy', self.on_info_db_destroy)
+			self._dbinfo_win = dbinfo_win.DBInfo_Window(ui_file, self._packages, self._transactions)
+			self._dbinfo_win.window.connect('destroy', self.on_info_db_destroy)
 
 
 	def on_info_db_destroy(self, event):
 		"""Close the database information window"""
-		self.dbinfo_win = None
+		self._dbinfo_win = None
 
 
 	def on_update_db_activate(self, event):

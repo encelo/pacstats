@@ -27,7 +27,7 @@ class LibParser(Subject):
 
 		Subject.__init__(self)
 		self._packages = packages
-		self._libdir = libdir
+		self._libdir = os.path.join(libdir, 'local')
 
 
 	def parse(self):

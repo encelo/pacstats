@@ -7,41 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 11:07+0300\n"
-"PO-Revision-Date: 2010-04-11 11:07+0200\n"
+"POT-Creation-Date: 2010-04-11 16:37+0300\n"
+"PO-Revision-Date: 2010-04-11 16:26+0200\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui/main_win.ui.h:1
-msgid "Description"
-msgstr "Descrizione"
-
-#: ../ui/main_win.ui.h:2
-msgid "Name"
-msgstr "Nome"
-
-#: ../ui/main_win.ui.h:3
-msgid "Optimize"
-msgstr "Ottimizzazione"
-
-#: ../ui/main_win.ui.h:4
-msgid "Version"
-msgstr "Versione"
-
-#: ../ui/main_win.ui.h:5
-msgid "_Database"
-msgstr "_Database"
-
-#: ../ui/main_win.ui.h:6
-msgid "_File"
-msgstr "_Archivio"
-
-#: ../ui/main_win.ui.h:7
-msgid "_Help"
-msgstr "A_iuto"
+#: ../ui/about_dlg.ui.h:1
+msgid "translator-credits"
+msgstr "Angelo \"Encelo\" Theodorou <encelo@gmail.com> (Italian)"
 
 #: ../ui/dbinfo_win.ui.h:1
 msgid "Database Information"
@@ -87,45 +63,87 @@ msgstr "Transazioni:"
 msgid "Upgrades:"
 msgstr "Aggiornamenti:"
 
-#: ../ui/about_dlg.ui.h:1
-msgid "translator-credits"
-msgstr "Angelo \"Encelo\" Theodorou <encelo@gmail.com> (Italian)"
+#: ../ui/main_win.ui.h:1
+msgid "Description"
+msgstr "Descrizione"
 
-#: ../PacStats/main_win.py:98
+#: ../ui/main_win.ui.h:2
+msgid "Name"
+msgstr "Nome"
+
+#: ../ui/main_win.ui.h:3
+msgid "Optimize"
+msgstr "Ottimizzazione"
+
+#: ../ui/main_win.ui.h:4
+msgid "Version"
+msgstr "Versione"
+
+#: ../ui/main_win.ui.h:5
+msgid "_Database"
+msgstr "_Database"
+
+#: ../ui/main_win.ui.h:6
+msgid "_File"
+msgstr "_Archivio"
+
+#: ../ui/main_win.ui.h:7
+msgid "_Help"
+msgstr "A_iuto"
+
+#: ../ui/prefs_win.ui.h:1
+msgid "Database:"
+msgstr "Database:"
+
+#: ../ui/prefs_win.ui.h:2
+msgid "Pacman lib:"
+msgstr "Libreria di Pacman:"
+
+#: ../ui/prefs_win.ui.h:3
+msgid "Pacman log:"
+msgstr "Log di Pacman:"
+
+#: ../ui/prefs_win.ui.h:4
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: ../PacStats/main_win.py:100
 #, python-format
 msgid "Packages: %d Transactions: %d"
 msgstr "Pacchetti: %d Transazioni: %d"
 
-#: ../PacStats/main_win.py:169
+#: ../PacStats/main_win.py:187
 msgid "Parsing the log file..."
 msgstr "Analisi del file di log..."
 
-#: ../PacStats/main_win.py:172
+#: ../PacStats/main_win.py:190
 msgid "Parsing the library..."
 msgstr "Analisi della libreria..."
 
-#: ../PacStats/main_win.py:189
+#: ../PacStats/main_win.py:207
 #, python-format
 msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
-msgstr "Database ottimizzato. La nuova grandezza del file è di %s byte (%s byte in meno)."
+msgstr ""
+"Database ottimizzato. La nuova grandezza del file è di %s byte (%s byte in "
+"meno)."
 
-#: ../PacStats/main_win.py:198
+#: ../PacStats/main_win.py:216
 msgid "Do you really want to clear the database?"
 msgstr "Si intende davver davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:206
+#: ../PacStats/main_win.py:224
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:217
+#: ../PacStats/main_win.py:235
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:229
+#: ../PacStats/main_win.py:247
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:232
+#: ../PacStats/main_win.py:250
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 
@@ -172,4 +190,3 @@ msgstr "Torta della Lettera"
 #: ../PacStats/charts/pie_letter.py:36
 msgid "Initial package letter pie chart"
 msgstr "Grafico a torta della lettera iniziale di un pacchetto"
-

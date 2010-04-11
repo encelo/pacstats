@@ -1,6 +1,7 @@
-[type: gettext/glade]ui/main_win.ui
-[type: gettext/glade]ui/dbinfo_win.ui
 [type: gettext/glade]ui/about_dlg.ui
+[type: gettext/glade]ui/dbinfo_win.ui
+[type: gettext/glade]ui/main_win.ui
+[type: gettext/glade]ui/prefs_win.ui
 
 PacStats/__init__.py
 PacStats/about_dlg.py
@@ -13,6 +14,7 @@ PacStats/libparser.py
 PacStats/logparser.py
 PacStats/main_win.py
 PacStats/packages.py
+PacStats/prefs_win.py
 PacStats/settings.py
 PacStats/subject.py
 PacStats/transactions.py

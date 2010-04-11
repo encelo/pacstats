@@ -33,6 +33,15 @@
                   <object class="GtkMenu" id="menu1">
                     <property name="visible">True</property>
                     <child>
+                      <object class="GtkImageMenuItem" id="prefs">
+                        <property name="label">gtk-preferences</property>
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_prefs_activate"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkImageMenuItem" id="quit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>

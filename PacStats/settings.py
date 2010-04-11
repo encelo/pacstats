@@ -81,11 +81,10 @@ class Settings():
 		dbname = os.path.join(data_home, 'pacstats.db')
 
 		# Setting defaults
-		defaults = {}
-		defaults['db'] = dbname
-		defaults['log'] = '/var/log/pacman.log'
-		defaults['lib'] = '/var/lib/pacman/local'
-		defaults['abs'] = '/var/abs'
+		self._defaults = {}
+		self._defaults['db'] = dbname
+		self._defaults['log'] = '/var/log/pacman.log'
+		self._defaults['lib'] = '/var/lib/pacman'
 
 		self._cfg = ConfigParser.RawConfigParser()
 		if os.path.isfile(fname):
@@ -93,9 +92,9 @@ class Settings():
 		else:
 			self._cfg.add_section('pacstats')
 
-		for key in defaults:
+		for key in self._defaults:
 			if self._cfg.has_option('pacstats', key) == False:
-				self._cfg.set('pacstats', key, defaults[key])
+				self._cfg.set('pacstats', key, self._defaults[key])
 
 	
 	def get_db(self):
@@ -106,6 +105,29 @@ class Settings():
 
 	db = property(get_db, set_db)
 
+	def get_default_db(self):
+		return self._defaults['db']
+
+	default_db = property(get_default_db)
+
+	def check_db(self, string = ''):
+
+		if string == '':
+			db_file = self._cfg.get('pacstats', 'db')
+		else:
+			db_file = string
+
+		if os.path.isfile(db_file) == False:
+			return True
+		else:
+			f = open(db_file, 'r')
+			header = f.read(16)
+			f.close()
+			if header == 'SQLite format 3\0':
+				return True
+			else:
+				return False
+
 
 	def get_log(self):
 	    return self._cfg.get('pacstats', 'log')
@@ -114,6 +136,24 @@ class Settings():
 		self._cfg.set('pacstats', 'log', value)
 
 	log = property(get_log, set_log)
+
+	def get_default_log(self):
+		return self._defaults['log']
+
+	default_log = property(get_default_log)
+
+	def check_log(self, string = ''):
+
+		if string == '':
+			log_file = self._cfg.get('pacstats', 'log')
+		else:
+			log_file = string
+
+		if os.path.isfile(log_file) and \
+			os.path.basename(log_file) == 'pacman.log':
+			return True
+		else:
+			return False
 
 
 	def get_lib(self):
@@ -124,18 +164,27 @@ class Settings():
 
 	lib = property(get_lib, set_lib)
 
+	def get_default_lib(self):
+		return self._defaults['lib']
 
-	def get_abs(self):
-	    return self._cfg.get('pacstats', 'abs')
+	default_lib = property(get_default_lib)
 
-	def set_abs(self, value):
-		self._cfg.set('pacstats', 'abs', value)
+	def check_lib(self, string = ''):
 
-	abs = property(get_abs, set_abs)
+		if string == '':
+			lib_dir = self._cfg.get('pacstats', 'lib')
+		else:
+			lib_dir = string
+
+		if os.path.isdir(os.path.join(lib_dir, 'local')) and \
+			os.path.isdir(os.path.join(lib_dir, 'sync')):
+			return True
+		else:
+			return False
 
 
 	def write(self):
 		"""Save the configuration file on exit"""
-	
+
 		with open(self._cfg_file, 'w') as configfile:
 		    self._cfg.write(configfile)

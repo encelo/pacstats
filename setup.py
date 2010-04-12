@@ -88,7 +88,7 @@ replace_paths_desktop('pacstats.desktop')
 
 setup(name='pacstats',
 	version='0.1',
-	description='ArchLinux\' Pacman statistical charts application',
+	description='Statistical charts about Archlinux pacman activity',
 	author='Angelo "Encelo" Theodorou',
 	author_email='encelo@gmail.com',
 	url='http://pacstats.googlecode.com',
@@ -108,7 +108,7 @@ setup(name='pacstats',
 	requires=['pygtk', 'matplotlib', 'numpy'],
 	packages=['PacStats', 'PacStats/charts'],
 	scripts=['pacstats'],
-	data_files=[('share/pacstats/ui', ['ui/about_dlg.ui', 'ui/main_win.ui']),
+	data_files=[('share/pacstats/ui', ['ui/about_dlg.ui', 'ui/dbinfo_win.ui', 'ui/main_win.ui', 'ui/prefs_win.ui']),
 				('share/locale/it/LC_MESSAGES', ['po/it/LC_MESSAGES/pacstats.mo']),
 				('share/pacstats/pixmaps', ['pixmaps/icon.png', 'pixmaps/logo.png']),
 				('share/applications', ['pacstats.desktop'])]

@@ -18,13 +18,14 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 import os
 import sys
 
 
 class Charts():
 	"""Charts manager class"""
-	def __init__(self, transactions, packages):
+	def __init__(self, database):
 
 		self._charts = {}
 		charts_dir = os.path.join(os.path.dirname(__file__), 'charts')
@@ -38,7 +39,7 @@ class Charts():
 			modname = file.replace('.py', '')
 			module = __import__(modname)
 			if 'Chart' in dir(module):
-				cls =  module.Chart(transactions, packages)
+				cls =  module.Chart(database)
 				self._charts[cls.get_name()] = cls
 
 

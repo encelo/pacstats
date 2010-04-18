@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 from PacStats.basechart import BaseChart
 
 try:
@@ -29,8 +30,8 @@ except ImportError:
 
 class Chart(BaseChart):
 	"""A derived chart"""
-	def __init__(self, transactions, packages):
-		BaseChart.__init__(self, transactions, packages)
+	def __init__(self, database):
+		BaseChart.__init__(self, database)
 
 		self._name = _('Histo Letter')
 		self._description = _('Initial package letter histogram')
@@ -45,11 +46,11 @@ class Chart(BaseChart):
 		data = []
 		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
 		for l in self._letters:
-			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
-	
+			data.append(self._database.query_one(QUERY % (self._packages.name, l))[0])
+	 
 		self._axes = self._fig.add_subplot(111)
 		self._axes.set_xlim(0, len(self._letters))
-		self._axes.set_ylim(0, max(data)+max(data)*0.1)
+		self._axes.set_ylim(0, max(data)*1.1)
 		self._axes.set_xticks(n.arange(0.5, len(self._letters)))
 		self._axes.set_xticklabels(self._letters)
 		self._axes.bar(range(len(self._letters)), data)

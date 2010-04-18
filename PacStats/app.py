@@ -24,8 +24,9 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 
-import settings, transactions, logparser, packages, libparser, charts
+import settings, database, logparser, libparser, charts
 import main_win
+
 
 class Application:
 	"""
@@ -38,16 +39,15 @@ class Application:
 		
 		# Singletons
 		self.settings = settings.Settings()
-		self.transactions = transactions.Transactions(self.settings.db)
+		self.database = database.ConcreteDB(self.settings.db)
 		seek_p = settings.PersistentInt(os.path.join(os.path.dirname(self.settings.db), 'seek.p'))
-		self.logparser = logparser.LogParser(self.transactions, self.settings.log, seek_p)
-		self.packages = packages.Packages(self.settings.db)
-		self.libparser = libparser.LibParser(self.packages, self.settings.lib)
-		self.charts = charts.Charts(self.transactions, self.packages)
+		self.logparser = logparser.LogParser(self.database, self.settings.log, seek_p)
+		self.libparser = libparser.LibParser(self.database, self.settings.lib)
+		self.charts = charts.Charts(self.database)
 		
 		self.main_win = main_win.Main_Window(self)
 
 	def run(self):
-		"""Make the gtk main loop start."""
+		"""Make the GTK main loop start."""
 		gtk.main()
 		self.settings.write()

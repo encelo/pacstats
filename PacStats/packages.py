@@ -18,25 +18,22 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
-import os
-from db import Database
 
-class  Packages(Database):
+from table import Table
+
+
+class Packages(Table):
 	"""Packages table managing class"""
-	def __init__(self, fname = 'pacstats.db'):
-		"""Connect and try to create the packages table"""
-		Database.__init__(self, fname)
-		self.table = 'packages'
 
-		try:
-			self.create_table()
-		except self._error:
-#			print('\"%s\" table exists already' % self.table)
-			pass
+	def __init__(self, database):
+		"""Try to create the packages table"""
+
+		Table.__init__(self, database, 'packages')
 
 
-	def create_table(self):
-		"""Create the packagess table"""
+	def create(self):
+		"""Create the packages table"""
+
 		CREATE = """CREATE TABLE %s (
 			id INTEGER PRIMARY KEY,
 			name VARCHAR(128) UNIQUE NOT NULL,
@@ -45,37 +42,55 @@ class  Packages(Database):
 			url VARCHAR(256),
 			license VARCHAR(128),
 			arch VARCHAR(16) NOT NULL,
-			builddate DATE NOT NULL,
-			buildtime TIME NOT NULL,
-			installdate DATE NOT NULL,
-			installtime TIME NOT NULL,
+			builddate DATE,
+			buildtime TIME,
+			installdate DATE,
+			installtime TIME,
 			packager VARCHAR(128),
-			size INTEGER,
-			reason INTEGER
-			);""" % self.table
+			size INTEGER NOT NULL,
+			reason INTEGER NOT NULL
+			);""" % self.name
 	
-		self._cur.execute(CREATE)
-		self._con.commit()
+		self._database.execute(CREATE)
+		self._database.commit()
 
 
-	def insert(self, name, version, description, url, license, arch, buildepoch, installepoch, packager, size, reason):
+	def insert(self, name, version, description, url, license, arch, 
+			   buildepoch, installepoch, packager, size, reason):
 		"""Insert a new transaction into the database"""
-		INSERT = """INSERT INTO %s VALUES (NULL, '%s', '%s', "%s", '%s', '%s', '%s',
-			date('%s', 'unixepoch', 'localtime'), time('%s', 'unixepoch', 'localtime'), 
-			date('%s', 'unixepoch', 'localtime'), time('%s', 'unixepoch', 'localtime'), "%s", %d, %d)""" % \
-			(self.table, name, version, description, url, license, arch, \
-			buildepoch, buildepoch, installepoch, installepoch, packager, size, reason)
+
+		INSERT = """INSERT INTO %s VALUES (NULL, ?, ?, ?, ?, ?, ?,
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), 
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?)""" % self.name
+		tuple = (name, version, description, url, license, arch, buildepoch,
+			buildepoch, installepoch, installepoch, packager, size, reason)
+
+		self._database.execute(INSERT, tuple)
 		
-		try:
-			self._cur.execute(INSERT)
-		except self._error:
-			return
-		self._con.commit()
+
+	def insert_many(self, tuples):
+		"""Insert many new transactions into the database"""
+
+		INSERT = """INSERT INTO %s VALUES (NULL, ?, ?, ?, ?, ?, ?,
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), 
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?)""" % self.name
+
+		self._database.execute_many(INSERT, tuples)
 
 
-	def remove(self, name):
+	def remove(self, id):
+		"""Remove the package with the given id from the database"""
+
+		DELETE = """DELETE FROM %s WHERE id = ?""" % self.name
+
+		self._database.execute(DELETE, (id, ))
+		self._database.commit()
+
+
+	def remove_name(self, name):
 		"""Remove the package with the given n ame from the database"""
-		DELETE = """DELETE FROM %s WHERE name='%s'""" % (self.table, name)
 
-		self._cur.execute(DELETE)
-		self._con.commit()
+		DELETE = """DELETE FROM %s WHERE name = ?""" % self.name
+
+		self._database.execute(DELETE, (name, ))
+		self._database.commit()

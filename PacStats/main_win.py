@@ -34,9 +34,10 @@ class Main_Window:
 		# Getting instances of "singleton" classes
 
 		self._settings = app_cls.settings
-		self._transactions = app_cls.transactions
+		self._database = app_cls.database
+		self._transactions = self._database.transactions
 		self._logparser = app_cls.logparser
-		self._packages = app_cls.packages
+		self._packages = self._database.packages
 		self._libparser = app_cls.libparser
 		self._charts = app_cls.charts
 
@@ -79,6 +80,7 @@ class Main_Window:
 		gtk.window_set_default_icon(pix)
 		self._window.set_icon(pix)
 
+		self.setup_dbstatus()
 		self.populate_charts_list()
 		self._active_chart = None
 		self._window.show()
@@ -95,9 +97,11 @@ class Main_Window:
 	def setup_dbstatus(self):
 		"""Setup DB info in the statusbar"""
 
-		packages = self._packages.query("SELECT COUNT(*) FROM packages;")[0][0]
-		transactions = self._transactions.query("SELECT COUNT(*) FROM transactions;")[0][0]
-		string = _('Packages: %d Transactions: %d') % (packages, transactions)
+		self._statusbar.pop(1)
+		
+		packages = self._database.query_one("SELECT COUNT(*) FROM %s;" %  self._packages.name)[0]
+		transactions = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._transactions.name)[0]
+		string = _('Packages: %d | Transactions: %d') % (packages, transactions)
 
 		self._statusbar.push(1, string)
 
@@ -170,7 +174,7 @@ class Main_Window:
 			self._dbinfo_win.window.present()
 		else:
 			ui_file = os.path.join(self._ui_dir, 'dbinfo_win.ui')
-			self._dbinfo_win = dbinfo_win.DBInfo_Window(ui_file, self._packages, self._transactions)
+			self._dbinfo_win = dbinfo_win.DBInfo_Window(ui_file, self._database)
 			self._dbinfo_win.window.connect('destroy', self.on_info_db_destroy)
 
 
@@ -200,7 +204,7 @@ class Main_Window:
 		"""Optimize the database and open an informative dialog"""
 
 		old_size = stat(self._settings.db).st_size
-		self._packages.vacuum() # this call is enough for the whole DB
+		self._database.vacuum()
 		new_size = stat(self._settings.db).st_size
 
 		dlg = gtk.MessageDialog(type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK,

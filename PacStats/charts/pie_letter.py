@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 from PacStats.basechart import BaseChart
 
 try:
@@ -29,8 +30,8 @@ except ImportError:
 
 class Chart(BaseChart):
 	"""A derived chart"""
-	def __init__(self, transactions, packages):
-		BaseChart.__init__(self, transactions, packages)
+	def __init__(self, database):
+		BaseChart.__init__(self, database)
 
 		self._name = _('Pie Letter')
 		self._description = _('Initial package letter pie chart')
@@ -46,7 +47,7 @@ class Chart(BaseChart):
 		data = []
 		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
 		for l in self._letters:
-			data.append(self._packages.query(QUERY % (self._packages.table, l))[0][0])
+			data.append(self._database.query_one(QUERY % (self._packages.name, l))[0])
 
 		self._axes = self._fig.add_subplot(111)
 		self._pie = self._axes.pie(data, labels=self._letters, shadow=True)

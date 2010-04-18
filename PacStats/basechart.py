@@ -30,9 +30,10 @@ except ImportError:
 
 class BaseChart:
 	"""A skeleton class for a chart to inherit from"""
-	def __init__(self, transactions, packages):
-		self._transactions = transactions
-		self._packages = packages
+	def __init__(self, database):
+		self._database = database
+		self._transactions = database.transactions
+		self._packages = database.packages
 
 		self._name = ''
 		self._description = ''
@@ -64,6 +65,7 @@ class BaseChart:
 
 		self.generate()
 
+
 	def generate(self):
 		"""Generate the chart"""
 		pass
@@ -77,11 +79,8 @@ class BaseChart:
 	def detach(self):
 		"""Erase the Drawing Area class of the chart"""
 
-#		try:
 		self._parent.remove(self._toolbar)
 		self._parent.remove(self._canvas)
 		self._canvas.destroy()
-#		except AttributeError:
-#			pass
 
-		self._parent = None		
+		self._parent = None

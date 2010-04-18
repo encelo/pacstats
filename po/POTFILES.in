@@ -8,8 +8,8 @@ PacStats/about_dlg.py
 PacStats/app.py
 PacStats/basechart.py
 PacStats/charts.py
+PacStats/database.py
 PacStats/dbinfo_win.py
-PacStats/db.py
 PacStats/libparser.py
 PacStats/logparser.py
 PacStats/main_win.py
@@ -17,6 +17,7 @@ PacStats/packages.py
 PacStats/prefs_win.py
 PacStats/settings.py
 PacStats/subject.py
+PacStats/table.py
 PacStats/transactions.py
 
 PacStats/charts/daily_transactions.py

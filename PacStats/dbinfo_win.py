@@ -28,9 +28,10 @@ import logparser
 
 class DBInfo_Window:
 	"""Open the database information window"""
-	def __init__(self, ui_file, packages, transactions):
-		self._packages = packages
-		self._transactions = transactions
+	def __init__(self, ui_file, database):
+		self._database = database
+		self._packages = database.packages
+		self._transactions = database.transactions
 
 		ui = gtk.Builder()
 		ui.add_from_file(ui_file)
@@ -56,24 +57,25 @@ class DBInfo_Window:
 	def setup_labels(self):
 		"""Setup information labels"""
 
-		packages = self._packages.query("SELECT COUNT(*) FROM packages;")[0][0]
-		transactions = self._transactions.query("SELECT COUNT(*) FROM transactions;")[0][0]
-		if transactions == 0:
-			first = ['', '']
-			last = ['', '']
-		else:
-			first = self._transactions.query("SELECT date, time FROM transactions ORDER BY date ASC LIMIT 1;")[0]
-			last = self._transactions.query("SELECT date, time FROM transactions ORDER BY date DESC LIMIT 1;")[0]
-		sync = self._transactions.query("SELECT COUNT(*) FROM transactions WHERE action=%s;" % logparser.SYNC)[0][0]
-		sysup = self._transactions.query("SELECT COUNT(*) FROM transactions WHERE action=%s;" % logparser.SYSUP)[0][0]
-		install = self._transactions.query("SELECT COUNT(*) FROM transactions WHERE action=%s;" % logparser.INSTALL)[0][0]
-		remove = self._transactions.query("SELECT COUNT(*) FROM transactions WHERE action=%s;" % logparser.REMOVE)[0][0]
-		upgrade = self._transactions.query("SELECT COUNT(*) FROM transactions WHERE action=%s;" % logparser.UPGRADE)[0][0]
+		packages = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._packages.name)[0]
+		transactions = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._transactions.name)[0]
+		if transactions > 0:
+			first = self._database.query_one("SELECT date, time FROM %s ORDER BY date ASC LIMIT 1;" % self._transactions.name)
+			last = self._database.query_one("SELECT date, time FROM %s ORDER BY date DESC LIMIT 1;" % self._transactions.name)
+		sync = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.SYNC, ))[0]
+		sysup = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.SYSUP, ))[0]
+		install = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.INSTALL, ))[0]
+		remove = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.REMOVE, ))[0]
+		upgrade = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.UPGRADE, ))[0]
 
 		self._packages_label.set_text(str(packages))
 		self._transactions_label.set_text(str(transactions))
-		self._first_label.set_text(first[1] + ' ' + first[0])
-		self._last_label.set_text(last[1] + ' ' + last[0])
+		if transactions == 0:
+			self._first_label.set_text(_('N/A'))
+			self._last_label.set_text(_('N/A'))
+		else:
+			self._first_label.set_text(first[1] + ' ' + first[0])
+			self._last_label.set_text(last[1] + ' ' + last[0])
 		self._synchronizations_label.set_text(str(sync))
 		self._sysupgrades_label.set_text(str(sysup))
 		self._installations_label.set_text(str(install))

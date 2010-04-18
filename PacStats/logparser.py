@@ -18,8 +18,11 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
+from time import clock
 from os import stat
 from subject import Subject
+
 
 SYNC = 0
 SYSUP = 1
@@ -29,10 +32,11 @@ UPGRADE = 4
 
 class LogParser(Subject):
 	"""A parser for pacman.log"""
-	def __init__(self, transactions, logfile, seek):
+	def __init__(self, database, logfile, seek):
 
 		Subject.__init__(self)
-		self._transactions = transactions
+		self._database = database
+		self._transactions = database.transactions
 		self._logfile = logfile
 		self._seek = seek
 
@@ -47,6 +51,8 @@ class LogParser(Subject):
 	def parse(self):
 		"""Parse a logfile from the saved seek position"""
 
+		start = clock()
+
 		try:
 			f = open(self._logfile)
 		except IOError:
@@ -59,6 +65,7 @@ class LogParser(Subject):
 		seek_value = self._seek.get()
 		f.seek(seek_value)
 
+		tuples = []
 		line_no = 0
 		for line in f:
 			line_no += 1
@@ -108,13 +115,20 @@ class LogParser(Subject):
 					version.append(rawaction[2].strip('(').strip(')\n'))
 
 			if action in (0, 1):
-				self._transactions.insert(date, time, action)
+#				self._transactions.insert(date, time, action)
+				tuples.append((date, time, action, None, None, None))
 			else:
-				self._transactions.insert(date, time, action, package, version[0], version[1])
+#				self._transactions.insert(date, time, action, package, version[0], version[1])
+				tuples.append((date, time, action, package, version[0], version[1]))
 
 			seek_value = f.tell()
 			self.notify(float(seek_value)/float(size))
 
+		f.close()
+		self._transactions.insert_many(tuples)
+		self._database.commit() # committing one time at the end
 		self._seek.set(size)
 		self._seek.write()
-		f.close()
+		
+		end = clock()
+		print('Parsed in %f seconds' % (end-start))

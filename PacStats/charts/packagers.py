@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 from PacStats.basechart import BaseChart
 
 try:
@@ -29,8 +30,8 @@ except ImportError:
 
 class Chart(BaseChart):
 	"""A derived chart"""
-	def __init__(self, transactions, packages):
-		BaseChart.__init__(self, transactions, packages)
+	def __init__(self, database):
+		BaseChart.__init__(self, database)
 
 		self._name = _('Packagers')
 		self._description = _('Top ten for number of packages created')
@@ -41,7 +42,7 @@ class Chart(BaseChart):
 		"""Generate the chart"""
 		
 		QUERY = """SELECT packager, COUNT(*) AS total FROM %s GROUP BY packager ORDER BY total DESC LIMIT 10;"""
-		data = self._packages.query(QUERY % (self._packages.table))
+		data = self._database.query_all(QUERY % (self._packages.name))
 		data.reverse()
 		widths = []
 		labels = []
@@ -53,7 +54,7 @@ class Chart(BaseChart):
 		self._axes = self._fig.add_subplot(111)
 		self._axes.set_ylim(0, len(widths))
 		if len(widths) > 0:
-			self._axes.set_xlim(0, max(widths)+max(widths)*0.05)
+			self._axes.set_xlim(0, max(widths)*1.1)
 		self._axes.set_yticks(n.arange(0.5, len(widths)))
 		self._axes.set_yticklabels(labels, fontsize=5)
 		self._axes.barh(range(len(widths)), widths)

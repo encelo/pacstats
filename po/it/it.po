@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-11 16:37+0300\n"
-"PO-Revision-Date: 2010-04-11 16:26+0200\n"
+"POT-Creation-Date: 2010-04-18 23:27+0200\n"
+"PO-Revision-Date: 2010-04-18 21:10+0100\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,46 +20,51 @@ msgid "translator-credits"
 msgstr "Angelo \"Encelo\" Theodorou <encelo@gmail.com> (Italian)"
 
 #: ../ui/dbinfo_win.ui.h:1
+msgid "<b>Packages</b>"
+msgstr "<b>Pacchetti</b>"
+
+#: ../ui/dbinfo_win.ui.h:2
+msgid "<b>Transactions</b>"
+msgstr "<b>Transazioni</b>"
+
+#: ../ui/dbinfo_win.ui.h:3
 msgid "Database Information"
 msgstr "Informazioni Database"
 
-#: ../ui/dbinfo_win.ui.h:2
+#: ../ui/dbinfo_win.ui.h:4
 msgid "First:"
 msgstr "Prima:"
 
-#: ../ui/dbinfo_win.ui.h:3
+#: ../ui/dbinfo_win.ui.h:5
 msgid "Installations:"
 msgstr "Installazioni:"
 
-#: ../ui/dbinfo_win.ui.h:4
+#: ../ui/dbinfo_win.ui.h:6
 msgid "Last:"
 msgstr "Ultima:"
 
-#: ../ui/dbinfo_win.ui.h:5
+#: ../ui/dbinfo_win.ui.h:7 ../PacStats/dbinfo_win.py:74
+#: ../PacStats/dbinfo_win.py:75
 msgid "N/A"
 msgstr "N/D"
 
-#: ../ui/dbinfo_win.ui.h:6
-msgid "Packages:"
-msgstr "Pacchetti:"
-
-#: ../ui/dbinfo_win.ui.h:7
+#: ../ui/dbinfo_win.ui.h:8
 msgid "Removals:"
 msgstr "Rimozioni:"
 
-#: ../ui/dbinfo_win.ui.h:8
+#: ../ui/dbinfo_win.ui.h:9
 msgid "Synchronizations:"
 msgstr "Sincronizzazioni:"
 
-#: ../ui/dbinfo_win.ui.h:9
+#: ../ui/dbinfo_win.ui.h:10
 msgid "System Upgrades:"
 msgstr "Aggiornamenti di sistema:"
 
-#: ../ui/dbinfo_win.ui.h:10
-msgid "Transactions:"
-msgstr "Transazioni:"
-
 #: ../ui/dbinfo_win.ui.h:11
+msgid "Total:"
+msgstr "Totale:"
+
+#: ../ui/dbinfo_win.ui.h:12
 msgid "Upgrades:"
 msgstr "Aggiornamenti:"
 
@@ -107,86 +112,86 @@ msgstr "Log di Pacman:"
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: ../PacStats/main_win.py:100
+#: ../PacStats/main_win.py:104
 #, python-format
-msgid "Packages: %d Transactions: %d"
-msgstr "Pacchetti: %d Transazioni: %d"
+msgid "Packages: %d | Transactions: %d"
+msgstr "Pacchetti: %d | Transazioni: %d"
 
-#: ../PacStats/main_win.py:187
+#: ../PacStats/main_win.py:191
 msgid "Parsing the log file..."
 msgstr "Analisi del file di log..."
 
-#: ../PacStats/main_win.py:190
+#: ../PacStats/main_win.py:194
 msgid "Parsing the library..."
 msgstr "Analisi della libreria..."
 
-#: ../PacStats/main_win.py:207
+#: ../PacStats/main_win.py:211
 #, python-format
 msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
 msgstr ""
 "Database ottimizzato. La nuova grandezza del file è di %s byte (%s byte in "
 "meno)."
 
-#: ../PacStats/main_win.py:216
+#: ../PacStats/main_win.py:220
 msgid "Do you really want to clear the database?"
 msgstr "Si intende davver davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:224
+#: ../PacStats/main_win.py:228
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:235
+#: ../PacStats/main_win.py:239
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:247
+#: ../PacStats/main_win.py:251
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:250
+#: ../PacStats/main_win.py:254
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 
-#: ../PacStats/charts/daily_transactions.py:36
+#: ../PacStats/charts/daily_transactions.py:37
 msgid "Daily Transactions"
 msgstr "Transazioni Giornaliere"
 
-#: ../PacStats/charts/daily_transactions.py:37
+#: ../PacStats/charts/daily_transactions.py:38
 msgid "Current month transactions per day"
 msgstr "Transazioni per giorno nel mese corrente"
 
-#: ../PacStats/charts/histo_letter.py:35
+#: ../PacStats/charts/histo_letter.py:36
 msgid "Histo Letter"
 msgstr "Istogramma della Lettera"
 
-#: ../PacStats/charts/histo_letter.py:36
+#: ../PacStats/charts/histo_letter.py:37
 msgid "Initial package letter histogram"
 msgstr "Istogramma della lettera iniziale di un pacchetto"
 
-#: ../PacStats/charts/monthly_old_packages.py:36
+#: ../PacStats/charts/monthly_old_packages.py:37
 msgid "Monthly Old Packages"
 msgstr "Vecchi pacchetti per mese"
 
-#: ../PacStats/charts/monthly_old_packages.py:37
+#: ../PacStats/charts/monthly_old_packages.py:38
 msgid "Number of packages no more updated since a certain month this year"
 msgstr "Numero di pacchetti non più aggiornati da un certo mese dell'anno"
 
-#: ../PacStats/charts/packagers.py:35
+#: ../PacStats/charts/packagers.py:36
 msgid "Packagers"
 msgstr "Creatori di pacchetti"
 
-#: ../PacStats/charts/packagers.py:36
+#: ../PacStats/charts/packagers.py:37
 msgid "Top ten for number of packages created"
 msgstr "Primi dieci per numero di pacchetti creati"
 
-#: ../PacStats/charts/package_size.py:36
+#: ../PacStats/charts/package_size.py:37
 msgid "Top ten for size in megabytes"
 msgstr "Primi dieci per grandezza in megabyte"
 
-#: ../PacStats/charts/pie_letter.py:35
+#: ../PacStats/charts/pie_letter.py:36
 msgid "Pie Letter"
 msgstr "Torta della Lettera"
 
-#: ../PacStats/charts/pie_letter.py:36
+#: ../PacStats/charts/pie_letter.py:37
 msgid "Initial package letter pie chart"
 msgstr "Grafico a torta della lettera iniziale di un pacchetto"

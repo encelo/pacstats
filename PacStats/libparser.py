@@ -18,21 +18,27 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
+from time import clock
 import os
 from subject import Subject
 
+
 class LibParser(Subject):
 	"""A parser for the pacman lib"""
-	def __init__(self, packages, libdir):
+	def __init__(self, database, libdir):
 
 		Subject.__init__(self)
-		self._packages = packages
+		self._database = database
+		self._packages = database.packages
 		self._libdir = os.path.join(libdir, 'local')
 
 
 	def parse(self):
 		"""Parse the lib directory"""
 
+		start = clock()
+		
 		try:
 			lib_listdir = os.listdir(self._libdir)
 		except OSError:
@@ -40,6 +46,7 @@ class LibParser(Subject):
 			return
 		print('Parsing the lib \"%s\"' % self._libdir)
 
+		tuples = []
 		pkg_count = 0
 		for pkg in lib_listdir:
 			pkgdesc = os.path.join(self._libdir, pkg, 'desc')
@@ -47,18 +54,19 @@ class LibParser(Subject):
 			list = pkg.split('-')
 			pkgname = '-'.join(list[:len(list)-2])
 			pkgver = '-'.join(list[len(list)-2:])
-			try:
-				stored_pkg = self._packages.query("SELECT name, version FROM %s WHERE name='%s'" % \
-					(self._packages.table, pkgname))[0]
-			except IndexError:
-				pass
-			else:
+			
+			SELECT = """SELECT name, version FROM %s WHERE name = ?""" % self._packages.name
+			stored_pkg = self._database.query_one(SELECT, (pkgname, ))
+			
+			if stored_pkg != None:
 				if stored_pkg[1] == pkgver:
+					# Skipping the not updated package
 					pkg_count += 1
 					self.notify(float(pkg_count)/float(len(lib_listdir)))
 					continue
 				else:
-					self._packages.query("DELETE FROM %s WHERE name='%s'" % (self._packages.table, pkgname))
+					DELETE = """DELETE FROM %s WHERE name = ?""" % self._packages.name
+					self._database.execute(DELETE, (pkgname, ))
 
 			reas = 0 # Default value for packages missing this field
 
@@ -91,5 +99,12 @@ class LibParser(Subject):
 			f.close()
 			pkg_count += 1
 
-			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas)
+#			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas)
+			tuples.append((name, ver, desc, url, lic, arch, bepoch, bepoch, iepoch, iepoch, pack, size, reas))
 			self.notify(float(pkg_count)/float(len(lib_listdir)))
+			
+		self._packages.insert_many(tuples)
+		self._database.commit() # committing one time at the end
+		
+		end = clock()
+		print('Parsed in %f seconds' % (end-start))

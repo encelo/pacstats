@@ -4,8 +4,8 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="prefs_win">
     <property name="title" translatable="yes">Preferences</property>
-    <property name="default_width">250</property>
-    <property name="default_height">200</property>
+    <property name="default_width">400</property>
+    <property name="default_height">160</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>

@@ -18,6 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 import time
 from PacStats.basechart import BaseChart
 
@@ -30,8 +31,8 @@ except ImportError:
 
 class Chart(BaseChart):
 	"""A derived chart"""
-	def __init__(self, transactions, packages):
-		BaseChart.__init__(self, transactions, packages)
+	def __init__(self, database):
+		BaseChart.__init__(self, database)
 
 		self._name = _('Daily Transactions')
 		self._description = _('Current month transactions per day')
@@ -47,12 +48,12 @@ class Chart(BaseChart):
 
 		data = []
 		for d in range(today):
-			data.append(self._transactions.query(QUERY % (self._transactions.table, d))[0][0])
+			data.append(self._database.query_one(QUERY % (self._transactions.name, d))[0])
 		data.reverse()
 
 		self._axes = self._fig.add_subplot(111)
 		if len(data) > 0:
-			self._axes.set_ylim(0, max(data)+max(data)*0.05)
+			self._axes.set_ylim(0, max(data)*1.1)
 		self._axes.set_xlim(0, today)
 		self._axes.set_xticks(n.arange(0.5, today))
 		self._axes.set_xticklabels(range(1, today+1), fontsize=5)

@@ -22,10 +22,21 @@
 import os
 import sys
 
+try:
+	import matplotlib.figure as f
+	from matplotlib.backends.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
+	from matplotlib.backends.backend_gtk import NavigationToolbar2GTK as NavigationToolbar
+except ImportError:
+	print('Matplotlib is missing!')
+	exit(-1)
+
 
 class Charts():
 	"""Charts manager class"""
 	def __init__(self, database):
+
+		self._parent = None
+		self._toolbar = None
 
 		self._charts = {}
 		charts_dir = os.path.join(os.path.dirname(__file__), 'charts')
@@ -60,3 +71,32 @@ class Charts():
 		except KeyError:
 			return None
 
+
+	def add_canvas(self, parent_box, with_toolbar=True):
+		"""Create the common canvas and toolbar for charts"""
+
+		self._parent = parent_box
+
+		self._canvas = FigureCanvas(f.Figure())  # a gtk.DrawingArea
+		self._canvas.figure.hold(False)
+		self._parent.pack_start(self._canvas, True, True)
+
+		if with_toolbar:
+			self._toolbar = NavigationToolbar(self._canvas, self._canvas.window)
+			self._parent.pack_start(self._toolbar, False, False)
+		self._canvas.show()
+
+		return self._canvas
+
+
+	def remove_canvas(self):
+		"""Remove and destroy the common canvas"""
+
+		if self._parent != None:
+			if self._toolbar != None:
+				self._parent.remove(self._toolbar)
+				self._toolbar.destroy()
+			self._parent.remove(self._canvas)
+			self._canvas.destroy()
+
+		self._parent = None

@@ -21,12 +21,6 @@
 
 from PacStats.basechart import BaseChart
 
-try:
-	import numpy as n
-except ImportError:
-	print('NumPy is missing!')
-	exit(-1)
-
 
 class Chart(BaseChart):
 	"""A derived chart"""
@@ -41,8 +35,9 @@ class Chart(BaseChart):
 	def generate(self):
 		"""Generate the chart"""
 		
-		QUERY = """SELECT packager, COUNT(*) AS total FROM %s GROUP BY packager ORDER BY total DESC LIMIT 10;"""
-		data = self._database.query_all(QUERY % (self._packages.name))
+		QUERY = """SELECT packager, COUNT(*) AS total FROM %s GROUP BY packager ORDER BY total DESC LIMIT 10"""
+
+		data = self._database.query_all(QUERY % self._packages.name)
 		data.reverse()
 		widths = []
 		labels = []
@@ -51,11 +46,12 @@ class Chart(BaseChart):
 			labels.append(name)
 			widths.append(tuple[1])
 	
-		self._axes = self._fig.add_subplot(111)
+		self._axes = self._canvas.figure.add_subplot(111)
+		self._axes.grid(True)
 		self._axes.set_ylim(0, len(widths))
 		if len(widths) > 0:
 			self._axes.set_xlim(0, max(widths)*1.1)
-		self._axes.set_yticks(n.arange(0.5, len(widths)))
+		self._axes.set_yticks(range(len(widths)))
 		self._axes.set_yticklabels(labels, fontsize=5)
-		self._axes.barh(range(len(widths)), widths)
+		self._axes.barh(range(len(widths)), widths, align='center')
 

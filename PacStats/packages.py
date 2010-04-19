@@ -48,7 +48,8 @@ class Packages(Table):
 			installtime TIME,
 			packager VARCHAR(128),
 			size INTEGER NOT NULL,
-			reason INTEGER NOT NULL
+			reason INTEGER NOT NULL,
+			repository VARCHAR(32)
 			);""" % self.name
 	
 		self._database.execute(CREATE)
@@ -56,14 +57,14 @@ class Packages(Table):
 
 
 	def insert(self, name, version, description, url, license, arch, 
-			   buildepoch, installepoch, packager, size, reason):
+			   buildepoch, installepoch, packager, size, reason, repository):
 		"""Insert a new transaction into the database"""
 
 		INSERT = """INSERT INTO %s VALUES (NULL, ?, ?, ?, ?, ?, ?,
 			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), 
-			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?)""" % self.name
-		tuple = (name, version, description, url, license, arch, buildepoch,
-			buildepoch, installepoch, installepoch, packager, size, reason)
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?, ?)""" % self.name
+		tuple = (name, version, description, url, license, arch, buildepoch, buildepoch,
+			installepoch, installepoch, packager, size, reason, repository)
 
 		self._database.execute(INSERT, tuple)
 		
@@ -73,7 +74,7 @@ class Packages(Table):
 
 		INSERT = """INSERT INTO %s VALUES (NULL, ?, ?, ?, ?, ?, ?,
 			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), 
-			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?)""" % self.name
+			date(?, 'unixepoch', 'localtime'), time(?, 'unixepoch', 'localtime'), ?, ?, ?, ?)""" % self.name
 
 		self._database.execute_many(INSERT, tuples)
 

@@ -14,8 +14,8 @@
   </object>
   <object class="GtkWindow" id="main_win">
     <property name="title">PacStats</property>
-    <property name="default_width">400</property>
-    <property name="default_height">550</property>
+    <property name="default_width">600</property>
+    <property name="default_height">600</property>
     <signal name="destroy" handler="on_main_win_destroy"/>
     <child>
       <object class="GtkVBox" id="vbox1">
@@ -96,7 +96,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="clear_db">
-                        <property name="label">gtk-delete</property>
+                        <property name="label">gtk-clear</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -148,7 +148,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="orientation">vertical</property>
-            <property name="position">200</property>
+            <property name="position">230</property>
             <property name="position_set">True</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow1">
@@ -169,7 +169,7 @@
                         <property name="resizable">True</property>
                         <property name="title" translatable="yes">Name</property>
                         <property name="sort_indicator">True</property>
-                        <property name="sort_column_id">1</property>
+                        <property name="sort_column_id">0</property>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
@@ -243,6 +243,6 @@
   </object>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>
-    <property name="stock">gtk-clear</property>
+    <property name="stock">gtk-harddisk</property>
   </object>
 </interface>

@@ -80,9 +80,10 @@ class Main_Window:
 		gtk.window_set_default_icon(pix)
 		self._window.set_icon(pix)
 
-		self.setup_dbstatus()
+		self._canvas = self._charts.add_canvas(self._chart_vbox)
 		self.populate_charts_list()
 		self._active_chart = None
+		self.setup_dbstatus()
 		self._window.show()
 
 		# Parsing
@@ -120,7 +121,7 @@ class Main_Window:
 			self.detach_chart()
 
 		self._active_chart = chart
-		chart.attach(self._chart_vbox)
+		chart.attach(self._canvas)
 
 
 	def detach_chart(self):

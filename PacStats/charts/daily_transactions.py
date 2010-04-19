@@ -19,14 +19,7 @@
 ##
 
 
-import time
 from PacStats.basechart import BaseChart
-
-try:
-	import numpy as n
-except ImportError:
-	print('NumPy is missing!')
-	exit(-1)
 
 
 class Chart(BaseChart):
@@ -35,26 +28,24 @@ class Chart(BaseChart):
 		BaseChart.__init__(self, database)
 
 		self._name = _('Daily Transactions')
-		self._description = _('Current month transactions per day')
+		self._description = _('Total transactions per day in the last month')
 		self._version = '0.1'
 
 
 	def generate(self):
 		"""Generate the chart"""
-		
-		QUERY = """SELECT COUNT(*) FROM %s WHERE date = date('now', '-%s day');"""
+	
+		QUERY = """SELECT strftime('%%m-%%d', date) AS day, COUNT(*) FROM %s WHERE date >= date('now', '-1 month') GROUP BY day ORDER BY day;"""
 
-		today = int(time.strftime('%d'))
+		data = self._database.query_all(QUERY % self._transactions.name)
+		labels = [x[0] for x in data]
+		heights = [x[1] for x in data]
 
-		data = []
-		for d in range(today):
-			data.append(self._database.query_one(QUERY % (self._transactions.name, d))[0])
-		data.reverse()
-
-		self._axes = self._fig.add_subplot(111)
+		self._axes = self._canvas.figure.add_subplot(111)
+		self._axes.grid(True)
 		if len(data) > 0:
-			self._axes.set_ylim(0, max(data)*1.1)
-		self._axes.set_xlim(0, today)
-		self._axes.set_xticks(n.arange(0.5, today))
-		self._axes.set_xticklabels(range(1, today+1), fontsize=5)
-		self._axes.bar(range(today), data)
+			self._axes.set_ylim(0, max(heights)*1.1)
+		self._axes.set_xticks(range(len(heights)))
+		self._axes.set_xticklabels(labels, fontsize=10)
+		self._canvas.figure.autofmt_xdate()
+		self._axes.bar(range(len(heights)), heights, align='center')

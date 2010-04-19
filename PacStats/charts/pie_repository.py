@@ -1,4 +1,4 @@
-## package_size.py
+## pie_repository.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,29 +27,21 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = ('Package size')
-		self._description = _('Top ten for size in megabytes')
+		self._name = _('Pie Repository')
+		self._description = _('Origin repository pie chart')
 		self._version = '0.1'
 
 
 	def generate(self):
-		"""Generate the chart"""
+		"""Genrate the chart"""
 		
-		QUERY = """SELECT name, size/(1024*1024) FROM %s ORDER BY size DESC LIMIT 10"""
+		QUERY = """SELECT repository, COUNT(*) FROM %s GROUP BY repository"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		data.reverse()
-		widths = []
-		labels = []
-		for tuple in data:
-			labels.append(tuple[0])
-			widths.append(tuple[1])
-	
+		labels = [str(x[0]) + '\n' + str(x[1]) for x in data]
+		fracts = [x[1] for x in data]
+		explode = [0 for x in fracts]
+		explode[fracts.index(max(fracts))] = 0.1
+
 		self._axes = self._canvas.figure.add_subplot(111)
-		self._axes.grid(True)
-		self._axes.set_ylim(0, len(widths))
-		if len(widths) > 0:
-			self._axes.set_xlim(0, max(widths)*1.1)
-		self._axes.set_yticks(range(len(widths)))
-		self._axes.set_yticklabels(labels, fontsize=5)
-		self._axes.barh(range(len(widths)), widths, align='center')
+		self._pie = self._axes.pie(fracts, explode=explode, labels=labels, shadow=True)

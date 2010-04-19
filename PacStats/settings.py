@@ -22,6 +22,7 @@
 import os
 import ConfigParser
 import cPickle
+from subprocess import Popen, PIPE
 
 
 class PersistentInt():
@@ -81,11 +82,23 @@ class Settings():
 			os.makedirs(data_home)
 		dbname = os.path.join(data_home, 'pacstats.db')
 
-		# Setting defaults
+		# Setting defaults using pacman
+		log = '/var/log/pacman.log'
+		lib = '/var/lib/pacman'
+		
+		pacout = Popen(['pacman', '-v'], stdout=PIPE).stdout
+		for line in pacout.readlines():
+			if line.find('DB Path') == 0:
+				lib = line.split(':')[1].strip()
+				continue
+			if line.find('Log File') == 0:
+				log = line.split(':')[1].strip()
+				continue
+
 		self._defaults = {}
 		self._defaults['db'] = dbname
-		self._defaults['log'] = '/var/log/pacman.log'
-		self._defaults['lib'] = '/var/lib/pacman'
+		self._defaults['log'] = log
+		self._defaults['lib'] = lib
 
 		self._cfg = ConfigParser.RawConfigParser()
 		if os.path.isfile(fname):

@@ -1,4 +1,4 @@
-## daily_transactions.py
+## monthly_old_packages.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -19,14 +19,7 @@
 ##
 
 
-import time
 from PacStats.basechart import BaseChart
-
-try:
-	import numpy as n
-except ImportError:
-	print('NumPy is missing!')
-	exit(-1)
 
 
 class Chart(BaseChart):
@@ -35,26 +28,26 @@ class Chart(BaseChart):
 		BaseChart.__init__(self, database)
 
 		self._name = _('Monthly Old Packages')
-		self._description = _('Number of packages no more updated since a certain month this year')
+		self._description = _('Packages no more updated since a certain month in the last twelve')
 		self._version = '0.1'
 
 
 	def generate(self):
 		"""Generate the chart"""
-		
-		QUERY = """SELECT COUNT(*) FROM %s WHERE installdate BETWEEN date('now', '-%s month') AND date('now', '-%s month') ;"""
+	
+		QUERY = """SELECT strftime('%%Y-%%m', installdate) AS month, COUNT(*) FROM %s 
+			WHERE installdate >= date('now', '-12 month') GROUP BY month ORDER BY month;"""
 
-		month = int(time.strftime('%m'))
+		data = self._database.query_all(QUERY % self._packages.name)
+		labels = [x[0] for x in data]
+		heights = [x[1] for x in data]
 
-		data = []
-		for m in range(month):
-			data.append(self._database.query_one(QUERY % (self._packages.name, m+1, m))[0])
-		data.reverse()
-
-		self._axes = self._fig.add_subplot(111)
+		self._axes = self._canvas.figure.add_subplot(111)
+		self._axes.grid(True)
 		if len(data) > 0:
-			self._axes.set_ylim(0, max(data)*1.1)
-		self._axes.set_xlim(0, month)
-		self._axes.set_xticks(n.arange(0.5, month))
-		self._axes.set_xticklabels(range(1, month+1), fontsize=5)
-		self._axes.bar(range(month), data)
+			self._axes.set_ylim(0, max(heights)*1.1)
+		self._axes.set_xlim(0, len(heights))
+		self._axes.set_xticks(range(len(heights)))
+		self._axes.set_xticklabels(labels, fontsize=10)
+		self._canvas.figure.autofmt_xdate()
+		self._axes.bar(range(len(heights)), heights, align='center')

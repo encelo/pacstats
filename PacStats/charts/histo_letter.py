@@ -21,12 +21,6 @@
 
 from PacStats.basechart import BaseChart
 
-try:
-	import numpy as n
-except ImportError:
-	print('NumPy is missing!')
-	exit(-1)
-
 
 class Chart(BaseChart):
 	"""A derived chart"""
@@ -37,20 +31,20 @@ class Chart(BaseChart):
 		self._description = _('Initial package letter histogram')
 		self._version = '0.1'
 
-		self._letters = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o' , 'p', 'q', 'r', 's', 't', 'y', 'w', 'x', 'z')
-
 
 	def generate(self):
 		"""Generate the chart"""
 
-		data = []
-		QUERY = """SELECT COUNT(*) FROM %s WHERE name LIKE '%s%%';"""
-		for l in self._letters:
-			data.append(self._database.query_one(QUERY % (self._packages.name, l))[0])
-	 
-		self._axes = self._fig.add_subplot(111)
-		self._axes.set_xlim(0, len(self._letters))
-		self._axes.set_ylim(0, max(data)*1.1)
-		self._axes.set_xticks(n.arange(0.5, len(self._letters)))
-		self._axes.set_xticklabels(self._letters)
-		self._axes.bar(range(len(self._letters)), data)
+		QUERY = """SELECT substr(name, 1, 1) AS letter, COUNT(*) FROM %s GROUP BY letter ORDER BY letter"""
+
+		data = self._database.query_all(QUERY % self._packages.name)
+		labels = [x[0] for x in data]
+		heights = [x[1] for x in data]
+	
+		self._axes = self._canvas.figure.add_subplot(111)
+		self._axes.grid(True)
+		self._axes.set_xlim(0, len(labels))
+		self._axes.set_ylim(0, max(heights)*1.1)
+		self._axes.set_xticks(range(len(labels)))
+		self._axes.set_xticklabels(labels)
+		self._axes.bar(range(len(heights)), heights, align='center')

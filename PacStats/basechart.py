@@ -50,37 +50,21 @@ class BaseChart:
 		return self._version
 
 
-	def attach(self, parent_box):
-		"""Setup the Drawing Area class for the chart"""
-
-		self._parent = parent_box
-
-		self._fig = f.Figure(figsize=(5,4), dpi=100, facecolor='w', edgecolor='k')
-		self._fig.hold(False)
-		self._canvas = FigureCanvas(self._fig)  # a gtk.DrawingArea
-		self._toolbar = NavigationToolbar(self._canvas, self._canvas.window)
-		self._parent.pack_start(self._canvas, True, True)
-		self._parent.pack_start(self._toolbar, False, False)
-		self._canvas.show()
-
-		self.generate()
-
-
 	def generate(self):
 		"""Generate the chart"""
 		pass
 		
 
-	def update(self):
-		"""Update the chart"""
+	def attach(self, canvas):
+		"""Attach the chart to a canvas class"""
+
+		self._canvas = canvas
+		self._canvas.figure.clear()
+		self.generate()
 		self._canvas.draw()
 
 
 	def detach(self):
-		"""Erase the Drawing Area class of the chart"""
+		"""Detach the chart from the canvas class"""
 
-		self._parent.remove(self._toolbar)
-		self._parent.remove(self._canvas)
-		self._canvas.destroy()
-
-		self._parent = None
+		self._canvas = None

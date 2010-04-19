@@ -31,25 +31,34 @@ class LibParser(Subject):
 		Subject.__init__(self)
 		self._database = database
 		self._packages = database.packages
-		self._libdir = os.path.join(libdir, 'local')
+		self._libdir = libdir
 
 
 	def parse(self):
 		"""Parse the lib directory"""
 
 		start = clock()
+
+		localdir = os.path.join(self._libdir, 'local')
+		syncdir = os.path.join(self._libdir, 'sync')
 		
 		try:
-			lib_listdir = os.listdir(self._libdir)
+			local_listdir = os.listdir(localdir)
 		except OSError:
-			print('Cannot list \"%s\"!' % self._libdir)
+			print('Cannot list \"%s\"!' % localdir)
 			return
-		print('Parsing the lib \"%s\"' % self._libdir)
+		print('Parsing the lib \"%s\"' % localdir)
+
+		try:
+			sync_listdir = os.listdir(syncdir)
+		except OSError:
+			print('Cannot list \"%s\"!' % syncdir)
+			sync_listdir = None
 
 		tuples = []
 		pkg_count = 0
-		for pkg in lib_listdir:
-			pkgdesc = os.path.join(self._libdir, pkg, 'desc')
+		for pkg in local_listdir:
+			pkgdesc = os.path.join(localdir, pkg, 'desc')
 
 			list = pkg.split('-')
 			pkgname = '-'.join(list[:len(list)-2])
@@ -62,7 +71,7 @@ class LibParser(Subject):
 				if stored_pkg[1] == pkgver:
 					# Skipping the not updated package
 					pkg_count += 1
-					self.notify(float(pkg_count)/float(len(lib_listdir)))
+					self.notify(float(pkg_count)/float(len(local_listdir)))
 					continue
 				else:
 					DELETE = """DELETE FROM %s WHERE name = ?""" % self._packages.name
@@ -99,9 +108,15 @@ class LibParser(Subject):
 			f.close()
 			pkg_count += 1
 
-#			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas)
-			tuples.append((name, ver, desc, url, lic, arch, bepoch, bepoch, iepoch, iepoch, pack, size, reas))
-			self.notify(float(pkg_count)/float(len(lib_listdir)))
+			repo = None
+			for repo_dir in sync_listdir:
+				if os.path.isdir(os.path.join(syncdir, repo_dir, pkg)):
+					repo = repo_dir
+					break
+
+#			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas, repo)
+			tuples.append((name, ver, desc, url, lic, arch, bepoch, bepoch, iepoch, iepoch, pack, size, reas, repo))
+			self.notify(float(pkg_count)/float(len(local_listdir)))
 			
 		self._packages.insert_many(tuples)
 		self._database.commit() # committing one time at the end

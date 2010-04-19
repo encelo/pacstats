@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-18 23:27+0200\n"
+"POT-Creation-Date: 2010-04-19 23:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,84 +113,120 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: ../PacStats/main_win.py:104
+#: ../PacStats/main_win.py:105
 #, python-format
 msgid "Packages: %d | Transactions: %d"
 msgstr ""
 
-#: ../PacStats/main_win.py:191
+#: ../PacStats/main_win.py:192
 msgid "Parsing the log file..."
 msgstr ""
 
-#: ../PacStats/main_win.py:194
+#: ../PacStats/main_win.py:195
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:211
+#: ../PacStats/main_win.py:212
 #, python-format
 msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
 msgstr ""
 
-#: ../PacStats/main_win.py:220
+#: ../PacStats/main_win.py:221
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:228
+#: ../PacStats/main_win.py:229
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:239
+#: ../PacStats/main_win.py:240
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:251
+#: ../PacStats/main_win.py:252
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:254
+#: ../PacStats/main_win.py:255
 msgid "Saving the packages table as "
 msgstr ""
 
-#: ../PacStats/charts/daily_transactions.py:37
+#: ../PacStats/charts/daily_transactions.py:30
 msgid "Daily Transactions"
 msgstr ""
 
-#: ../PacStats/charts/daily_transactions.py:38
-msgid "Current month transactions per day"
+#: ../PacStats/charts/daily_transactions.py:31
+msgid "Total transactions per day in the last month"
 msgstr ""
 
-#: ../PacStats/charts/histo_letter.py:36
+#: ../PacStats/charts/histo_letter.py:30
 msgid "Histo Letter"
 msgstr ""
 
-#: ../PacStats/charts/histo_letter.py:37
+#: ../PacStats/charts/histo_letter.py:31
 msgid "Initial package letter histogram"
 msgstr ""
 
-#: ../PacStats/charts/monthly_old_packages.py:37
+#: ../PacStats/charts/monthly_old_packages.py:30
 msgid "Monthly Old Packages"
 msgstr ""
 
-#: ../PacStats/charts/monthly_old_packages.py:38
-msgid "Number of packages no more updated since a certain month this year"
+#: ../PacStats/charts/monthly_old_packages.py:31
+msgid "Packages no more updated since a certain month in the last twelve"
 msgstr ""
 
-#: ../PacStats/charts/packagers.py:36
+#: ../PacStats/charts/monthly_transactions.py:39
+msgid "Monthly Transactions"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:40
+msgid "Type splitted transactions per month in the last twelve"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:78
+msgid "Synchronizations"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:79
+msgid "System Upgrades"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:80
+msgid "Installations"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:81
+msgid "Removals"
+msgstr ""
+
+#: ../PacStats/charts/monthly_transactions.py:82
+msgid "Upgrades"
+msgstr ""
+
+#: ../PacStats/charts/packagers.py:30
 msgid "Packagers"
 msgstr ""
 
-#: ../PacStats/charts/packagers.py:37
+#: ../PacStats/charts/packagers.py:31
 msgid "Top ten for number of packages created"
 msgstr ""
 
-#: ../PacStats/charts/package_size.py:37
+#: ../PacStats/charts/package_size.py:31
 msgid "Top ten for size in megabytes"
 msgstr ""
 
-#: ../PacStats/charts/pie_letter.py:36
+#: ../PacStats/charts/pie_letter.py:30
 msgid "Pie Letter"
 msgstr ""
 
-#: ../PacStats/charts/pie_letter.py:37
+#: ../PacStats/charts/pie_letter.py:31
 msgid "Initial package letter pie chart"
+msgstr ""
+
+#: ../PacStats/charts/pie_repository.py:30
+msgid "Pie Repository"
+msgstr ""
+
+#: ../PacStats/charts/pie_repository.py:31
+msgid "Origin repository pie chart"
 msgstr ""

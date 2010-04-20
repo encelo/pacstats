@@ -44,6 +44,15 @@ class Table:
 		self._database.commit()
 
 
+	def drop(self):
+		"""Drop the table"""
+		
+		DROP = """DROP TABLE %s""" % self.name
+
+		self._database.execute(DROP)
+		self._database.commit()
+
+
 	def create(self):
 		pass
 	

@@ -83,7 +83,7 @@ class Main_Window:
 		self._canvas = self._charts.add_canvas(self._chart_vbox)
 		self.populate_charts_list()
 		self._active_chart = None
-		self.setup_dbstatus()
+		self.setup_statusbar()
 		self._window.show()
 
 		# Parsing
@@ -92,23 +92,43 @@ class Main_Window:
 		self._logparser.attach(self)
 		self._libparser.attach(self)
 
-#		on_update_db_activate()
+		self.check_update()
 
 
-	def setup_dbstatus(self):
-		"""Setup DB info in the statusbar"""
+	def setup_statusbar(self):
+		"""Setup database information in the statusbar"""
 
 		self._statusbar.pop(1)
 		
 		packages = self._database.query_one("SELECT COUNT(*) FROM %s;" %  self._packages.name)[0]
 		transactions = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._transactions.name)[0]
-		string = _('Packages: %d | Transactions: %d') % (packages, transactions)
+		size = stat(self._settings.db).st_size
+
+		string = _('Packages: %d | Transactions: %d | DB size: %d KiB') % (packages, transactions, size/1024)
 
 		self._statusbar.push(1, string)
 
 
+	def check_update(self):
+		"""Check if an update to the database is needed"""
+
+		size = stat(self._settings.db).st_size
+		seek = self._logparser.get_seek()
+
+		if size > seek:
+			dlg = gtk.MessageDialog(type=gtk.MESSAGE_QUESTION, buttons=gtk.BUTTONS_YES_NO,
+			message_format=_('The database is out of sync. Do you want to update now?'))
+			dlg.set_default_response(gtk.RESPONSE_YES)
+			response = dlg.run()
+			dlg.destroy()
+
+			if response == gtk.RESPONSE_YES:
+				self.on_update_db_activate()
+
+
 	def populate_charts_list(self):
 		"""Populate the treeview with charts"""
+
 		for name in self._charts.get_names():
 			chart = self._charts.get_chart(name)
 			self._liststore.append([chart.get_name(), chart.get_description(), chart.get_version()])
@@ -187,6 +207,8 @@ class Main_Window:
 	def on_update_db_activate(self, event):
 		"""Update the database"""
 
+		old_size = stat(self._settings.db).st_size
+
 		self._pb.show()
 		self._vpaned.set_sensitive(False)
 		self._statusbar.push(1, _('Parsing the log file...'))
@@ -197,8 +219,14 @@ class Main_Window:
 		self._statusbar.pop(1)
 		self._pb.hide()
 
-		self.setup_dbstatus()
+		self.setup_statusbar()
 		self._vpaned.set_sensitive(True)
+
+		new_size = stat(self._settings.db).st_size
+		dlg = gtk.MessageDialog(type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK,
+            message_format=_('Database updated. The new file size is %s KiB (%s bytes more).' % (new_size/1024, new_size-old_size)))
+		dlg.run()
+		dlg.destroy()
 
 
 	def on_optimize_db_activate(self, event):
@@ -208,8 +236,10 @@ class Main_Window:
 		self._database.vacuum()
 		new_size = stat(self._settings.db).st_size
 
+		self.setup_statusbar()
+
 		dlg = gtk.MessageDialog(type=gtk.MESSAGE_INFO, buttons=gtk.BUTTONS_OK,
-			message_format=_('Database optimized. The new file size is %s bytes (%s bytes less).' % (new_size, old_size-new_size)))
+			message_format=_('Database optimized. The new file size is %s KiB (%s bytes less).' % (new_size/1024, old_size-new_size)))
 		dlg.run()
 		dlg.destroy()
 
@@ -223,15 +253,14 @@ class Main_Window:
 		response = dlg.run()
 		dlg.destroy()
 
-		if response == gtk.RESPONSE_NO:
-			return
-		else:
+		if response == gtk.RESPONSE_YES:
 			self._statusbar.push(1, _('Clearing the database...'))
-			self._transactions.clear()
+			# The database is recreated and not just cleared to 
+			# ensure a correct update in its schema.
+			self._database.recreate()
 			self._logparser.reset_seek()
-			self._packages.clear()
 			self._statusbar.pop(1)
-			self.setup_dbstatus()
+			self.setup_statusbar()
 
 
 	def on_dump_db_activate(self, event):
@@ -265,7 +294,7 @@ class Main_Window:
 
 
 	def on_charts_list_button_press_event(self, widget, event, data=None):
-		"""A treeview element was clicked once"""
+		"""A treeview element has been clicked once"""
 
 		try:
 			(path, column, x, y) = self._charts_list.get_path_at_pos(
@@ -279,7 +308,8 @@ class Main_Window:
 
 
 	def on_charts_list_row_activated(self, treeview, path, view_column):
-		"""A treeview element was activated"""
+		"""A treeview element has been activated"""
+
 		iter = self._liststore.get_iter(path)
 		(selname, ) = self._liststore.get(iter, 0)
 

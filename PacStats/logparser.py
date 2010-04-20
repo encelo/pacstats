@@ -40,6 +40,12 @@ class LogParser(Subject):
 		self._logfile = logfile
 		self._seek = seek
 
+	
+	def get_seek(self):
+		"""Get the seek value"""
+
+		return self._seek.get()
+
 
 	def reset_seek(self):
 		"""Reset the seek value to zero"""

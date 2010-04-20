@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-19 23:57+0200\n"
-"PO-Revision-Date: 2010-04-19 23:54+0100\n"
+"POT-Creation-Date: 2010-04-20 17:02+0200\n"
+"PO-Revision-Date: 2010-04-20 16:34+0100\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,39 +32,58 @@ msgid "Database Information"
 msgstr "Informazioni Database"
 
 #: ../ui/dbinfo_win.ui.h:4
+msgid "First built:"
+msgstr "Primo creato:"
+
+#: ../ui/dbinfo_win.ui.h:5
+msgid "First installed:"
+msgstr "Primo installato:"
+
+#: ../ui/dbinfo_win.ui.h:6
 msgid "First:"
 msgstr "Prima:"
 
-#: ../ui/dbinfo_win.ui.h:5
+#: ../ui/dbinfo_win.ui.h:7
 msgid "Installations:"
 msgstr "Installazioni:"
 
-#: ../ui/dbinfo_win.ui.h:6
+#: ../ui/dbinfo_win.ui.h:8
+msgid "Installed size"
+msgstr "Dimensione installati:"
+
+#: ../ui/dbinfo_win.ui.h:9
+msgid "Last built:"
+msgstr "Ultimo creato:"
+
+#: ../ui/dbinfo_win.ui.h:10
+msgid "Last installed:"
+msgstr "Ultimo installato:"
+
+#: ../ui/dbinfo_win.ui.h:11
 msgid "Last:"
 msgstr "Ultima:"
 
-#: ../ui/dbinfo_win.ui.h:7 ../PacStats/dbinfo_win.py:74
-#: ../PacStats/dbinfo_win.py:75
+#: ../ui/dbinfo_win.ui.h:12
 msgid "N/A"
 msgstr "N/D"
 
-#: ../ui/dbinfo_win.ui.h:8
+#: ../ui/dbinfo_win.ui.h:13
 msgid "Removals:"
 msgstr "Rimozioni:"
 
-#: ../ui/dbinfo_win.ui.h:9
+#: ../ui/dbinfo_win.ui.h:14
 msgid "Synchronizations:"
 msgstr "Sincronizzazioni:"
 
-#: ../ui/dbinfo_win.ui.h:10
-msgid "System Upgrades:"
+#: ../ui/dbinfo_win.ui.h:15
+msgid "System upgrades:"
 msgstr "Aggiornamenti di sistema:"
 
-#: ../ui/dbinfo_win.ui.h:11
+#: ../ui/dbinfo_win.ui.h:16
 msgid "Total:"
 msgstr "Totale:"
 
-#: ../ui/dbinfo_win.ui.h:12
+#: ../ui/dbinfo_win.ui.h:17
 msgid "Upgrades:"
 msgstr "Aggiornamenti:"
 
@@ -112,43 +131,54 @@ msgstr "Log di Pacman:"
 msgid "Preferences"
 msgstr "Preferenze"
 
-#: ../PacStats/main_win.py:105
+#: ../PacStats/main_win.py:107
 #, python-format
-msgid "Packages: %d | Transactions: %d"
-msgstr "Pacchetti: %d | Transazioni: %d"
+msgid "Packages: %d | Transactions: %d | DB size: %d KiB"
+msgstr "Pacchetti: %d | Transazioni: %d | Dimensione DB: %d KiB"
 
-#: ../PacStats/main_win.py:192
+#: ../PacStats/main_win.py:120
+msgid "The database is out of sync. Do you want to update now?"
+msgstr "Il database non è più sincronizzato. Si intende aggiornarlo adesso?"
+
+#: ../PacStats/main_win.py:214
 msgid "Parsing the log file..."
 msgstr "Analisi del file di log..."
 
-#: ../PacStats/main_win.py:195
+#: ../PacStats/main_win.py:217
 msgid "Parsing the library..."
 msgstr "Analisi della libreria..."
 
-#: ../PacStats/main_win.py:212
+#: ../PacStats/main_win.py:227
 #, python-format
-msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
+msgid "Database updated. The new file size is %s KiB (%s bytes more)."
 msgstr ""
-"Database ottimizzato. La nuova grandezza del file è di %s byte (%s byte in "
+"Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in "
+"più)."
+
+#: ../PacStats/main_win.py:242
+#, python-format
+msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
+msgstr ""
+"Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in "
 "meno)."
 
-#: ../PacStats/main_win.py:221
+#: ../PacStats/main_win.py:251
 msgid "Do you really want to clear the database?"
-msgstr "Si intende davver davvero cancellare il database?"
+msgstr "Si intende davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:229
+#: ../PacStats/main_win.py:257
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:240
+#: ../PacStats/main_win.py:269
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:252
+#: ../PacStats/main_win.py:281
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:255
+#: ../PacStats/main_win.py:284
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-19 23:57+0200\n"
+"POT-Creation-Date: 2010-04-20 17:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,39 +33,58 @@ msgid "Database Information"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:4
-msgid "First:"
+msgid "First built:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:5
-msgid "Installations:"
+msgid "First installed:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:6
-msgid "Last:"
+msgid "First:"
 msgstr ""
 
-#: ../ui/dbinfo_win.ui.h:7 ../PacStats/dbinfo_win.py:74
-#: ../PacStats/dbinfo_win.py:75
-msgid "N/A"
+#: ../ui/dbinfo_win.ui.h:7
+msgid "Installations:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:8
-msgid "Removals:"
+msgid "Installed size"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:9
-msgid "Synchronizations:"
+msgid "Last built:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:10
-msgid "System Upgrades:"
+msgid "Last installed:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:11
-msgid "Total:"
+msgid "Last:"
 msgstr ""
 
 #: ../ui/dbinfo_win.ui.h:12
+msgid "N/A"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:13
+msgid "Removals:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:14
+msgid "Synchronizations:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:15
+msgid "System upgrades:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:16
+msgid "Total:"
+msgstr ""
+
+#: ../ui/dbinfo_win.ui.h:17
 msgid "Upgrades:"
 msgstr ""
 
@@ -113,41 +132,50 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: ../PacStats/main_win.py:105
+#: ../PacStats/main_win.py:107
 #, python-format
-msgid "Packages: %d | Transactions: %d"
+msgid "Packages: %d | Transactions: %d | DB size: %d KiB"
 msgstr ""
 
-#: ../PacStats/main_win.py:192
+#: ../PacStats/main_win.py:120
+msgid "The database is out of sync. Do you want to update now?"
+msgstr ""
+
+#: ../PacStats/main_win.py:214
 msgid "Parsing the log file..."
 msgstr ""
 
-#: ../PacStats/main_win.py:195
+#: ../PacStats/main_win.py:217
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:212
+#: ../PacStats/main_win.py:227
 #, python-format
-msgid "Database optimized. The new file size is %s bytes (%s bytes less)."
+msgid "Database updated. The new file size is %s KiB (%s bytes more)."
 msgstr ""
 
-#: ../PacStats/main_win.py:221
+#: ../PacStats/main_win.py:242
+#, python-format
+msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
+msgstr ""
+
+#: ../PacStats/main_win.py:251
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:229
+#: ../PacStats/main_win.py:257
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:240
+#: ../PacStats/main_win.py:269
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:252
+#: ../PacStats/main_win.py:281
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:255
+#: ../PacStats/main_win.py:284
 msgid "Saving the packages table as "
 msgstr ""
 

@@ -49,6 +49,8 @@ class PersistentInt():
 	def set(self, value):
 		self._value = value
 
+	value = property(get, set)
+
 
 	def write(self):
 		with open(self._pfile, 'wb') as pfile:

@@ -55,27 +55,19 @@ class LibParser(Subject):
 			print('Cannot list \"%s\"!' % syncdir)
 			sync_listdir = None
 
+		# The packages table is always cleared before parsing.
+		# This ensures a correct synchronization even if the pacman 
+		# library misses some package already in the database.
+		self._packages.clear()
+
 		tuples = []
 		pkg_count = 0
-		for pkg in local_listdir:
-			pkgdesc = os.path.join(localdir, pkg, 'desc')
+		for pkgdir in local_listdir:
+			pkgdesc = os.path.join(localdir, pkgdir, 'desc')
 
-			list = pkg.split('-')
+			list = pkgdir.split('-')
 			pkgname = '-'.join(list[:len(list)-2])
 			pkgver = '-'.join(list[len(list)-2:])
-			
-			SELECT = """SELECT name, version FROM %s WHERE name = ?""" % self._packages.name
-			stored_pkg = self._database.query_one(SELECT, (pkgname, ))
-			
-			if stored_pkg != None:
-				if stored_pkg[1] == pkgver:
-					# Skipping the not updated package
-					pkg_count += 1
-					self.notify(float(pkg_count)/float(len(local_listdir)))
-					continue
-				else:
-					DELETE = """DELETE FROM %s WHERE name = ?""" % self._packages.name
-					self._database.execute(DELETE, (pkgname, ))
 
 			reas = 0 # Default value for packages missing this field
 
@@ -109,9 +101,9 @@ class LibParser(Subject):
 			pkg_count += 1
 
 			repo = None
-			for repo_dir in sync_listdir:
-				if os.path.isdir(os.path.join(syncdir, repo_dir, pkg)):
-					repo = repo_dir
+			for repodir in sync_listdir:
+				if os.path.isdir(os.path.join(syncdir, repodir, pkgdir)):
+					repo = repodir
 					break
 
 #			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas, repo)

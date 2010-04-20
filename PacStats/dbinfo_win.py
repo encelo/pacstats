@@ -39,6 +39,11 @@ class DBInfo_Window:
 		# Getting widgets
 		self.window = ui.get_object("dbinfo_win")
 		self._packages_label = ui.get_object("packages_label")
+		self._first_built_label = ui.get_object("first_built_label")
+		self._last_built_label = ui.get_object("last_built_label")
+		self._first_installed_label = ui.get_object("first_installed_label")
+		self._last_installed_label = ui.get_object("last_installed_label")
+		self._installed_size_label = ui.get_object("installed_size_label")
 		self._transactions_label = ui.get_object("transactions_label")
 		self._first_label = ui.get_object("first_label")
 		self._last_label = ui.get_object("last_label")
@@ -57,25 +62,34 @@ class DBInfo_Window:
 	def setup_labels(self):
 		"""Setup information labels"""
 
-		packages = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._packages.name)[0]
-		transactions = self._database.query_one("SELECT COUNT(*) FROM %s;" % self._transactions.name)[0]
+		packages = self._database.query_one("SELECT COUNT(*) FROM %s" % self._packages.name)[0]
+		if packages > 0:
+			first_built = self._database.query_one("SELECT buildtime, builddate FROM %s ORDER BY builddate ASC LIMIT 1" % self._packages.name)
+			last_built = self._database.query_one("SELECT buildtime, builddate FROM %s ORDER BY builddate DESC LIMIT 1" % self._packages.name)
+			first_installed = self._database.query_one("SELECT installtime, installdate FROM %s ORDER BY installdate ASC LIMIT 1" % self._packages.name)
+			last_installed = self._database.query_one("SELECT installtime, installdate FROM %s ORDER BY installdate DESC LIMIT 1" % self._packages.name)
+			installed_size = self._database.query_one("SELECT SUM(size)/(1024*1024) FROM %s" % self._packages.name)[0]
+		transactions = self._database.query_one("SELECT COUNT(*) FROM %s" % self._transactions.name)[0]
 		if transactions > 0:
-			first = self._database.query_one("SELECT date, time FROM %s ORDER BY date ASC LIMIT 1;" % self._transactions.name)
-			last = self._database.query_one("SELECT date, time FROM %s ORDER BY date DESC LIMIT 1;" % self._transactions.name)
-		sync = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.SYNC, ))[0]
-		sysup = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.SYSUP, ))[0]
-		install = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.INSTALL, ))[0]
-		remove = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.REMOVE, ))[0]
-		upgrade = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?;" % self._transactions.name, (logparser.UPGRADE, ))[0]
+			first = self._database.query_one("SELECT time, date FROM %s ORDER BY date ASC LIMIT 1" % self._transactions.name)
+			last = self._database.query_one("SELECT time, date FROM %s ORDER BY date DESC LIMIT 1" % self._transactions.name)
+		sync = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?" % self._transactions.name, (logparser.SYNC, ))[0]
+		sysup = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?" % self._transactions.name, (logparser.SYSUP, ))[0]
+		install = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?" % self._transactions.name, (logparser.INSTALL, ))[0]
+		remove = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?" % self._transactions.name, (logparser.REMOVE, ))[0]
+		upgrade = self._database.query_one("SELECT COUNT(*) FROM %s WHERE action = ?" % self._transactions.name, (logparser.UPGRADE, ))[0]
 
 		self._packages_label.set_text(str(packages))
+		if packages > 0:
+			self._first_built_label.set_text(first_built[0] + ' ' + first_built[1])
+			self._last_built_label.set_text(last_built[0] + ' ' + last_built[1])
+			self._first_installed_label.set_text(first_installed[0] + ' ' + first_installed[1])
+			self._last_installed_label.set_text(last_installed[0] + ' ' + last_installed[1])
+			self._installed_size_label.set_text(str(installed_size) + ' MiB')
 		self._transactions_label.set_text(str(transactions))
-		if transactions == 0:
-			self._first_label.set_text(_('N/A'))
-			self._last_label.set_text(_('N/A'))
-		else:
-			self._first_label.set_text(first[1] + ' ' + first[0])
-			self._last_label.set_text(last[1] + ' ' + last[0])
+		if transactions >0:
+			self._first_label.set_text(first[0] + ' ' + first[1])
+			self._last_label.set_text(last[0] + ' ' + last[1])
 		self._synchronizations_label.set_text(str(sync))
 		self._sysupgrades_label.set_text(str(sysup))
 		self._installations_label.set_text(str(install))

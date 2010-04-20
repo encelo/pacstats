@@ -46,7 +46,7 @@ class Database:
 			
 		self._cur = self._con.cursor()
 
-		self.table = None
+		self._create_tables()
 
 
 	def __del__(self):
@@ -54,6 +54,16 @@ class Database:
 
 		self._con.commit()
 		self._con.close()
+
+
+	def _drop_tables(self):
+		"""Drop every table in the database"""
+		pass
+
+
+	def _create_tables(self):
+		"""Create database tables"""
+		pass
 
 
 	def commit(self):
@@ -74,15 +84,6 @@ class Database:
 		return self._cur
 
 	cursor = property(get_cursor)
-
-
-	def drop(self, name):
-		"""Drop the specified table"""
-		
-		DROP = """DROP TABLE %s""" % name
-
-		self._cur.execute(DROP)
-		self._con.commit()
 
 
 	def execute(self, string, tuple=()):
@@ -121,6 +122,13 @@ class Database:
 		return self._cur.fetchall()
 
 
+	def recreate(self):
+		"""Drop and recreate tables"""
+
+		self._drop_tables()
+		self._create_tables()
+
+
 	def vacuum(self):
 		"""Optimize the whole database defragmenting it"""
 
@@ -134,5 +142,19 @@ class ConcreteDB(Database):
 		"""Connect and try to create the tables"""
 
 		Database.__init__(self, fname)
+
+
+	def _drop_tables(self):
+		"""Drop every table in the database"""
+
+		self.transactions.drop()
+		self.transactions = None
+		self.packages.drop()
+		self.packages = None
+
+
+	def _create_tables(self):
+		"""Create database tables"""
+
 		self.transactions = Transactions(self)
 		self.packages = Packages(self)

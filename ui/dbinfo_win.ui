@@ -21,6 +21,7 @@
                 <child>
                   <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
+                    <property name="n_rows">6</property>
                     <property name="n_columns">2</property>
                     <child>
                       <object class="GtkLabel" id="label3">
@@ -37,6 +38,122 @@
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="right_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label6">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">First installed:</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="first_installed_label">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">N/A</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label7">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Last installed:</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="last_installed_label">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">N/A</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label8">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Installed size</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">5</property>
+                        <property name="bottom_attach">6</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="installed_size_label">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">N/A</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">5</property>
+                        <property name="bottom_attach">6</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label4">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">First built:</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label5">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Last built:</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="first_built_label">
+                        <property name="visible">True</property>
+                        <property name="yalign">0.47999998927116394</property>
+                        <property name="label" translatable="yes">N/A</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="last_built_label">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">N/A</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
                       </packing>
                     </child>
                   </object>
@@ -70,13 +187,13 @@
                     <property name="n_columns">2</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkLabel" id="label4">
+                      <object class="GtkLabel" id="label9">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Total:</property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label5">
+                      <object class="GtkLabel" id="label10">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">First:</property>
                       </object>
@@ -86,7 +203,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label6">
+                      <object class="GtkLabel" id="label">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Last:</property>
                       </object>
@@ -96,7 +213,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label7">
+                      <object class="GtkLabel" id="label14">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Installations:</property>
                       </object>
@@ -106,7 +223,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label8">
+                      <object class="GtkLabel" id="label13">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Removals:</property>
                       </object>
@@ -116,9 +233,9 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label9">
+                      <object class="GtkLabel" id="label11">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">System Upgrades:</property>
+                        <property name="label" translatable="yes">System upgrades:</property>
                       </object>
                       <packing>
                         <property name="top_attach">4</property>
@@ -202,7 +319,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label10">
+                      <object class="GtkLabel" id="label12">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Synchronizations:</property>
                       </object>
@@ -225,7 +342,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label11">
+                      <object class="GtkLabel" id="label16">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Upgrades:</property>
                       </object>

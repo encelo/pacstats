@@ -25,6 +25,6 @@ PacStats/charts/histo_letter.py
 PacStats/charts/monthly_old_packages.py
 PacStats/charts/monthly_transactions.py
 PacStats/charts/packagers.py
-PacStats/charts/package_size.py
+PacStats/charts/packages_size.py
 PacStats/charts/pie_letter.py
 PacStats/charts/pie_repository.py

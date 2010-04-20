@@ -123,7 +123,7 @@ class Main_Window:
 			dlg.destroy()
 
 			if response == gtk.RESPONSE_YES:
-				self.on_update_db_activate()
+				self.on_update_db_activate(None)
 
 
 	def populate_charts_list(self):

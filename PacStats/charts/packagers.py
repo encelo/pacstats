@@ -52,6 +52,6 @@ class Chart(BaseChart):
 		if len(widths) > 0:
 			self._axes.set_xlim(0, max(widths)*1.1)
 		self._axes.set_yticks(range(len(widths)))
-		self._axes.set_yticklabels(labels, fontsize=5)
+		self._axes.set_yticklabels(labels, fontsize=8)
 		self._axes.barh(range(len(widths)), widths, align='center')
 

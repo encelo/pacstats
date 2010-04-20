@@ -81,4 +81,4 @@ class Chart(BaseChart):
 		self._axes.bar(ind+3*width, h_remove, width, color = 'y', label=_('Removals'))
 		self._axes.bar(ind+4*width, h_upgrade, width, color = 'm', label=_('Upgrades'))
 
-		self._axes.legend(prop=FontProperties(size=7))
+		self._axes.legend(prop=FontProperties(size=8))

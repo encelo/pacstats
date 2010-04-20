@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-20 17:02+0200\n"
+"POT-Creation-Date: 2010-04-20 22:02+0200\n"
 "PO-Revision-Date: 2010-04-20 16:34+0100\n"
 "Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -151,16 +151,12 @@ msgstr "Analisi della libreria..."
 #: ../PacStats/main_win.py:227
 #, python-format
 msgid "Database updated. The new file size is %s KiB (%s bytes more)."
-msgstr ""
-"Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in "
-"più)."
+msgstr "Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in più)."
 
 #: ../PacStats/main_win.py:242
 #, python-format
 msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
-msgstr ""
-"Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in "
-"meno)."
+msgstr "Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in meno)."
 
 #: ../PacStats/main_win.py:251
 msgid "Do you really want to clear the database?"
@@ -242,7 +238,11 @@ msgstr "Creatori di pacchetti"
 msgid "Top ten for number of packages created"
 msgstr "Primi dieci per numero di pacchetti creati"
 
-#: ../PacStats/charts/package_size.py:31
+#: ../PacStats/charts/packages_size.py:30
+msgid "Packages size"
+msgstr "Dimensioni pacchetti"
+
+#: ../PacStats/charts/packages_size.py:31
 msgid "Top ten for size in megabytes"
 msgstr "Primi dieci per grandezza in megabyte"
 

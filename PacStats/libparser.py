@@ -19,8 +19,8 @@
 ##
 
 
-from time import clock
 import os
+from time import clock, mktime, strptime
 from subject import Subject
 
 
@@ -100,6 +100,15 @@ class LibParser(Subject):
 			f.close()
 			pkg_count += 1
 
+			try:
+				int(bepoch)
+			except ValueError:
+				# converting old format timestamps to epoch
+				time_struct = strptime(bepoch, '%a %b %d %H:%M:%S %Y')
+				bepoch = mktime(time_struct)
+				time_struct = strptime(iepoch, '%a %b %d %H:%M:%S %Y')
+				iepoch = mktime(time_struct)
+
 			repo = None
 			for repodir in sync_listdir:
 				if os.path.isdir(os.path.join(syncdir, repodir, pkgdir)):
@@ -108,10 +117,12 @@ class LibParser(Subject):
 
 #			self._packages.insert(name, ver, desc, url, lic, arch, bepoch, iepoch, pack, size, reas, repo)
 			tuples.append((name, ver, desc, url, lic, arch, bepoch, bepoch, iepoch, iepoch, pack, size, reas, repo))
-			self.notify(float(pkg_count)/float(len(local_listdir)))
+
+			if pkg_count % 50 == 0: #  updating the progress bar every 50 packages
+				self.notify(float(pkg_count)/float(len(local_listdir)))
 			
 		self._packages.insert_many(tuples)
 		self._database.commit() # committing one time at the end
 		
 		end = clock()
-		print('Parsed in %f seconds' % (end-start))
+		print('Parsed %d packages in %f seconds' % (pkg_count, end-start))

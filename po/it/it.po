@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-20 22:02+0200\n"
-"PO-Revision-Date: 2010-04-20 16:34+0100\n"
-"Last-Translator: Angelo \"Encelo\" Theodorou <encelo@gmail.com>\n"
+"POT-Creation-Date: 2010-04-22 00:49+0200\n"
+"PO-Revision-Date: 2010-04-22 00:50+0100\n"
+"Last-Translator: Angelo Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -97,7 +97,7 @@ msgstr "Nome"
 
 #: ../ui/main_win.ui.h:3
 msgid "Optimize"
-msgstr "Ottimizzazione"
+msgstr "Ottimizza"
 
 #: ../ui/main_win.ui.h:4
 msgid "Version"
@@ -109,7 +109,7 @@ msgstr "_Database"
 
 #: ../ui/main_win.ui.h:6
 msgid "_File"
-msgstr "_Archivio"
+msgstr "_File"
 
 #: ../ui/main_win.ui.h:7
 msgid "_Help"
@@ -137,44 +137,48 @@ msgid "Packages: %d | Transactions: %d | DB size: %d KiB"
 msgstr "Pacchetti: %d | Transazioni: %d | Dimensione DB: %d KiB"
 
 #: ../PacStats/main_win.py:120
-msgid "The database is out of sync. Do you want to update now?"
+msgid "The database is empty. Do you want to build it now?"
+msgstr "Il database è vuote. Si intende costruirlo adesso?"
+
+#: ../PacStats/main_win.py:122
+msgid "The database is out of sync. Do you want to update it now?"
 msgstr "Il database non è più sincronizzato. Si intende aggiornarlo adesso?"
 
-#: ../PacStats/main_win.py:214
+#: ../PacStats/main_win.py:217
 msgid "Parsing the log file..."
 msgstr "Analisi del file di log..."
 
-#: ../PacStats/main_win.py:217
+#: ../PacStats/main_win.py:220
 msgid "Parsing the library..."
 msgstr "Analisi della libreria..."
 
-#: ../PacStats/main_win.py:227
+#: ../PacStats/main_win.py:230
 #, python-format
 msgid "Database updated. The new file size is %s KiB (%s bytes more)."
 msgstr "Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in più)."
 
-#: ../PacStats/main_win.py:242
+#: ../PacStats/main_win.py:245
 #, python-format
 msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
 msgstr "Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in meno)."
 
-#: ../PacStats/main_win.py:251
+#: ../PacStats/main_win.py:254
 msgid "Do you really want to clear the database?"
 msgstr "Si intende davvero cancellare il database?"
 
-#: ../PacStats/main_win.py:257
+#: ../PacStats/main_win.py:260
 msgid "Clearing the database..."
 msgstr "Cancellazione del database..."
 
-#: ../PacStats/main_win.py:269
+#: ../PacStats/main_win.py:273
 msgid "DB Dump"
 msgstr "Salvataggio del DB"
 
-#: ../PacStats/main_win.py:281
+#: ../PacStats/main_win.py:285
 msgid "Saving the transactions table as "
 msgstr "Salvataggio della tabella delle transazioni come "
 
-#: ../PacStats/main_win.py:284
+#: ../PacStats/main_win.py:288
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 
@@ -193,6 +197,14 @@ msgstr "Istogramma della Lettera"
 #: ../PacStats/charts/histo_letter.py:31
 msgid "Initial package letter histogram"
 msgstr "Istogramma della lettera iniziale di un pacchetto"
+
+#: ../PacStats/charts/installed_survival.py:30
+msgid "Installed survival"
+msgstr "Sopravvivenza installati"
+
+#: ../PacStats/charts/installed_survival.py:31
+msgid "Top ten for days of survival of still installed packages"
+msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti ancora installati"
 
 #: ../PacStats/charts/monthly_old_packages.py:30
 msgid "Monthly Old Packages"
@@ -261,3 +273,12 @@ msgstr "Repository a torta"
 #: ../PacStats/charts/pie_repository.py:31
 msgid "Origin repository pie chart"
 msgstr "Grafico a torta sul repository di provenienza"
+
+#: ../PacStats/charts/removed_survival.py:30
+msgid "Removed survival"
+msgstr "Sopravvivenza rimossi"
+
+#: ../PacStats/charts/removed_survival.py:31
+msgid "Top ten for days of survival of removed packages"
+msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti rimossi"
+

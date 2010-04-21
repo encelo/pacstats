@@ -41,7 +41,8 @@ class Chart(BaseChart):
 		labels = [x[0] for x in data]
 		fracts = [x[1] for x in data]
 		explode = [0 for x in data]
-		explode[fracts.index(max(fracts))] = 0.1
+		if len(fracts) > 0:
+			explode[fracts.index(max(fracts))] = 0.1
 
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._pie = self._axes.pie(fracts, explode=explode, labels=labels, shadow=True)

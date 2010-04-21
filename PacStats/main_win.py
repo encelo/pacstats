@@ -112,12 +112,15 @@ class Main_Window:
 	def check_update(self):
 		"""Check if an update to the database is needed"""
 
-		size = stat(self._settings.db).st_size
+		size = stat(self._settings.log).st_size
 		seek = self._logparser.get_seek()
 
 		if size > seek:
-			dlg = gtk.MessageDialog(type=gtk.MESSAGE_QUESTION, buttons=gtk.BUTTONS_YES_NO,
-			message_format=_('The database is out of sync. Do you want to update now?'))
+			if seek == 0:
+				message = _('The database is empty. Do you want to build it now?')
+			else:
+				message = _('The database is out of sync. Do you want to update it now?')
+			dlg = gtk.MessageDialog(type=gtk.MESSAGE_QUESTION, buttons=gtk.BUTTONS_YES_NO, message_format=message)
 			dlg.set_default_response(gtk.RESPONSE_YES)
 			response = dlg.run()
 			dlg.destroy()
@@ -258,6 +261,7 @@ class Main_Window:
 			# The database is recreated and not just cleared to 
 			# ensure a correct update in its schema.
 			self._database.recreate()
+			self._database.vacuum()
 			self._logparser.reset_seek()
 			self._statusbar.pop(1)
 			self.setup_statusbar()

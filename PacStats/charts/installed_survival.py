@@ -1,4 +1,4 @@
-## pie_repository.py
+## installed_survival.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,22 +27,29 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Pie Repository')
-		self._description = _('Origin repository pie chart')
+		self._name = _('Installed survival')
+		self._description = _('Top ten for days of survival of still installed packages')
 		self._version = '0.1'
 
 
 	def generate(self):
-		"""Genrate the chart"""
-		
-		QUERY = """SELECT repository, COUNT(*) FROM %s GROUP BY repository"""
+		"""Generate the chart"""
+
+		QUERY = """SELECT name, julianday('now') - julianday(installdate, installtime) AS survival FROM %s ORDER BY survival DESC LIMIT 10"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		labels = [str(x[0]) + '\n' + str(x[1]) for x in data]
-		fracts = [x[1] for x in data]
-		explode = [0 for x in fracts]
-		if len(fracts) > 0:
-			explode[fracts.index(max(fracts))] = 0.1
-
+		data.reverse()
+		widths = []
+		labels = []
+		for tuple in data:
+			labels.append(tuple[0])
+			widths.append(tuple[1])
+	
 		self._axes = self._canvas.figure.add_subplot(111)
-		self._pie = self._axes.pie(fracts, explode=explode, labels=labels, shadow=True)
+		self._axes.grid(True)
+		self._axes.set_ylim(0, len(widths))
+		if len(widths) > 0:
+			self._axes.set_xlim(0, max(widths)*1.1)
+		self._axes.set_yticks(range(len(widths)))
+		self._axes.set_yticklabels(labels, fontsize=8)
+		self._axes.barh(range(len(widths)), widths, align='center')

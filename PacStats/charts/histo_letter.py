@@ -44,7 +44,8 @@ class Chart(BaseChart):
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
 		self._axes.set_xlim(0, len(labels))
-		self._axes.set_ylim(0, max(heights)*1.1)
+		if len(heights) > 0:
+			self._axes.set_ylim(0, max(heights)*1.1)
 		self._axes.set_xticks(range(len(labels)))
 		self._axes.set_xticklabels(labels)
 		self._axes.bar(range(len(heights)), heights, align='center')

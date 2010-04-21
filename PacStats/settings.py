@@ -82,7 +82,7 @@ class Settings():
 		data_home = os.path.join(data_home, 'pacstats')
 		if os.path.isdir(data_home) == False:
 			os.makedirs(data_home)
-		dbname = os.path.join(data_home, 'pacstats.db')
+		dbname = os.path.join(data_home, 'pacstats.sqlite')
 
 		# Setting defaults using pacman
 		log = '/var/log/pacman.log'

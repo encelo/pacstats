@@ -138,7 +138,7 @@ class Database:
 class ConcreteDB(Database):
 	"""The concrete database actually used by the application"""
 
-	def __init__(self, fname = 'pacstats.db'):
+	def __init__(self, fname = 'pacstats.sqlite'):
 		"""Connect and try to create the tables"""
 
 		Database.__init__(self, fname)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-20 22:07+0200\n"
+"POT-Creation-Date: 2010-04-22 01:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,44 +138,48 @@ msgid "Packages: %d | Transactions: %d | DB size: %d KiB"
 msgstr ""
 
 #: ../PacStats/main_win.py:120
-msgid "The database is out of sync. Do you want to update now?"
+msgid "The database is empty. Do you want to build it now?"
 msgstr ""
 
-#: ../PacStats/main_win.py:214
-msgid "Parsing the log file..."
+#: ../PacStats/main_win.py:122
+msgid "The database is out of sync. Do you want to update it now?"
 msgstr ""
 
 #: ../PacStats/main_win.py:217
+msgid "Parsing the log file..."
+msgstr ""
+
+#: ../PacStats/main_win.py:220
 msgid "Parsing the library..."
 msgstr ""
 
-#: ../PacStats/main_win.py:227
+#: ../PacStats/main_win.py:230
 #, python-format
 msgid "Database updated. The new file size is %s KiB (%s bytes more)."
 msgstr ""
 
-#: ../PacStats/main_win.py:242
+#: ../PacStats/main_win.py:245
 #, python-format
 msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
 msgstr ""
 
-#: ../PacStats/main_win.py:251
+#: ../PacStats/main_win.py:254
 msgid "Do you really want to clear the database?"
 msgstr ""
 
-#: ../PacStats/main_win.py:257
+#: ../PacStats/main_win.py:260
 msgid "Clearing the database..."
 msgstr ""
 
-#: ../PacStats/main_win.py:269
+#: ../PacStats/main_win.py:273
 msgid "DB Dump"
 msgstr ""
 
-#: ../PacStats/main_win.py:281
+#: ../PacStats/main_win.py:285
 msgid "Saving the transactions table as "
 msgstr ""
 
-#: ../PacStats/main_win.py:284
+#: ../PacStats/main_win.py:288
 msgid "Saving the packages table as "
 msgstr ""
 
@@ -193,6 +197,14 @@ msgstr ""
 
 #: ../PacStats/charts/histo_letter.py:31
 msgid "Initial package letter histogram"
+msgstr ""
+
+#: ../PacStats/charts/installed_survival.py:30
+msgid "Installed survival"
+msgstr ""
+
+#: ../PacStats/charts/installed_survival.py:31
+msgid "Top ten for days of survival of still installed packages"
 msgstr ""
 
 #: ../PacStats/charts/monthly_old_packages.py:30
@@ -261,4 +273,12 @@ msgstr ""
 
 #: ../PacStats/charts/pie_repository.py:31
 msgid "Origin repository pie chart"
+msgstr ""
+
+#: ../PacStats/charts/removed_survival.py:30
+msgid "Removed survival"
+msgstr ""
+
+#: ../PacStats/charts/removed_survival.py:31
+msgid "Top ten for days of survival of removed packages"
 msgstr ""

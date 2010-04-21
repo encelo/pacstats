@@ -19,8 +19,8 @@
 ##
 
 
-from time import clock
 from os import stat
+from time import clock, strftime, strptime
 from subject import Subject
 
 
@@ -89,9 +89,14 @@ class LogParser(Subject):
 			rawstamp = rawstamp.strip('[')
 			rawstamp = rawstamp.strip(']')
 			rawstamp = rawstamp.split(' ')
-		
+
 			date = rawstamp[0]
 			time = rawstamp[1]
+
+			# parsing the old format
+			splitted = date.split('/')
+			if len(splitted) > 1:
+				date = '20'+splitted[2] + '-' + splitted[0] + '-' + splitted[1]
 
 			# Action performed
 			if rawaction.find('synchronizing package lists') == 0:
@@ -128,7 +133,8 @@ class LogParser(Subject):
 				tuples.append((date, time, action, package, version[0], version[1]))
 
 			seek_value = f.tell()
-			self.notify(float(seek_value)/float(size))
+			if line_no % 250 == 0: # updating the progress bar every 250 lines
+				self.notify(float(seek_value)/float(size))
 
 		f.close()
 		self._transactions.insert_many(tuples)
@@ -137,4 +143,4 @@ class LogParser(Subject):
 		self._seek.write()
 		
 		end = clock()
-		print('Parsed in %f seconds' % (end-start))
+		print('Parsed %d lines in %f seconds' % (line_no, end-start))

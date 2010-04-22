@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-22 00:49+0200\n"
-"PO-Revision-Date: 2010-04-22 00:50+0100\n"
+"PO-Revision-Date: 2010-04-22 19:32+0100\n"
 "Last-Translator: Angelo Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgstr "Pacchetti: %d | Transazioni: %d | Dimensione DB: %d KiB"
 
 #: ../PacStats/main_win.py:120
 msgid "The database is empty. Do you want to build it now?"
-msgstr "Il database è vuote. Si intende costruirlo adesso?"
+msgstr "Il database è vuoto. Si intende costruirlo adesso?"
 
 #: ../PacStats/main_win.py:122
 msgid "The database is out of sync. Do you want to update it now?"

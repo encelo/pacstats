@@ -20,6 +20,7 @@
 
 
 import os
+import locale
 from time import clock, mktime, strptime
 from subject import Subject
 
@@ -36,6 +37,10 @@ class LibParser(Subject):
 
 	def parse(self):
 		"""Parse the lib directory"""
+
+		# Configuring English locale for timestamp recognition
+		old_locale = locale.getlocale()
+		locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
 
 		start = clock()
 
@@ -126,3 +131,6 @@ class LibParser(Subject):
 		
 		end = clock()
 		print('Parsed %d packages in %f seconds' % (pkg_count, end-start))
+
+		# Restoring user locale settings
+		locale.setlocale(locale.LC_ALL, old_locale)

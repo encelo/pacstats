@@ -20,7 +20,7 @@
 
 
 from os import stat
-from time import clock, strftime, strptime
+from time import clock
 from subject import Subject
 
 

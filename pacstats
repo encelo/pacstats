@@ -23,16 +23,17 @@
 share_dir = '.'
 locale_dir = './po'
 
-import locale
-import gettext
-from gtk import glade
+import locale, gettext
 from PacStats import app
 
-locale.setlocale(locale.LC_ALL, '')
-for module in gettext, glade:
-	module.bindtextdomain('pacstats', locale_dir)
-	module.textdomain('pacstats')
-gettext.install('pacstats', locale_dir, unicode=1)
+gettext.install('pacstats', locale_dir, unicode=True, names=('ngettext',))
+locale.bindtextdomain('pacstats', locale_dir)
+locale.bind_textdomain_codeset('pacstats', 'UTF-8')
+# trying to load current locale settings
+try:
+	locale.setlocale(locale.LC_ALL, "")
+except locale.Error:
+	pass
 
 app = app.Application(share_dir)
 app.run()

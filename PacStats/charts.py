@@ -39,7 +39,7 @@ class Charts():
 		self._toolbar = None
 
 		self._charts = {}
-		charts_dir = os.path.join(os.path.dirname(__file__), 'charts')
+		charts_dir = os.path.join(os.path.dirname(__file__), 'Charts')
 		sys.path.insert(0, charts_dir)
 
 		charts_dir_list = os.listdir(charts_dir)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-22 01:21+0200\n"
+"POT-Creation-Date: 2010-04-26 22:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,102 +183,142 @@ msgstr ""
 msgid "Saving the packages table as "
 msgstr ""
 
-#: ../PacStats/charts/daily_transactions.py:30
+#: ../PacStats/Charts/daily_transactions.py:33
 msgid "Daily Transactions"
 msgstr ""
 
-#: ../PacStats/charts/daily_transactions.py:31
+#: ../PacStats/Charts/daily_transactions.py:34
 msgid "Total transactions per day in the last month"
 msgstr ""
 
-#: ../PacStats/charts/histo_letter.py:30
-msgid "Histo Letter"
+#: ../PacStats/Charts/histo_letters.py:30
+msgid "Histo Letters"
 msgstr ""
 
-#: ../PacStats/charts/histo_letter.py:31
+#: ../PacStats/Charts/histo_letters.py:31
 msgid "Initial package letter histogram"
 msgstr ""
 
-#: ../PacStats/charts/installed_survival.py:30
+#: ../PacStats/Charts/important_updates.py:32
+msgid "Important Updates"
+msgstr ""
+
+#: ../PacStats/Charts/important_updates.py:33
+msgid "Update dates chart of some important packages in the last twelve months"
+msgstr ""
+
+#: ../PacStats/Charts/installed_survival.py:30
 msgid "Installed survival"
 msgstr ""
 
-#: ../PacStats/charts/installed_survival.py:31
+#: ../PacStats/Charts/installed_survival.py:31
 msgid "Top ten for days of survival of still installed packages"
 msgstr ""
 
-#: ../PacStats/charts/monthly_old_packages.py:30
+#: ../PacStats/Charts/monthly_old_packages.py:32
 msgid "Monthly Old Packages"
 msgstr ""
 
-#: ../PacStats/charts/monthly_old_packages.py:31
+#: ../PacStats/Charts/monthly_old_packages.py:33
 msgid "Packages no more updated since a certain month in the last twelve"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:39
+#: ../PacStats/Charts/monthly_transactions.py:39
 msgid "Monthly Transactions"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:40
+#: ../PacStats/Charts/monthly_transactions.py:40
 msgid "Type splitted transactions per month in the last twelve"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:78
+#: ../PacStats/Charts/monthly_transactions.py:76
 msgid "Synchronizations"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:79
+#: ../PacStats/Charts/monthly_transactions.py:77
 msgid "System Upgrades"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:80
+#: ../PacStats/Charts/monthly_transactions.py:78
 msgid "Installations"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:81
+#: ../PacStats/Charts/monthly_transactions.py:79
 msgid "Removals"
 msgstr ""
 
-#: ../PacStats/charts/monthly_transactions.py:82
+#: ../PacStats/Charts/monthly_transactions.py:80
 msgid "Upgrades"
 msgstr ""
 
-#: ../PacStats/charts/packagers.py:30
+#: ../PacStats/Charts/packagers.py:30
 msgid "Packagers"
 msgstr ""
 
-#: ../PacStats/charts/packagers.py:31
+#: ../PacStats/Charts/packagers.py:31
 msgid "Top ten for number of packages created"
 msgstr ""
 
-#: ../PacStats/charts/packages_size.py:30
+#: ../PacStats/Charts/packages_license.py:30
+msgid "Packages license"
+msgstr ""
+
+#: ../PacStats/Charts/packages_license.py:31
+msgid "Top ten for license adopted"
+msgstr ""
+
+#: ../PacStats/Charts/packages_size.py:30
 msgid "Packages size"
 msgstr ""
 
-#: ../PacStats/charts/packages_size.py:31
+#: ../PacStats/Charts/packages_size.py:31
 msgid "Top ten for size in megabytes"
 msgstr ""
 
-#: ../PacStats/charts/pie_letter.py:30
-msgid "Pie Letter"
+#: ../PacStats/Charts/pie_descriptions.py:31
+msgid "Pie Descriptions"
 msgstr ""
 
-#: ../PacStats/charts/pie_letter.py:31
+#: ../PacStats/Charts/pie_descriptions.py:32
+msgid "Description lengths pie chart"
+msgstr ""
+
+#: ../PacStats/Charts/pie_descriptions.py:54
+msgid "characters"
+msgstr ""
+
+#: ../PacStats/Charts/pie_letters.py:30
+msgid "Pie Letters"
+msgstr ""
+
+#: ../PacStats/Charts/pie_letters.py:31
 msgid "Initial package letter pie chart"
 msgstr ""
 
-#: ../PacStats/charts/pie_repository.py:30
-msgid "Pie Repository"
+#: ../PacStats/Charts/pie_repositories.py:30
+msgid "Pie Repositories"
 msgstr ""
 
-#: ../PacStats/charts/pie_repository.py:31
+#: ../PacStats/Charts/pie_repositories.py:31
 msgid "Origin repository pie chart"
 msgstr ""
 
-#: ../PacStats/charts/removed_survival.py:30
+#: ../PacStats/Charts/pie_sizes.py:31
+msgid "Pie Sizes"
+msgstr ""
+
+#: ../PacStats/Charts/pie_sizes.py:32
+msgid "Packages size pie chart"
+msgstr ""
+
+#: ../PacStats/Charts/pie_sizes.py:54
+msgid "megabytes"
+msgstr ""
+
+#: ../PacStats/Charts/removed_survival.py:30
 msgid "Removed survival"
 msgstr ""
 
-#: ../PacStats/charts/removed_survival.py:31
+#: ../PacStats/Charts/removed_survival.py:31
 msgid "Top ten for days of survival of removed packages"
 msgstr ""

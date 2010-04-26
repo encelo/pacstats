@@ -39,7 +39,6 @@ class LibParser(Subject):
 		"""Parse the lib directory"""
 
 		# Configuring English locale for timestamp recognition
-		old_locale = locale.getlocale()
 		locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
 
 		start = clock()
@@ -133,4 +132,4 @@ class LibParser(Subject):
 		print('Parsed %d packages in %f seconds' % (pkg_count, end-start))
 
 		# Restoring user locale settings
-		locale.setlocale(locale.LC_ALL, old_locale)
+		locale.setlocale(locale.LC_ALL, "")

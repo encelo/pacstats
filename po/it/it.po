@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-22 00:49+0200\n"
-"PO-Revision-Date: 2010-04-22 19:32+0100\n"
+"POT-Creation-Date: 2010-04-26 22:08+0200\n"
+"PO-Revision-Date: 2010-04-26 20:59+0100\n"
 "Last-Translator: Angelo Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -155,12 +155,16 @@ msgstr "Analisi della libreria..."
 #: ../PacStats/main_win.py:230
 #, python-format
 msgid "Database updated. The new file size is %s KiB (%s bytes more)."
-msgstr "Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in più)."
+msgstr ""
+"Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in "
+"più)."
 
 #: ../PacStats/main_win.py:245
 #, python-format
 msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
-msgstr "Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in meno)."
+msgstr ""
+"Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in "
+"meno)."
 
 #: ../PacStats/main_win.py:254
 msgid "Do you really want to clear the database?"
@@ -182,103 +186,145 @@ msgstr "Salvataggio della tabella delle transazioni come "
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 
-#: ../PacStats/charts/daily_transactions.py:30
+#: ../PacStats/Charts/daily_transactions.py:33
 msgid "Daily Transactions"
 msgstr "Transazioni Giornaliere"
 
-#: ../PacStats/charts/daily_transactions.py:31
+#: ../PacStats/Charts/daily_transactions.py:34
 msgid "Total transactions per day in the last month"
 msgstr "Transazioni giornaliere totali nell'ultimo mese"
 
-#: ../PacStats/charts/histo_letter.py:30
-msgid "Histo Letter"
-msgstr "Istogramma della Lettera"
+#: ../PacStats/Charts/histo_letters.py:30
+msgid "Histo Letters"
+msgstr "Istogramma delle Lettere"
 
-#: ../PacStats/charts/histo_letter.py:31
+#: ../PacStats/Charts/histo_letters.py:31
 msgid "Initial package letter histogram"
 msgstr "Istogramma della lettera iniziale di un pacchetto"
 
-#: ../PacStats/charts/installed_survival.py:30
+#: ../PacStats/Charts/important_updates.py:32
+msgid "Important Updates"
+msgstr "Aggiornamenti importanti"
+
+#: ../PacStats/Charts/important_updates.py:33
+msgid "Update dates chart of some important packages in the last twelve months"
+msgstr ""
+"Grafico delle date di aggiornamento di alcuni pacchetti importanti negli "
+"ultimi dodici mesi"
+
+#: ../PacStats/Charts/installed_survival.py:30
 msgid "Installed survival"
 msgstr "Sopravvivenza installati"
 
-#: ../PacStats/charts/installed_survival.py:31
+#: ../PacStats/Charts/installed_survival.py:31
 msgid "Top ten for days of survival of still installed packages"
-msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti ancora installati"
+msgstr ""
+"Primi dieci per giorni di sopravvivenza tra i pacchetti ancora installati"
 
-#: ../PacStats/charts/monthly_old_packages.py:30
+#: ../PacStats/Charts/monthly_old_packages.py:32
 msgid "Monthly Old Packages"
 msgstr "Vecchi pacchetti per mese"
 
-#: ../PacStats/charts/monthly_old_packages.py:31
+#: ../PacStats/Charts/monthly_old_packages.py:33
 msgid "Packages no more updated since a certain month in the last twelve"
 msgstr "Pacchetti non più aggiornati da un certo mese negli ultimi dodici"
 
-#: ../PacStats/charts/monthly_transactions.py:39
+#: ../PacStats/Charts/monthly_transactions.py:39
 msgid "Monthly Transactions"
 msgstr "Transazioni Mensili"
 
-#: ../PacStats/charts/monthly_transactions.py:40
+#: ../PacStats/Charts/monthly_transactions.py:40
 msgid "Type splitted transactions per month in the last twelve"
 msgstr "Transazioni per mese negli ultimi dodici, divise per tipologia"
 
-#: ../PacStats/charts/monthly_transactions.py:78
+#: ../PacStats/Charts/monthly_transactions.py:76
 msgid "Synchronizations"
 msgstr "Sincronizzazioni"
 
-#: ../PacStats/charts/monthly_transactions.py:79
+#: ../PacStats/Charts/monthly_transactions.py:77
 msgid "System Upgrades"
 msgstr "Aggiornamenti di sistema"
 
-#: ../PacStats/charts/monthly_transactions.py:80
+#: ../PacStats/Charts/monthly_transactions.py:78
 msgid "Installations"
 msgstr "Installazioni"
 
-#: ../PacStats/charts/monthly_transactions.py:81
+#: ../PacStats/Charts/monthly_transactions.py:79
 msgid "Removals"
 msgstr "Rimozioni"
 
-#: ../PacStats/charts/monthly_transactions.py:82
+#: ../PacStats/Charts/monthly_transactions.py:80
 msgid "Upgrades"
 msgstr "Aggiornamenti"
 
-#: ../PacStats/charts/packagers.py:30
+#: ../PacStats/Charts/packagers.py:30
 msgid "Packagers"
 msgstr "Creatori di pacchetti"
 
-#: ../PacStats/charts/packagers.py:31
+#: ../PacStats/Charts/packagers.py:31
 msgid "Top ten for number of packages created"
 msgstr "Primi dieci per numero di pacchetti creati"
 
-#: ../PacStats/charts/packages_size.py:30
+#: ../PacStats/Charts/packages_license.py:30
+msgid "Packages license"
+msgstr "Licenza pacchetti"
+
+#: ../PacStats/Charts/packages_license.py:31
+msgid "Top ten for license adopted"
+msgstr "Prime dieci licenze adottate"
+
+#: ../PacStats/Charts/packages_size.py:30
 msgid "Packages size"
 msgstr "Dimensioni pacchetti"
 
-#: ../PacStats/charts/packages_size.py:31
+#: ../PacStats/Charts/packages_size.py:31
 msgid "Top ten for size in megabytes"
 msgstr "Primi dieci per grandezza in megabyte"
 
-#: ../PacStats/charts/pie_letter.py:30
-msgid "Pie Letter"
-msgstr "Lettera a torta"
+#: ../PacStats/Charts/pie_descriptions.py:31
+msgid "Pie Descriptions"
+msgstr "Descrizioni a torta"
 
-#: ../PacStats/charts/pie_letter.py:31
+#: ../PacStats/Charts/pie_descriptions.py:32
+msgid "Description lengths pie chart"
+msgstr "Grafico a torta sulla lunghezza delle descrizioni"
+
+#: ../PacStats/Charts/pie_descriptions.py:54
+msgid "characters"
+msgstr "caratteri"
+
+#: ../PacStats/Charts/pie_letters.py:30
+msgid "Pie Letters"
+msgstr "Lettere a torta"
+
+#: ../PacStats/Charts/pie_letters.py:31
 msgid "Initial package letter pie chart"
 msgstr "Grafico a torta della lettera iniziale di un pacchetto"
 
-#: ../PacStats/charts/pie_repository.py:30
-msgid "Pie Repository"
+#: ../PacStats/Charts/pie_repositories.py:30
+msgid "Pie Repositories"
 msgstr "Repository a torta"
 
-#: ../PacStats/charts/pie_repository.py:31
+#: ../PacStats/Charts/pie_repositories.py:31
 msgid "Origin repository pie chart"
 msgstr "Grafico a torta sul repository di provenienza"
 
-#: ../PacStats/charts/removed_survival.py:30
+#: ../PacStats/Charts/pie_sizes.py:31
+msgid "Pie Sizes"
+msgstr "Dimensioni a torta"
+
+#: ../PacStats/Charts/pie_sizes.py:32
+msgid "Packages size pie chart"
+msgstr "Grafico a torta sulla dimensione dei pacchetti"
+
+#: ../PacStats/Charts/pie_sizes.py:54
+msgid "megabytes"
+msgstr "megabyte"
+
+#: ../PacStats/Charts/removed_survival.py:30
 msgid "Removed survival"
 msgstr "Sopravvivenza rimossi"
 
-#: ../PacStats/charts/removed_survival.py:31
+#: ../PacStats/Charts/removed_survival.py:31
 msgid "Top ten for days of survival of removed packages"
 msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti rimossi"
-

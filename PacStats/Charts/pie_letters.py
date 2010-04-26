@@ -1,4 +1,4 @@
-## pie_repository.py
+## pie_letters.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,20 +27,20 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Pie Repository')
-		self._description = _('Origin repository pie chart')
+		self._name = _('Pie Letters')
+		self._description = _('Initial package letter pie chart')
 		self._version = '0.1'
 
 
 	def generate(self):
 		"""Genrate the chart"""
-		
-		QUERY = """SELECT repository, COUNT(*) FROM %s GROUP BY repository"""
+	
+		QUERY = """SELECT substr(name, 1, 1) AS letter, COUNT(*) FROM %s GROUP BY letter ORDER BY letter"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		labels = [str(x[0]) + '\n' + str(x[1]) for x in data]
+		labels = [x[0] for x in data]
 		fracts = [x[1] for x in data]
-		explode = [0 for x in fracts]
+		explode = [0 for x in data]
 		if len(fracts) > 0:
 			explode[fracts.index(max(fracts))] = 0.1
 

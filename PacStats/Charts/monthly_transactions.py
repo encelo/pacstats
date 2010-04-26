@@ -69,8 +69,6 @@ class Chart(BaseChart):
 
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
-		if len(data) > 0:
-			self._axes.set_ylim(0, max(h_sync)*1.1)
 		self._axes.set_xticks(np.arange(len(labels)) + 2.5*width)
 		self._axes.set_xticklabels(labels, fontsize=10)
 		self._canvas.figure.autofmt_xdate()
@@ -80,5 +78,8 @@ class Chart(BaseChart):
 		self._axes.bar(ind+2*width, h_install, width, color = 'b', label= _('Installations'))
 		self._axes.bar(ind+3*width, h_remove, width, color = 'y', label=_('Removals'))
 		self._axes.bar(ind+4*width, h_upgrade, width, color = 'm', label=_('Upgrades'))
+
+		if len(data) > 0:
+			self._axes.set_ylim(0, max(h_upgrade)*1.05)
 
 		self._axes.legend(prop=FontProperties(size=8))

@@ -20,13 +20,17 @@ PacStats/subject.py
 PacStats/table.py
 PacStats/transactions.py
 
-PacStats/charts/daily_transactions.py
-PacStats/charts/histo_letter.py
-PacStats/charts/installed_survival.py
-PacStats/charts/monthly_old_packages.py
-PacStats/charts/monthly_transactions.py
-PacStats/charts/packagers.py
-PacStats/charts/packages_size.py
-PacStats/charts/pie_letter.py
-PacStats/charts/pie_repository.py
-PacStats/charts/removed_survival.py
+PacStats/Charts/daily_transactions.py
+PacStats/Charts/histo_letters.py
+PacStats/Charts/important_updates.py
+PacStats/Charts/installed_survival.py
+PacStats/Charts/monthly_old_packages.py
+PacStats/Charts/monthly_transactions.py
+PacStats/Charts/packagers.py
+PacStats/Charts/packages_license.py
+PacStats/Charts/packages_size.py
+PacStats/Charts/pie_descriptions.py
+PacStats/Charts/pie_letters.py
+PacStats/Charts/pie_repositories.py
+PacStats/Charts/pie_sizes.py
+PacStats/Charts/removed_survival.py

@@ -1,4 +1,4 @@
-## histo_letter.py
+## pie_repositories.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,25 +27,22 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Histo Letter')
-		self._description = _('Initial package letter histogram')
+		self._name = _('Pie Repositories')
+		self._description = _('Origin repository pie chart')
 		self._version = '0.1'
 
 
 	def generate(self):
-		"""Generate the chart"""
-
-		QUERY = """SELECT substr(name, 1, 1) AS letter, COUNT(*) FROM %s GROUP BY letter ORDER BY letter"""
+		"""Genrate the chart"""
+		
+		QUERY = """SELECT repository, COUNT(*) FROM %s GROUP BY repository"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		labels = [x[0] for x in data]
-		heights = [x[1] for x in data]
-	
+		labels = [str(x[0]) + '\n' + str(x[1]) for x in data]
+		fracts = [x[1] for x in data]
+		explode = [0 for x in fracts]
+		if len(fracts) > 0:
+			explode[fracts.index(max(fracts))] = 0.1
+
 		self._axes = self._canvas.figure.add_subplot(111)
-		self._axes.grid(True)
-		self._axes.set_xlim(0, len(labels))
-		if len(heights) > 0:
-			self._axes.set_ylim(0, max(heights)*1.1)
-		self._axes.set_xticks(range(len(labels)))
-		self._axes.set_xticklabels(labels)
-		self._axes.bar(range(len(heights)), heights, align='center')
+		self._pie = self._axes.pie(fracts, explode=explode, labels=labels, shadow=True)

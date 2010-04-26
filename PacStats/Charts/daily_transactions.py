@@ -19,6 +19,9 @@
 ##
 
 
+from datetime import datetime
+from matplotlib.dates import DateFormatter
+
 from PacStats.basechart import BaseChart
 
 
@@ -35,17 +38,17 @@ class Chart(BaseChart):
 	def generate(self):
 		"""Generate the chart"""
 	
-		QUERY = """SELECT strftime('%%m-%%d', date) AS day, COUNT(*) FROM %s WHERE date >= date('now', '-1 month') GROUP BY day ORDER BY day;"""
+		QUERY = """SELECT date, COUNT(*) FROM %s WHERE date >= date('now', '-1 month') GROUP BY date ORDER BY date"""
 
 		data = self._database.query_all(QUERY % self._transactions.name)
-		labels = [x[0] for x in data]
+		dates = [datetime.strptime(x[0], "%Y-%m-%d") for x in data]
 		heights = [x[1] for x in data]
 
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
-		if len(data) > 0:
-			self._axes.set_ylim(0, max(heights)*1.1)
-		self._axes.set_xticks(range(len(heights)))
-		self._axes.set_xticklabels(labels, fontsize=10)
+		formatter = DateFormatter('%d %b')
+		self._axes.xaxis.set_major_formatter(formatter)
 		self._canvas.figure.autofmt_xdate()
-		self._axes.bar(range(len(heights)), heights, align='center')
+		self._axes.bar(dates, heights, align='center')
+		if len(data) > 0:
+			self._axes.set_ylim(0, max(heights)*1.05)

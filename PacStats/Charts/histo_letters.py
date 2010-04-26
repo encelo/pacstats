@@ -1,4 +1,4 @@
-## packages_size.py
+## histo_letters.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,29 +27,24 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Packages size')
-		self._description = _('Top ten for size in megabytes')
+		self._name = _('Histo Letters')
+		self._description = _('Initial package letter histogram')
 		self._version = '0.1'
 
 
 	def generate(self):
 		"""Generate the chart"""
-		
-		QUERY = """SELECT name, size/(1024*1024) FROM %s ORDER BY size DESC LIMIT 10"""
+
+		QUERY = """SELECT substr(name, 1, 1) AS letter, COUNT(*) FROM %s GROUP BY letter ORDER BY letter"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		data.reverse()
-		widths = []
-		labels = []
-		for tuple in data:
-			labels.append(tuple[0])
-			widths.append(tuple[1])
+		labels = [x[0] for x in data]
+		heights = [x[1] for x in data]
 	
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
-		self._axes.set_ylim(0, len(widths))
-		if len(widths) > 0:
-			self._axes.set_xlim(0, max(widths)*1.1)
-		self._axes.set_yticks(range(len(widths)))
-		self._axes.set_yticklabels(labels, fontsize=8)
-		self._axes.barh(range(len(widths)), widths, align='center')
+		self._axes.set_xticks(range(len(labels)))
+		self._axes.set_xticklabels(labels)
+		self._axes.bar(range(len(heights)), heights, align='center')
+		if len(heights) > 0:
+			self._axes.set_ylim(0, max(heights)*1.05)

@@ -1,4 +1,4 @@
-## pie_letter.py
+## packages_license.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -27,22 +27,28 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Pie Letter')
-		self._description = _('Initial package letter pie chart')
+		self._name = _('Packages license')
+		self._description = _('Top ten for license adopted')
 		self._version = '0.1'
 
 
 	def generate(self):
-		"""Genrate the chart"""
+		"""Generate the chart"""
 	
-		QUERY = """SELECT substr(name, 1, 1) AS letter, COUNT(*) FROM %s GROUP BY letter ORDER BY letter"""
+		QUERY = """SELECT license, COUNT(*) AS count FROM %s GROUP BY license ORDER BY count DESC LIMIT 10"""
 
 		data = self._database.query_all(QUERY % self._packages.name)
-		labels = [x[0] for x in data]
-		fracts = [x[1] for x in data]
-		explode = [0 for x in data]
-		if len(fracts) > 0:
-			explode[fracts.index(max(fracts))] = 0.1
-
+		data.reverse()
+		widths = []
+		labels = []
+		for tuple in data:
+			labels.append(tuple[0])
+			widths.append(tuple[1])
+	
 		self._axes = self._canvas.figure.add_subplot(111)
-		self._pie = self._axes.pie(fracts, explode=explode, labels=labels, shadow=True)
+		self._axes.grid(True)
+		self._axes.set_yticks(range(len(widths)))
+		self._axes.set_yticklabels(labels, fontsize=8)
+		self._axes.barh(range(len(widths)), widths, align='center')
+		if len(widths) > 0:
+			self._axes.set_xlim(0, max(widths)*1.05)

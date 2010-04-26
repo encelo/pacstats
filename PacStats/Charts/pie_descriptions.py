@@ -1,4 +1,4 @@
-## installed_survival.py
+## pie_descriptions.py
 ##
 ## PacStats: Statistical charts about Archlinux pacman activity
 ## Copyright (C) 2010 Angelo "Encelo" Theodorou <encelo@gmail.com>
@@ -19,6 +19,7 @@
 ##
 
 
+from math import ceil
 from PacStats.basechart import BaseChart
 
 
@@ -27,29 +28,33 @@ class Chart(BaseChart):
 	def __init__(self, database):
 		BaseChart.__init__(self, database)
 
-		self._name = _('Installed survival')
-		self._description = _('Top ten for days of survival of still installed packages')
+		self._name = _('Pie Descriptions')
+		self._description = _('Description lengths pie chart')
 		self._version = '0.1'
 
 
 	def generate(self):
-		"""Generate the chart"""
-
-		QUERY = """SELECT name, julianday('now') - julianday(installdate, installtime) AS survival FROM %s ORDER BY survival DESC LIMIT 10"""
-
-		data = self._database.query_all(QUERY % self._packages.name)
-		data.reverse()
-		widths = []
-		labels = []
-		for tuple in data:
-			labels.append(tuple[0])
-			widths.append(tuple[1])
+		"""Genrate the chart"""
 	
+		MAX = """SELECT MAX(length(description)) FROM %s"""
+		MIN = """SELECT MIN(length(description)) FROM %s"""
+		QUERY = """SELECT COUNT(*) FROM %s WHERE length(description) BETWEEN ? AND ?"""
+
+		max = self._database.query_one(MAX % self._packages.name)[0]
+		min = self._database.query_one(MIN % self._packages.name)[0]
+
+		labels = []
+		fracts = []
+
+		fractions = 6
+		lrange = int(ceil((max - min)/float(fractions)))
+		low = min
+		high = min + lrange
+		for i in range(fractions):
+			labels.append(str(low) + '-' + str(high) + ' ' + _('characters'))
+			fracts.append(self._database.query_one(QUERY % self._packages.name, (low, high))[0])
+			low += lrange
+			high = low + lrange
+
 		self._axes = self._canvas.figure.add_subplot(111)
-		self._axes.grid(True)
-		self._axes.set_ylim(0, len(widths))
-		if len(widths) > 0:
-			self._axes.set_xlim(0, max(widths)*1.1)
-		self._axes.set_yticks(range(len(widths)))
-		self._axes.set_yticklabels(labels, fontsize=8)
-		self._axes.barh(range(len(widths)), widths, align='center')
+		self._pie = self._axes.pie(fracts, labels=labels, shadow=True)

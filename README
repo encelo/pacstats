@@ -26,4 +26,4 @@ You can specify a prefix (e.g. /usr) and an alternative root (e.g. /mnt/hdb1).
 Generating Docs
 ---------------
 To generate automatic documentation type:
-	$ epydoc -o epydoc --name=pacstats --url=http://pacstats.googlecode.com --graph=all PacStats/*.py PacStats/charts/*.py
+	$ epydoc -o epydoc --name=pacstats --url=http://pacstats.googlecode.com --graph=all PacStats/*.py PacStats/Charts/*.py

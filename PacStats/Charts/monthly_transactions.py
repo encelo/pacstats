@@ -27,6 +27,10 @@ except ImportError:
         print('NumPy is missing!')
         exit(-1)
 
+from datetime import datetime
+from matplotlib.dates import DateFormatter
+from matplotlib.font_manager import FontProperties
+
 from PacStats.basechart import BaseChart
 import PacStats.logparser as logparser
 
@@ -37,7 +41,7 @@ class Chart(BaseChart):
 		BaseChart.__init__(self, database)
 
 		self._name = _('Monthly Transactions')
-		self._description = _('Type splitted transactions per month in the last twelve')
+		self._description = _('Stacked transactions per month in the last twelve')
 		self._version = '0.1'
 
 
@@ -51,35 +55,38 @@ class Chart(BaseChart):
 
 		dict = {}
 		for t in data:
-			if t['month'] not in dict.keys():
-				dict[t['month']] = [0, 0, 0, 0, 0]
-			dict[t['month']][t['action']] = t['count']
+			dt = datetime.strptime(t['month'], "%Y-%m")
+			if dt not in dict.keys():
+				dict[dt] = [0, 0, 0, 0, 0]
+			dict[dt][t['action']] = t['count']
 
-		labels = dict.keys()
-		labels.sort()
+		dates = dict.keys()
+		dates.sort()
 
-		h_sync = [dict[date][logparser.SYNC] for date in labels]
-		h_sysup = [dict[date][logparser.SYSUP] for date in labels]
-		h_install = [dict[date][logparser.INSTALL] for date in labels]
-		h_remove = [dict[date][logparser.REMOVE] for date in labels]
-		h_upgrade = [dict[date][logparser.UPGRADE] for date in labels]
-
-		ind = np.arange(len(h_sync))
-		width = 0.15
+		h_sync = [dict[date][logparser.SYNC] for date in dates]
+		h_sysup = [dict[date][logparser.SYSUP] for date in dates]
+		h_install = [dict[date][logparser.INSTALL] for date in dates]
+		h_remove = [dict[date][logparser.REMOVE] for date in dates]
+		h_upgrade = [dict[date][logparser.UPGRADE] for date in dates]
 
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
-		self._axes.set_xticks(np.arange(len(labels)) + 2.5*width)
-		self._axes.set_xticklabels(labels, fontsize=10)
+		formatter = DateFormatter('%b %Y')
+		self._axes.xaxis.set_major_formatter(formatter)
 		self._canvas.figure.autofmt_xdate()
 
-		self._axes.bar(ind, h_sync, width, color = 'r', label=_('Synchronizations'))
-		self._axes.bar(ind+width, h_sysup, width, color = 'g', label= _('System Upgrades'))
-		self._axes.bar(ind+2*width, h_install, width, color = 'b', label= _('Installations'))
-		self._axes.bar(ind+3*width, h_remove, width, color = 'y', label=_('Removals'))
-		self._axes.bar(ind+4*width, h_upgrade, width, color = 'm', label=_('Upgrades'))
+		self._axes.bar(dates, h_sync, width=12, color = 'r', align='center', label=_('Synchronizations'))
+		bottoms = np.array(h_sync)
+		self._axes.bar(dates, h_sysup, width=12, bottom=bottoms, color = 'g', align='center', label= _('System Upgrades'))
+		bottoms += np.array(h_sysup)
+		self._axes.bar(dates, h_install, width=12, bottom=bottoms, color = 'b', align='center', label= _('Installations'))
+		bottoms += np.array(h_install)
+		self._axes.bar(dates, h_remove, width=12, bottom=bottoms, color = 'y', align='center', label=_('Removals'))
+		bottoms += np.array(h_remove)
+		self._axes.bar(dates, h_upgrade, width=12, bottom=bottoms, color = 'm', align='center', label=_('Upgrades'))
+		bottoms += np.array(h_upgrade)
 
 		if len(data) > 0:
-			self._axes.set_ylim(0, max(h_upgrade)*1.05)
+			self._axes.set_ylim(0, max(bottoms)*1.05)
 
 		self._axes.legend(prop=FontProperties(size=8))

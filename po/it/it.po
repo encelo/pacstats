@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-26 22:08+0200\n"
-"PO-Revision-Date: 2010-04-26 20:59+0100\n"
+"POT-Creation-Date: 2010-04-28 20:41+0200\n"
+"PO-Revision-Date: 2010-04-28 20:42+0100\n"
 "Last-Translator: Angelo Theodorou <encelo@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -155,16 +155,12 @@ msgstr "Analisi della libreria..."
 #: ../PacStats/main_win.py:230
 #, python-format
 msgid "Database updated. The new file size is %s KiB (%s bytes more)."
-msgstr ""
-"Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in "
-"più)."
+msgstr "Database aggiornato. La nuova grandezza del file è di %s KiB (%s byte in più)."
 
 #: ../PacStats/main_win.py:245
 #, python-format
 msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
-msgstr ""
-"Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in "
-"meno)."
+msgstr "Database ottimizzato. La nuova grandezza del file è di %s KiB (%s byte in meno)."
 
 #: ../PacStats/main_win.py:254
 msgid "Do you really want to clear the database?"
@@ -186,13 +182,38 @@ msgstr "Salvataggio della tabella delle transazioni come "
 msgid "Saving the packages table as "
 msgstr "Salvataggio della tabella dei pacchetti come "
 
-#: ../PacStats/Charts/daily_transactions.py:33
+#: ../PacStats/Charts/daily_transactions.py:41
 msgid "Daily Transactions"
 msgstr "Transazioni Giornaliere"
 
-#: ../PacStats/Charts/daily_transactions.py:34
-msgid "Total transactions per day in the last month"
-msgstr "Transazioni giornaliere totali nell'ultimo mese"
+#: ../PacStats/Charts/daily_transactions.py:42
+msgid "Stacked transactions per day in the last month"
+msgstr "Transazioni impilate giornaliere nell'ultimo mese"
+
+#: ../PacStats/Charts/daily_transactions.py:75
+#: ../PacStats/Charts/monthly_transactions.py:78
+msgid "Synchronizations"
+msgstr "Sincronizzazioni"
+
+#: ../PacStats/Charts/daily_transactions.py:77
+#: ../PacStats/Charts/monthly_transactions.py:80
+msgid "System Upgrades"
+msgstr "Aggiornamenti di sistema"
+
+#: ../PacStats/Charts/daily_transactions.py:79
+#: ../PacStats/Charts/monthly_transactions.py:82
+msgid "Installations"
+msgstr "Installazioni"
+
+#: ../PacStats/Charts/daily_transactions.py:81
+#: ../PacStats/Charts/monthly_transactions.py:84
+msgid "Removals"
+msgstr "Rimozioni"
+
+#: ../PacStats/Charts/daily_transactions.py:83
+#: ../PacStats/Charts/monthly_transactions.py:86
+msgid "Upgrades"
+msgstr "Aggiornamenti"
 
 #: ../PacStats/Charts/histo_letters.py:30
 msgid "Histo Letters"
@@ -202,15 +223,13 @@ msgstr "Istogramma delle Lettere"
 msgid "Initial package letter histogram"
 msgstr "Istogramma della lettera iniziale di un pacchetto"
 
-#: ../PacStats/Charts/important_updates.py:32
+#: ../PacStats/Charts/important_updates.py:33
 msgid "Important Updates"
 msgstr "Aggiornamenti importanti"
 
-#: ../PacStats/Charts/important_updates.py:33
+#: ../PacStats/Charts/important_updates.py:34
 msgid "Update dates chart of some important packages in the last twelve months"
-msgstr ""
-"Grafico delle date di aggiornamento di alcuni pacchetti importanti negli "
-"ultimi dodici mesi"
+msgstr "Grafico delle date di aggiornamento di alcuni pacchetti importanti negli ultimi dodici mesi"
 
 #: ../PacStats/Charts/installed_survival.py:30
 msgid "Installed survival"
@@ -218,8 +237,7 @@ msgstr "Sopravvivenza installati"
 
 #: ../PacStats/Charts/installed_survival.py:31
 msgid "Top ten for days of survival of still installed packages"
-msgstr ""
-"Primi dieci per giorni di sopravvivenza tra i pacchetti ancora installati"
+msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti ancora installati"
 
 #: ../PacStats/Charts/monthly_old_packages.py:32
 msgid "Monthly Old Packages"
@@ -229,33 +247,13 @@ msgstr "Vecchi pacchetti per mese"
 msgid "Packages no more updated since a certain month in the last twelve"
 msgstr "Pacchetti non più aggiornati da un certo mese negli ultimi dodici"
 
-#: ../PacStats/Charts/monthly_transactions.py:39
+#: ../PacStats/Charts/monthly_transactions.py:43
 msgid "Monthly Transactions"
 msgstr "Transazioni Mensili"
 
-#: ../PacStats/Charts/monthly_transactions.py:40
-msgid "Type splitted transactions per month in the last twelve"
-msgstr "Transazioni per mese negli ultimi dodici, divise per tipologia"
-
-#: ../PacStats/Charts/monthly_transactions.py:76
-msgid "Synchronizations"
-msgstr "Sincronizzazioni"
-
-#: ../PacStats/Charts/monthly_transactions.py:77
-msgid "System Upgrades"
-msgstr "Aggiornamenti di sistema"
-
-#: ../PacStats/Charts/monthly_transactions.py:78
-msgid "Installations"
-msgstr "Installazioni"
-
-#: ../PacStats/Charts/monthly_transactions.py:79
-msgid "Removals"
-msgstr "Rimozioni"
-
-#: ../PacStats/Charts/monthly_transactions.py:80
-msgid "Upgrades"
-msgstr "Aggiornamenti"
+#: ../PacStats/Charts/monthly_transactions.py:44
+msgid "Stacked transactions per month in the last twelve"
+msgstr "Transazioni impilate per mese negli ultimi dodici"
 
 #: ../PacStats/Charts/packagers.py:30
 msgid "Packagers"
@@ -328,3 +326,4 @@ msgstr "Sopravvivenza rimossi"
 #: ../PacStats/Charts/removed_survival.py:31
 msgid "Top ten for days of survival of removed packages"
 msgstr "Primi dieci per giorni di sopravvivenza tra i pacchetti rimossi"
+

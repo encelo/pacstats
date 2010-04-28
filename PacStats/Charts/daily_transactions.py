@@ -19,10 +19,18 @@
 ##
 
 
+try:
+        import numpy as np
+except ImportError:
+        print('NumPy is missing!')
+        exit(-1)
+
 from datetime import datetime
 from matplotlib.dates import DateFormatter
+from matplotlib.font_manager import FontProperties
 
 from PacStats.basechart import BaseChart
+import PacStats.logparser as logparser
 
 
 class Chart(BaseChart):
@@ -31,24 +39,51 @@ class Chart(BaseChart):
 		BaseChart.__init__(self, database)
 
 		self._name = _('Daily Transactions')
-		self._description = _('Total transactions per day in the last month')
+		self._description = _('Stacked transactions per day in the last month')
 		self._version = '0.1'
 
 
 	def generate(self):
 		"""Generate the chart"""
-	
-		QUERY = """SELECT date, COUNT(*) FROM %s WHERE date >= date('now', '-1 month') GROUP BY date ORDER BY date"""
+
+		QUERY = """SELECT date, action, COUNT(action) AS count FROM %s WHERE date >= date('now', '-1 month') GROUP BY action, date ORDER BY date"""
 
 		data = self._database.query_all(QUERY % self._transactions.name)
-		dates = [datetime.strptime(x[0], "%Y-%m-%d") for x in data]
-		heights = [x[1] for x in data]
+
+		dict = {}
+		for t in data:
+			dt = datetime.strptime(t['date'], "%Y-%m-%d")
+			if dt not in dict.keys():
+				dict[dt] = [0, 0, 0, 0, 0]
+			dict[dt][t['action']] = t['count']
+
+		dates = dict.keys()
+		dates.sort()
+
+		h_sync = [dict[date][logparser.SYNC] for date in dates]
+		h_sysup = [dict[date][logparser.SYSUP] for date in dates]
+		h_install = [dict[date][logparser.INSTALL] for date in dates]
+		h_remove = [dict[date][logparser.REMOVE] for date in dates]
+		h_upgrade = [dict[date][logparser.UPGRADE] for date in dates]
 
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
 		formatter = DateFormatter('%d %b')
 		self._axes.xaxis.set_major_formatter(formatter)
 		self._canvas.figure.autofmt_xdate()
-		self._axes.bar(dates, heights, align='center')
+
+		self._axes.bar(dates, h_sync, color = 'r', align='center', label=_('Synchronizations'))
+		bottoms = np.array(h_sync)
+		self._axes.bar(dates, h_sysup, bottom=bottoms, color = 'g', align='center', label= _('System Upgrades'))
+		bottoms += np.array(h_sysup)
+		self._axes.bar(dates, h_install, bottom=bottoms, color = 'b', align='center', label= _('Installations'))
+		bottoms += np.array(h_install)
+		self._axes.bar(dates, h_remove, bottom=bottoms, color = 'y', align='center', label=_('Removals'))
+		bottoms += np.array(h_remove)
+		self._axes.bar(dates, h_upgrade, bottom=bottoms, color = 'm', align='center', label=_('Upgrades'))
+		bottoms += np.array(h_upgrade)
+
 		if len(data) > 0:
-			self._axes.set_ylim(0, max(heights)*1.05)
+			self._axes.set_ylim(0, max(bottoms)*1.05)
+
+		self._axes.legend(prop=FontProperties(size=8))

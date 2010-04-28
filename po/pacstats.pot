@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-26 22:08+0200\n"
+"POT-Creation-Date: 2010-04-28 20:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,12 +183,37 @@ msgstr ""
 msgid "Saving the packages table as "
 msgstr ""
 
-#: ../PacStats/Charts/daily_transactions.py:33
+#: ../PacStats/Charts/daily_transactions.py:41
 msgid "Daily Transactions"
 msgstr ""
 
-#: ../PacStats/Charts/daily_transactions.py:34
-msgid "Total transactions per day in the last month"
+#: ../PacStats/Charts/daily_transactions.py:42
+msgid "Stacked transactions per day in the last month"
+msgstr ""
+
+#: ../PacStats/Charts/daily_transactions.py:75
+#: ../PacStats/Charts/monthly_transactions.py:78
+msgid "Synchronizations"
+msgstr ""
+
+#: ../PacStats/Charts/daily_transactions.py:77
+#: ../PacStats/Charts/monthly_transactions.py:80
+msgid "System Upgrades"
+msgstr ""
+
+#: ../PacStats/Charts/daily_transactions.py:79
+#: ../PacStats/Charts/monthly_transactions.py:82
+msgid "Installations"
+msgstr ""
+
+#: ../PacStats/Charts/daily_transactions.py:81
+#: ../PacStats/Charts/monthly_transactions.py:84
+msgid "Removals"
+msgstr ""
+
+#: ../PacStats/Charts/daily_transactions.py:83
+#: ../PacStats/Charts/monthly_transactions.py:86
+msgid "Upgrades"
 msgstr ""
 
 #: ../PacStats/Charts/histo_letters.py:30
@@ -199,11 +224,11 @@ msgstr ""
 msgid "Initial package letter histogram"
 msgstr ""
 
-#: ../PacStats/Charts/important_updates.py:32
+#: ../PacStats/Charts/important_updates.py:33
 msgid "Important Updates"
 msgstr ""
 
-#: ../PacStats/Charts/important_updates.py:33
+#: ../PacStats/Charts/important_updates.py:34
 msgid "Update dates chart of some important packages in the last twelve months"
 msgstr ""
 
@@ -223,32 +248,12 @@ msgstr ""
 msgid "Packages no more updated since a certain month in the last twelve"
 msgstr ""
 
-#: ../PacStats/Charts/monthly_transactions.py:39
+#: ../PacStats/Charts/monthly_transactions.py:43
 msgid "Monthly Transactions"
 msgstr ""
 
-#: ../PacStats/Charts/monthly_transactions.py:40
-msgid "Type splitted transactions per month in the last twelve"
-msgstr ""
-
-#: ../PacStats/Charts/monthly_transactions.py:76
-msgid "Synchronizations"
-msgstr ""
-
-#: ../PacStats/Charts/monthly_transactions.py:77
-msgid "System Upgrades"
-msgstr ""
-
-#: ../PacStats/Charts/monthly_transactions.py:78
-msgid "Installations"
-msgstr ""
-
-#: ../PacStats/Charts/monthly_transactions.py:79
-msgid "Removals"
-msgstr ""
-
-#: ../PacStats/Charts/monthly_transactions.py:80
-msgid "Upgrades"
+#: ../PacStats/Charts/monthly_transactions.py:44
+msgid "Stacked transactions per month in the last twelve"
 msgstr ""
 
 #: ../PacStats/Charts/packagers.py:30

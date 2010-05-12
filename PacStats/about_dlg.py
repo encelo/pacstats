@@ -25,7 +25,11 @@ import sys
 import webbrowser
 import gtk
 
-import PacStats
+from PacStats import VERSION
+try:
+	from PacStats import REVISION
+except ImportError:
+	REVISION = None
 
 class About_Dialog:
 	"""Open the about dialog"""
@@ -37,7 +41,9 @@ class About_Dialog:
 		ui.add_from_file(ui_file)
 		self._dialog = ui.get_object("about_dlg")
 
-		self._dialog.set_version(PacStats.VERSION)
+		self._dialog.set_version(VERSION)
+		if REVISION != None:
+			self._dialog.set_comments('(' + REVISION + ')')
 		self._dialog.set_logo(logo)
 		self._dialog.run()
 		self._dialog.destroy()

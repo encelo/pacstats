@@ -47,8 +47,9 @@ class Chart(BaseChart):
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
 		formatter = DateFormatter('%b %Y')
-		self._axes.xaxis.set_major_formatter(formatter)
 		self._canvas.figure.autofmt_xdate()
 		self._axes.bar(dates, heights, width=12, align='center')
+
 		if len(data) > 0:
 			self._axes.set_ylim(0, max(heights)*1.05)
+			self._axes.xaxis.set_major_formatter(formatter)

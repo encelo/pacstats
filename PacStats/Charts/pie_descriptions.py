@@ -42,6 +42,10 @@ class Chart(BaseChart):
 
 		max = self._database.query_one(MAX % self._packages.name)[0]
 		min = self._database.query_one(MIN % self._packages.name)[0]
+		if max == None:
+			max= 0
+		if min == None:
+			min = 0
 
 		labels = []
 		fracts = []

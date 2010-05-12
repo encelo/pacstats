@@ -69,7 +69,6 @@ class Chart(BaseChart):
 		self._axes = self._canvas.figure.add_subplot(111)
 		self._axes.grid(True)
 		formatter = DateFormatter('%d %b')
-		self._axes.xaxis.set_major_formatter(formatter)
 		self._canvas.figure.autofmt_xdate()
 
 		self._axes.bar(dates, h_sync, color = 'r', align='center', label=_('Synchronizations'))
@@ -85,5 +84,5 @@ class Chart(BaseChart):
 
 		if len(data) > 0:
 			self._axes.set_ylim(0, max(bottoms)*1.05)
-
-		self._axes.legend(prop=FontProperties(size=8))
+			self._axes.xaxis.set_major_formatter(formatter)
+			self._axes.legend(prop=FontProperties(size=8))

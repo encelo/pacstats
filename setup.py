@@ -18,11 +18,38 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
+
 import sys
 import os
+from subprocess import Popen, PIPE
 from distutils.core import setup
 from distutils.command import install 
 
+VERSION = '0.1'
+
+def identify_revision():
+
+	global VERSION
+	REVISION = None
+
+	if os.path.isdir('.hg'):
+		VERSION += '-hg'
+
+	try:
+		hg = Popen(['hg', 'identify', '-nibt'], stdout=PIPE, stderr=PIPE)
+	except OSError:
+		pass
+	else:
+		if hg.stderr.readline() == '':
+			REVISION = hg.stdout.readline()
+			REVISION = REVISION.strip('\n')
+
+	init = open('PacStats/__init__.py', 'w')
+	init.writelines("VERSION = '" + VERSION + "'\n")
+	if REVISION != None:
+		init.writelines("REVISION = '" + REVISION + "'")
+	init.close()
+	
 
 def compile_po(path):
 	for lang in os.listdir(path):
@@ -38,6 +65,7 @@ def compile_po(path):
 			mo_file = os.path.join(lc_path, 'pacstats.mo')
 			args = ['msgfmt', '-c', '-o', mo_file, po_file]
 			return os.spawnvp(os.P_WAIT, 'msgfmt', args)
+
 
 def replace_paths_exe(fname):
 	lines_p = []
@@ -55,6 +83,7 @@ def replace_paths_exe(fname):
 	file = open(fname, 'w')
 	file.writelines(lines_p)
 	file.close()
+
 
 def replace_paths_desktop(fname):
 	lines_p = []
@@ -79,15 +108,17 @@ if 'install' in sys.argv:
 		if arg.find('--prefix') == 0:
 			prefix = arg.split('=')[1]
 
-print 'Compiling i18n files'
+print ('Determining Mercurial revision')
+identify_revision()
+print ('Compiling i18n files')
 compile_po('po')
-print 'Replacing data paths'
+print ('Replacing data paths')
 replace_paths_exe('pacstats')
 replace_paths_desktop('pacstats.desktop')
 
 
 setup(name='pacstats',
-	version='0.1',
+	version=VERSION,
 	description='Statistical charts about Archlinux pacman activity',
 	author='Angelo "Encelo" Theodorou',
 	author_email='encelo@gmail.com',

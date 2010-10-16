@@ -1,0 +1,331 @@
+# PacStats French catalog file.
+# Copyright (C) 2010
+# This file is distributed under the same license as the PacStats package.
+# The Green Arrow <revan@no-log.org>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-28 20:41+0200\n"
+"PO-Revision-Date: 2010-08-17 20:31+0100\n"
+"Last-Translator: \n"
+"Language-Team: French <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../ui/about_dlg.ui.h:1
+msgid "translator-credits"
+msgstr "The Green Arrow <revan@no-log.org> (French)"
+
+#: ../ui/dbinfo_win.ui.h:1
+msgid "<b>Packages</b>"
+msgstr "<b>Paquets</b>"
+
+#: ../ui/dbinfo_win.ui.h:2
+msgid "<b>Transactions</b>"
+msgstr "<b>Transactions</b>"
+
+#: ../ui/dbinfo_win.ui.h:3
+msgid "Database Information"
+msgstr "Information sur la base de données"
+
+#: ../ui/dbinfo_win.ui.h:4
+msgid "First built:"
+msgstr "Compilé la première fois :"
+
+#: ../ui/dbinfo_win.ui.h:5
+msgid "First installed:"
+msgstr "Installé la première fois :"
+
+#: ../ui/dbinfo_win.ui.h:6
+msgid "First:"
+msgstr "Première"
+
+#: ../ui/dbinfo_win.ui.h:7
+msgid "Installations:"
+msgstr "Installations"
+
+#: ../ui/dbinfo_win.ui.h:8
+msgid "Installed size"
+msgstr "Taille (installée)"
+
+#: ../ui/dbinfo_win.ui.h:9
+msgid "Last built:"
+msgstr "Compilé le:"
+
+#: ../ui/dbinfo_win.ui.h:10
+msgid "Last installed:"
+msgstr "Installé le:"
+
+#: ../ui/dbinfo_win.ui.h:11
+msgid "Last:"
+msgstr "Dernière:"
+
+#: ../ui/dbinfo_win.ui.h:12
+msgid "N/A"
+msgstr "N/A"
+
+#: ../ui/dbinfo_win.ui.h:13
+msgid "Removals:"
+msgstr "Suppressions:"
+
+#: ../ui/dbinfo_win.ui.h:14
+msgid "Synchronizations:"
+msgstr "Synchronisations:"
+
+#: ../ui/dbinfo_win.ui.h:15
+msgid "System upgrades:"
+msgstr "Mises à jour du système:"
+
+#: ../ui/dbinfo_win.ui.h:16
+msgid "Total:"
+msgstr "Total:"
+
+#: ../ui/dbinfo_win.ui.h:17
+msgid "Upgrades:"
+msgstr "Mises à jour:"
+
+#: ../ui/main_win.ui.h:1
+msgid "Description"
+msgstr "Description"
+
+#: ../ui/main_win.ui.h:2
+msgid "Name"
+msgstr "Nom"
+
+#: ../ui/main_win.ui.h:3
+msgid "Optimize"
+msgstr "Optimiser"
+
+#: ../ui/main_win.ui.h:4
+msgid "Version"
+msgstr "Version"
+
+#: ../ui/main_win.ui.h:5
+msgid "_Database"
+msgstr "Base de données"
+
+#: ../ui/main_win.ui.h:6
+msgid "_File"
+msgstr "_Fichier"
+
+#: ../ui/main_win.ui.h:7
+msgid "_Help"
+msgstr "_Aide"
+
+#: ../ui/prefs_win.ui.h:1
+msgid "Database:"
+msgstr "Base de données:"
+
+#: ../ui/prefs_win.ui.h:2
+msgid "Pacman lib:"
+msgstr "Base de données pacman:"
+
+#: ../ui/prefs_win.ui.h:3
+msgid "Pacman log:"
+msgstr "Journaux de pacman"
+
+#: ../ui/prefs_win.ui.h:4
+msgid "Preferences"
+msgstr "Préférences"
+
+#: ../PacStats/main_win.py:107
+#, python-format
+msgid "Packages: %d | Transactions: %d | DB size: %d KiB"
+msgstr "Paquets: %d | Transactions: %d | Taille BDD: %d KiB"
+
+#: ../PacStats/main_win.py:120
+msgid "The database is empty. Do you want to build it now?"
+msgstr "La base de données est vide. Voulez-vous la construire maintenant?"
+
+#: ../PacStats/main_win.py:122
+msgid "The database is out of sync. Do you want to update it now?"
+msgstr "La base de données est périmée. Voulez-vous la mettre à jour?"
+
+#: ../PacStats/main_win.py:217
+msgid "Parsing the log file..."
+msgstr "Analyze des fichiers journaux..."
+
+#: ../PacStats/main_win.py:220
+msgid "Parsing the library..."
+msgstr "Analyze de la base de données..."
+
+#: ../PacStats/main_win.py:230
+#, python-format
+msgid "Database updated. The new file size is %s KiB (%s bytes more)."
+msgstr "Base de données mise à jour. La nouvelle taille est de %s Kib (%s octets de plus)."
+
+#: ../PacStats/main_win.py:245
+#, python-format
+msgid "Database optimized. The new file size is %s KiB (%s bytes less)."
+msgstr "Base de données optimisée. La nouvelle taille est de %s Kib (%s octets de moins)."
+
+#: ../PacStats/main_win.py:254
+msgid "Do you really want to clear the database?"
+msgstr "Voulez-vous vraiment vider la base de données?"
+
+#: ../PacStats/main_win.py:260
+msgid "Clearing the database..."
+msgstr "Vidage de la base de données..."
+
+#: ../PacStats/main_win.py:273
+msgid "DB Dump"
+msgstr "Instantanée de la BDD"
+
+#: ../PacStats/main_win.py:285
+msgid "Saving the transactions table as "
+msgstr "Sauvegarder la table des transactions sous "
+
+#: ../PacStats/main_win.py:288
+msgid "Saving the packages table as "
+msgstr "Sauvegarder la table des paquets sous "
+
+#: ../PacStats/Charts/daily_transactions.py:41
+msgid "Daily Transactions"
+msgstr "Transactions journalières"
+
+#: ../PacStats/Charts/daily_transactions.py:42
+msgid "Stacked transactions per day in the last month"
+msgstr "Transactions empilées par jour du mois passé"
+
+#: ../PacStats/Charts/daily_transactions.py:75
+#: ../PacStats/Charts/monthly_transactions.py:78
+msgid "Synchronizations"
+msgstr "Synchronisations"
+
+#: ../PacStats/Charts/daily_transactions.py:77
+#: ../PacStats/Charts/monthly_transactions.py:80
+msgid "System Upgrades"
+msgstr "Mises à  jour du système"
+
+#: ../PacStats/Charts/daily_transactions.py:79
+#: ../PacStats/Charts/monthly_transactions.py:82
+msgid "Installations"
+msgstr "Installations"
+
+#: ../PacStats/Charts/daily_transactions.py:81
+#: ../PacStats/Charts/monthly_transactions.py:84
+msgid "Removals"
+msgstr "Suppressions"
+
+#: ../PacStats/Charts/daily_transactions.py:83
+#: ../PacStats/Charts/monthly_transactions.py:86
+msgid "Upgrades"
+msgstr "Mise à jour"
+
+#: ../PacStats/Charts/histo_letters.py:30
+msgid "Histo Letters"
+msgstr "Histo Lettres"
+
+#: ../PacStats/Charts/histo_letters.py:31
+msgid "Initial package letter histogram"
+msgstr "Histogramme des lettres initiales des paquets"
+
+#: ../PacStats/Charts/important_updates.py:33
+msgid "Important Updates"
+msgstr "Mises à jour importantes"
+
+#: ../PacStats/Charts/important_updates.py:34
+msgid "Update dates chart of some important packages in the last twelve months"
+msgstr "Graphique des dates des mises à jour des paquets importants durant les douze derniers mois "
+
+#: ../PacStats/Charts/installed_survival.py:30
+msgid "Installed survival"
+msgstr "Survie des paquets installés"
+
+#: ../PacStats/Charts/installed_survival.py:31
+msgid "Top ten for days of survival of still installed packages"
+msgstr "Top 10 du nombre de jours de survie des paquets encore installés"
+
+#: ../PacStats/Charts/monthly_old_packages.py:32
+msgid "Monthly Old Packages"
+msgstr "Paquets obsolètes par mois"
+
+#: ../PacStats/Charts/monthly_old_packages.py:33
+msgid "Packages no more updated since a certain month in the last twelve"
+msgstr "Paquets non mis à jour depuis un ou plusieurs mois durant l'année passée"
+
+#: ../PacStats/Charts/monthly_transactions.py:43
+msgid "Monthly Transactions"
+msgstr "Transactions mensuelles"
+
+#: ../PacStats/Charts/monthly_transactions.py:44
+msgid "Stacked transactions per month in the last twelve"
+msgstr "Transactions empilées par mois depuis les douze derniers mois"
+
+#: ../PacStats/Charts/packagers.py:30
+msgid "Packagers"
+msgstr "Paqueteurs"
+
+#: ../PacStats/Charts/packagers.py:31
+msgid "Top ten for number of packages created"
+msgstr "Top 10 pour le nombre de paquets créés"
+
+#: ../PacStats/Charts/packages_license.py:30
+msgid "Packages license"
+msgstr "License des paquets"
+
+#: ../PacStats/Charts/packages_license.py:31
+msgid "Top ten for license adopted"
+msgstr "Top 10 pour la license choisie"
+
+#: ../PacStats/Charts/packages_size.py:30
+msgid "Packages size"
+msgstr "Taille des paquets"
+
+#: ../PacStats/Charts/packages_size.py:31
+msgid "Top ten for size in megabytes"
+msgstr "Top 10 pour la taille des paquets mégaoctets"
+
+#: ../PacStats/Charts/pie_descriptions.py:31
+msgid "Pie Descriptions"
+msgstr "Graphique en camembert des descriptions"
+
+#: ../PacStats/Charts/pie_descriptions.py:32
+msgid "Description lengths pie chart"
+msgstr "Graphique en camembert pour la longueur des descriptions"
+
+#: ../PacStats/Charts/pie_descriptions.py:54
+msgid "characters"
+msgstr "caractères"
+
+#: ../PacStats/Charts/pie_letters.py:30
+msgid "Pie Letters"
+msgstr "Diagramme en camembert pour les lettres"
+
+#: ../PacStats/Charts/pie_letters.py:31
+msgid "Initial package letter pie chart"
+msgstr "Diagramme en camembert pour les lettres initiales des paquets"
+
+#: ../PacStats/Charts/pie_repositories.py:30
+msgid "Pie Repositories"
+msgstr "Diagramme en camembert pour les dépôts"
+
+#: ../PacStats/Charts/pie_repositories.py:31
+msgid "Origin repository pie chart"
+msgstr "Diagramme en camembert pour les dépôts utilisés"
+
+#: ../PacStats/Charts/pie_sizes.py:31
+msgid "Pie Sizes"
+msgstr "Diagramme en camembert pour les tailles"
+
+#: ../PacStats/Charts/pie_sizes.py:32
+msgid "Packages size pie chart"
+msgstr "Diagramme en camembert pour les tailles des paquets"
+
+#: ../PacStats/Charts/pie_sizes.py:54
+msgid "megabytes"
+msgstr "mégaoctets"
+
+#: ../PacStats/Charts/removed_survival.py:30
+msgid "Removed survival"
+msgstr "Survie des paquets supprimés"
+
+#: ../PacStats/Charts/removed_survival.py:31
+msgid "Top ten for days of survival of removed packages"
+msgstr "Top 10 du nombre de jours de survie des paquets supprimés"
+
+
+

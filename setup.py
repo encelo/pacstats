@@ -64,7 +64,7 @@ def compile_po(path):
 		if os.path.isfile(po_file):
 			mo_file = os.path.join(lc_path, 'pacstats.mo')
 			args = ['msgfmt', '-c', '-o', mo_file, po_file]
-			return os.spawnvp(os.P_WAIT, 'msgfmt', args)
+			os.spawnvp(os.P_WAIT, 'msgfmt', args)
 
 
 def replace_paths_exe(fname):
@@ -141,6 +141,7 @@ setup(name='pacstats',
 	scripts=['pacstats'],
 	data_files=[('share/pacstats/ui', ['ui/about_dlg.ui', 'ui/dbinfo_win.ui', 'ui/main_win.ui', 'ui/prefs_win.ui']),
 				('share/locale/it/LC_MESSAGES', ['po/it/LC_MESSAGES/pacstats.mo']),
+				('share/locale/fr/LC_MESSAGES', ['po/fr/LC_MESSAGES/pacstats.mo']),
 				('share/pacstats/pixmaps', ['pixmaps/icon.png', 'pixmaps/logo.png']),
 				('share/applications', ['pacstats.desktop'])]
 	)

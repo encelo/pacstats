@@ -50,8 +50,9 @@ class Charts():
 			modname = file.replace('.py', '')
 			module = __import__(modname)
 			if 'Chart' in dir(module):
-				cls =  module.Chart(database)
-				self._charts[cls.get_name()] = cls
+				cls = module.Chart(database)
+				# no unicode name in dictionary key
+				self._charts[str(cls.get_name())] = cls
 
 
 	def __len__(self):
